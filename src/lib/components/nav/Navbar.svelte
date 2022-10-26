@@ -94,7 +94,7 @@
                                 <span class="sr-only">Open user menu</span>
                                 <img
                                     class="h-8 w-8 rounded-full"
-                                    src="https://avatars.githubusercontent.com/u/41306347"
+                                    src={user.icon.mini}
                                     alt={`${user.name}'s Profile Icon`} />
                             </button>
                         </div>
