@@ -10,7 +10,7 @@
 </svelte:head>
 
 <div class="transition-colors duration-150">
-    <Navbar user={$page.data.user} />
+    <Navbar user={$page.data.user} currentPath={$page.data.pathName} />
     <div class="dark:text-neutral-200">
         <Container>
             <slot />

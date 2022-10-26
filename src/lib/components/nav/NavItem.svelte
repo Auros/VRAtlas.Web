@@ -1,9 +1,9 @@
 <script lang="ts">
     export let href = '/';
     export let name = 'Item';
-    export let currentPage = '/';
+    export let currentPath = '/';
 
-    $: active = href === currentPage;
+    $: active = href === currentPath;
 </script>
 
 <a
