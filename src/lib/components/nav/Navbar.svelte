@@ -1,6 +1,6 @@
 <script lang="ts">
     import { fade } from 'svelte/transition';
-    import type { User } from '$lib/types/User';
+    import type { User } from '$lib/types/user';
     import { clickOutside } from '$lib/events/click-outside';
     import { toggleTheme } from '$lib/utilities/themeToggler';
     import NavItem from './NavItem.svelte';
@@ -12,6 +12,7 @@
     let mobileOpen = false;
 
     export let user: User | null = null;
+    export let currentPath: string = '';
 
 </script>
 
@@ -55,9 +56,9 @@
             <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div class="hidden sm:ml-6 sm:block">
                     <div class="flex space-x-4">
-                        <NavItem name="Home" active={true} />
-                        <NavItem name="Events" />
-                        <NavItem name="Groups" />
+                        <NavItem name="Home" href="/" currentPath={currentPath} />
+                        <NavItem name="Events" href="/events" currentPath={currentPath} />
+                        <NavItem name="Groups" href="/groups" currentPath={currentPath} />
                     </div>
                 </div>
             </div>
@@ -141,9 +142,9 @@
     {#key mobileOpen}
         <div class="sm:hidden" id="mobile-menu" class:hidden={!mobileOpen} transition:fade={{ duration: 100 }}>
             <div class="space-y-1 px-2 pt-2 pb-3">
-                <NavItem name="Home" active={true} />
-                <NavItem name="Events" />
-                <NavItem name="Groups" />
+                <NavItem name="Home" href="/" currentPath={currentPath} />
+                <NavItem name="Events" href="/events" currentPath={currentPath} />
+                <NavItem name="Groups"  href="/groups" currentPath={currentPath} />
             </div>
         </div>
     {/key}
