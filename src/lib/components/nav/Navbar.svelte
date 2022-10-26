@@ -104,7 +104,31 @@
                                     <ProfileMenuItem name="Your Profile" />
                                     <ProfileMenuItem name="Toggle Theme" on:click={() => toggleTheme()} />
                                     <ProfileMenuSeparator />
-                                    <ProfileMenuItem name="Log Out" />
+                                    <ProfileMenuItem name="Log Out" href="/logout" />
+                                </ProfileMenu>
+                            </div>
+                        {/if}
+                    {:else}
+                        <div>
+                            <button
+                                on:click={() => (userOpen = !userOpen)}
+                                id="user-menu-button"
+                                type="button"
+                                class="rounded-full bg-neutral-800 p-1 text-neutral-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-neutral-800"
+                                aria-expanded="false"
+                                aria-haspopup="true">
+                                <span class="sr-only">Open login menu</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                                </svg>
+                            </button>
+                        </div>
+                        {#if userOpen}
+                            <div in:fade={{ duration: 100 }} out:fade={{ duration: 75 }}>
+                                <ProfileMenu>
+                                    <ProfileMenuItem name="Log In" href="/login" />
+                                    <ProfileMenuSeparator />
+                                    <ProfileMenuItem name="Toggle Theme" on:click={() => toggleTheme()} />
                                 </ProfileMenu>
                             </div>
                         {/if}
