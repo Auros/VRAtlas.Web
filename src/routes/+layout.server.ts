@@ -3,7 +3,7 @@ import { atlasUrl } from '$lib/env';
 import type { LayoutServerData } from './$types';
 import type { User } from '$lib/types/user';
 
-export const load: LayoutServerData = async ({ cookies }) => {
+export const load: LayoutServerData = async ({ cookies, url: { pathname } }) => {
     const token = cookies.get('token');
     let user: User | null = null;
 
@@ -15,6 +15,7 @@ export const load: LayoutServerData = async ({ cookies }) => {
     }
 
     return {
-        user
+        user,
+        pathName: pathname
     }
 }

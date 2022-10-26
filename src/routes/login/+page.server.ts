@@ -4,10 +4,14 @@ import { redirect } from '@sveltejs/kit';
 import type { PageServerData } from './$types';
 
 export const load: PageServerData = async ({ url, cookies }) => {
+
+    if (url.searchParams.get('from-redirect'))
+        return;
+
     const code = url.searchParams.get('code');
     
     // If there's no code and there's no token provided, redirect to the backend auth page
-    if (!code && !cookies.get('token')) {
+    if (!code) {
         throw redirect(307, atlasUrl('/auth/discord'))
     }
 
@@ -19,7 +23,9 @@ export const load: PageServerData = async ({ url, cookies }) => {
             });
 
             // Add the token to the cookies
-            cookies.set('token', response.data.token)
+            cookies.set('token', response.data.token, {
+                maxAge: 3 * 60 * 60
+            })
         }
     } catch {
         // Auth failure
@@ -28,5 +34,7 @@ export const load: PageServerData = async ({ url, cookies }) => {
     // If the code is in the url, redirect the page to the non-query page
     // This also acts to refresh the page so the query gets properly applied
     if (code)
-        throw redirect(307, '/login')
+        throw redirect(307, '/login?from-redirect=true')
+
+    
 };
