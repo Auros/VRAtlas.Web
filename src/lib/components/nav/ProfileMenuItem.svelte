@@ -11,6 +11,6 @@
     class="block px-4 py-2 text-sm text-neutral-700 hover:bg-neutral-200 dark:text-neutral-300 dark:hover:bg-neutral-700"
     role="menuitem"
     tabindex="-1"
-    class:cursor-pointer={href === undefined} >
+    class:cursor-pointer={href === undefined}>
     {name}
 </a>

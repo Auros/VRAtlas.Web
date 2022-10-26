@@ -6,9 +6,13 @@
     import ProfileMenu from './ProfileMenu.svelte';
     import ProfileMenuItem from './ProfileMenuItem.svelte';
     import ProfileMenuSeparator from './ProfileMenuSeparator.svelte';
+    import type { User } from '$lib/types/User';
 
-    let userOpen = true;
+    let userOpen = false;
     let mobileOpen = false;
+
+    export let user: User | null = null;
+
 </script>
 
 <nav class=" bg-neutral-800 select-none">
@@ -78,30 +82,32 @@
                 </button>
 
                 <div use:clickOutside on:click_outside={() => (userOpen = false)} class="relative ml-3">
-                    <div>
-                        <button
-                            on:click={() => (userOpen = !userOpen)}
-                            id="user-menu-button"
-                            type="button"
-                            class="flex rounded-full bg-neutral-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-neutral-800"
-                            aria-expanded="false"
-                            aria-haspopup="true">
-                            <span class="sr-only">Open user menu</span>
-                            <img
-                                class="h-8 w-8 rounded-full"
-                                src="https://avatars.githubusercontent.com/u/41306347"
-                                alt="User's Profile Icon" />
-                        </button>
-                    </div>
-                    {#if userOpen}
-                        <div in:fade={{ duration: 100 }} out:fade={{ duration: 75 }}>
-                            <ProfileMenu>
-                                <ProfileMenuItem name="Your Profile" />
-                                <ProfileMenuItem name="Toggle Theme" on:click={() => toggleTheme()} />
-                                <ProfileMenuSeparator />
-                                <ProfileMenuItem name="Log Out" />
-                            </ProfileMenu>
+                    {#if user}
+                        <div>
+                            <button
+                                on:click={() => (userOpen = !userOpen)}
+                                id="user-menu-button"
+                                type="button"
+                                class="flex rounded-full bg-neutral-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-neutral-800"
+                                aria-expanded="false"
+                                aria-haspopup="true">
+                                <span class="sr-only">Open user menu</span>
+                                <img
+                                    class="h-8 w-8 rounded-full"
+                                    src="https://avatars.githubusercontent.com/u/41306347"
+                                    alt={`${user.name}'s Profile Icon`} />
+                            </button>
                         </div>
+                        {#if userOpen}
+                            <div in:fade={{ duration: 100 }} out:fade={{ duration: 75 }}>
+                                <ProfileMenu>
+                                    <ProfileMenuItem name="Your Profile" />
+                                    <ProfileMenuItem name="Toggle Theme" on:click={() => toggleTheme()} />
+                                    <ProfileMenuSeparator />
+                                    <ProfileMenuItem name="Log Out" />
+                                </ProfileMenu>
+                            </div>
+                        {/if}
                     {/if}
                 </div>
             </div>
