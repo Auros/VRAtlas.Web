@@ -2,7 +2,7 @@
     import '../app.css';
     import { page } from '$app/stores';
     import Navbar from '$lib/components/nav/Navbar.svelte';
-    import Container from '$lib/components/nav/layout/Container.svelte';
+    import Container from '$lib/components/layout/Container.svelte';
 </script>
 
 <svelte:head>

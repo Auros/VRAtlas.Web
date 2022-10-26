@@ -1,12 +1,12 @@
 <script lang="ts">
     import { fade } from 'svelte/transition';
+    import type { User } from '$lib/types/User';
     import { clickOutside } from '$lib/events/click-outside';
     import { toggleTheme } from '$lib/utilities/themeToggler';
     import NavItem from './NavItem.svelte';
     import ProfileMenu from './ProfileMenu.svelte';
     import ProfileMenuItem from './ProfileMenuItem.svelte';
     import ProfileMenuSeparator from './ProfileMenuSeparator.svelte';
-    import type { User } from '$lib/types/User';
 
     let userOpen = false;
     let mobileOpen = false;
