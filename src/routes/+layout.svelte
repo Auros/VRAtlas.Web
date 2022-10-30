@@ -1,8 +1,14 @@
 <script>
     import '../app.css';
     import { page } from '$app/stores';
+    import { token } from '$lib/stores/token';
     import Navbar from '$lib/components/nav/Navbar.svelte';
     import Container from '$lib/components/layout/Container.svelte';
+    import { onMount } from 'svelte';
+
+    onMount(() => {
+        token.set($page.data.token)
+    })
 </script>
 
 <svelte:head>

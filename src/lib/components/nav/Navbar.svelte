@@ -102,7 +102,7 @@
                         {#if userOpen}
                             <div in:fade={{ duration: 100 }} out:fade={{ duration: 75 }}>
                                 <ProfileMenu>
-                                    <ProfileMenuItem name="Your Profile" />
+                                    <ProfileMenuItem name="Your Profile" href={`/users/${user.id}`} />
                                     <ProfileMenuItem name="Toggle Theme" on:click={() => toggleTheme()} />
                                     <ProfileMenuSeparator />
                                     <ProfileMenuItem name="Log Out" href="/logout" />

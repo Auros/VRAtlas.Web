@@ -21,13 +21,13 @@ export const load: PageServerData = async ({ url, cookies }) => {
             const response = await axios.post(atlasUrl('/auth/token'), {
                 code
             });
-
             // Add the token to the cookies
             cookies.set('token', response.data.token, {
                 maxAge: 3 * 60 * 60
             })
         }
-    } catch {
+    } catch (e) {
+        console.log(e)
         // Auth failure
     }
 
