@@ -1,13 +1,23 @@
 <script lang="ts">
-    import type { User } from "$lib/types/user";
     import type { PageData } from "./$types";
-    import { token } from '$lib/stores/token'
+    import type { User } from "$lib/types/user";
+    import Box from "$lib/components/layout/Box.svelte";
+    import Image from "$lib/components/base/Image.svelte";
 
     export let data: PageData;
+
+    let user: User = data.user;
+
 </script>
 
-<div class="bg-neutral-800 rounded-3xl p-4">
-    <div class="">
-        {data.user.id}
-    </div>
+<div class="flex flex-row gap-4 md:flex-wrap-0 flex-wrap">
+    <Box class="md:w-72 md:grow-0 grow">
+        <div class="flex md:flex-col md:justify-center md:items-center gap-4">
+            <Image class="md:w-52 md:h-52 w-24 h-24" circle={true} src={user.icon.full} alt={`${user.name}'s Profile Icon`} />
+            <p class="text-2xl">{user.name}</p>
+        </div>
+    </Box>
+    <Box class="grow w-96">
+        
+    </Box>
 </div>
