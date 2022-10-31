@@ -1,5 +1,6 @@
 import { atlasUrl } from '$lib/env';
 import { token } from '$lib/stores/token';
+import { currentUser } from '$lib/stores/currentUser';
 import type { User } from '$lib/types/user';
 import type { LayoutServerData } from './$types';
 import fetcher from '$lib/utilities/fetcher';
@@ -12,10 +13,11 @@ export const load: LayoutServerData = async ({ cookies, url: { pathname } }) => 
         token.set(cookieTokenValue)
         const data = await fetcher<User>(atlasUrl('/users/@me'))
         user = data
+        currentUser.set(user)
     }
 
     return {
-        user,
+        currentUser: user,
         pathName: pathname,
         token: cookieTokenValue
     }

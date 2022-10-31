@@ -4,9 +4,9 @@
 declare namespace App {
     // interface Locals {}
     interface PageData {
-        user: import('$lib/types/User').User | null
-        token: string | null
         pathName: string
+        token: string | null
+        currentUser: import('$lib/types/User').User | null
     }
     // interface Error {}
     // interface Platform {}

@@ -3,10 +3,11 @@
     import type { User } from "$lib/types/user";
     import Box from "$lib/components/layout/Box.svelte";
     import Image from "$lib/components/base/Image.svelte";
+    import { currentUser } from "$lib/stores/currentUser"
 
     export let data: PageData;
 
-    let user: User = data.user;
+    let user: User = data.thisUser;
 
 </script>
 
@@ -18,6 +19,6 @@
         </div>
     </Box>
     <Box class="grow w-96">
-        
+        <p>{JSON.stringify($currentUser)}</p>
     </Box>
 </div>

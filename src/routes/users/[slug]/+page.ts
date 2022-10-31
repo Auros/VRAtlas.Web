@@ -7,8 +7,8 @@ export const load: PageLoad = async ({ fetch, params }) => {
     const response = await fetch(atlasUrl(`/users/${userId}`))
     const userJson = await response.json();
 
-    const user = userJson as User;
+    const thisUser = userJson as User;
     return {
-        user
+        thisUser
     }
 }
