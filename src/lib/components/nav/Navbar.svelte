@@ -7,6 +7,7 @@
     import ProfileMenu from './ProfileMenu.svelte';
     import ProfileMenuItem from './ProfileMenuItem.svelte';
     import ProfileMenuSeparator from './ProfileMenuSeparator.svelte';
+    import { hasPermission } from '$lib/utilities/helpers';
 
     let userOpen = false;
     let mobileOpen = false;
@@ -59,6 +60,9 @@
                         <NavItem name="Home" href="/" currentPath={currentPath} />
                         <NavItem name="Events" href="/events" currentPath={currentPath} />
                         <NavItem name="Groups" href="/groups" currentPath={currentPath} />
+                        {#if hasPermission(user, 'contexts.manage')}
+                            <NavItem name="Contexts" href="/contexts" currentPath={currentPath} />
+                        {/if}
                     </div>
                 </div>
             </div>
