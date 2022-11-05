@@ -1,3 +1,4 @@
+<!--suppress CssUnusedSymbol -->
 <script>
     import '../app.css';
     import { page } from '$app/stores';
