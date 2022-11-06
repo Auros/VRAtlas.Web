@@ -3,11 +3,7 @@
 // and what to do when importing types
 declare namespace App {
     // interface Locals {}
-    interface PageData {
-        pathName: string
-        token: string | null
-        currentUser: import('$lib/types/User').User | null
-    }
+    // interface PageData {}
     // interface Error {}
     // interface Platform {}
 }

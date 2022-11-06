@@ -1,9 +1,9 @@
-import type { ImageVariants } from "./ImageVariants"
+import type { ImageVariants } from './ImageVariants';
 
 export interface Context {
-    id: string
-    name: string
-    description: string
-    type: number
-    icon: ImageVariants
+    id: string;
+    name: string;
+    description: string;
+    type: number;
+    icon: ImageVariants;
 }

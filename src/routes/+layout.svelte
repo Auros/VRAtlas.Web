@@ -1,17 +1,18 @@
 <!--suppress CssUnusedSymbol -->
-<script>
+<script lang="ts">
     import '../app.css';
-    import { page } from '$app/stores';
+    import { onMount } from 'svelte';
     import { token } from '$lib/stores/token';
     import { currentUser } from '$lib/stores/currentUser';
     import Navbar from '$lib/components/nav/Navbar.svelte';
     import Container from '$lib/components/layout/Container.svelte';
-    import { onMount } from 'svelte';
+
+    export let data: any;
 
     onMount(() => {
-        token.set($page.data.token)
-        currentUser.set($page.data.currentUser)
-    })
+        token.set(data.token);
+        currentUser.set(data.currentUser);
+    });
 </script>
 
 <svelte:head>
@@ -19,7 +20,7 @@
 </svelte:head>
 
 <div class="transition-colors duration-150">
-    <Navbar user={$currentUser} currentPath={$page.data.pathName} />
+    <Navbar user={$currentUser} currentPath={data.path} />
     <div class="dark:text-neutral-200">
         <Container>
             <slot />

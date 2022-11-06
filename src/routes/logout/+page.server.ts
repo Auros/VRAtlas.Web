@@ -5,5 +5,5 @@ export const load: PageServerData = ({ cookies }) => {
         httpOnly: true,
         path: '/',
         maxAge: 0
-    })
-}
+    });
+};

@@ -1,15 +1,15 @@
 <script lang="ts">
-    export let href: string | undefined = undefined
-    export let text: string = 'Button'
-    export let type = 'button'
+    export let href: string | undefined = undefined;
+    export let text: string = 'Button';
+    export let type = 'button';
 
-    export let success: boolean = false
+    export let success: boolean = false;
 
     $: standard = !success;
 </script>
 
-{#if href} 
-    <a href={href}>
+{#if href}
+    <a {href}>
         <button
             on:click
             type="button"
@@ -22,15 +22,14 @@
             class:dark:text-neutral-900={standard}
             class:bg-green-600={success}
             class:hover:bg-green-700={success}
-            class:text-neutral-100={success}
-            >
+            class:text-neutral-100={success}>
             {text}
         </button>
     </a>
 {:else}
     <button
         on:click
-        type={type}
+        {type}
         class="py-2 px-4 rounded-full transition-colors"
         class:bg-stone-800={standard}
         class:hover:bg-stone-700={standard}
@@ -40,8 +39,7 @@
         class:dark:text-neutral-900={standard}
         class:bg-green-600={success}
         class:hover:bg-green-700={success}
-        class:text-neutral-100={success}
-        >
+        class:text-neutral-100={success}>
         {text}
     </button>
 {/if}

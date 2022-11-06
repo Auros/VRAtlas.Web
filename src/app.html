@@ -6,7 +6,8 @@
         <meta name="viewport" content="width=device-width" />
         <script>
             // Essential: Prevents flickering on page load when the user has overridden theme values.
-            const isDark = localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
+            const isDark =
+                localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
             if (isDark) {
                 document.documentElement.classList.add('dark');
             } else {

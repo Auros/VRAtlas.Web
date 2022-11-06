@@ -1,24 +1,26 @@
-import { atlasUrl } from '$lib/env';
-import { token } from '$lib/stores/token';
-import { currentUser } from '$lib/stores/currentUser';
-import type { User } from '$lib/types/user';
-import type { LayoutServerData } from './$types';
-import fetcher from '$lib/utilities/fetcher';
+import { fetcher } from '$lib/utilities';
+import type { User } from '../lib/types/User';
+import type { LayoutServerLoad } from './$types';
+import { token as tokenStore, currentUser } from '$lib/stores';
 
-export const load: LayoutServerData = async ({ cookies, url: { pathname } }) => {
-    const cookieTokenValue = cookies.get('token');
-    let user: User | null = null;
+export const load: LayoutServerLoad = async ({ fetch, cookies, url: { pathname } }) => {
+    let user: User | undefined;
+    const token = cookies.get('token');
+    tokenStore.set(token);
 
-    if (cookieTokenValue) {
-        token.set(cookieTokenValue)
-        const data = await fetcher<User>(atlasUrl('/users/@me'))
-        user = data
-        currentUser.set(user)
+    if (token) {
+        try {
+            user = (await fetcher<User>('/users/@me', token, fetch)) ?? undefined;
+            currentUser.set(user);
+        } catch (e) {
+            console.log('An error occured loading the user');
+            console.log(e)
+        }
     }
 
     return {
-        currentUser: user,
-        pathName: pathname,
-        token: cookieTokenValue
-    }
-}
+        token,
+        path: pathname,
+        currentUser: user
+    };
+};

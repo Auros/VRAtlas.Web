@@ -1,5 +1,5 @@
-import type { Role } from "./Role";
-import type { ImageVariants } from "./ImageVariants";
+import type { Role } from './Role';
+import type { ImageVariants } from './ImageVariants';
 
 export interface User {
     id: string;
