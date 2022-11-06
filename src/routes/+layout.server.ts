@@ -1,5 +1,5 @@
+import type { User } from '$lib/types';
 import { fetcher } from '$lib/utilities';
-import type { User } from '../lib/types/User';
 import type { LayoutServerLoad } from './$types';
 import { token as tokenStore, currentUser } from '$lib/stores';
 

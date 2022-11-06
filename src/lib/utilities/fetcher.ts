@@ -5,7 +5,7 @@ export default async function <T>(
     url: string,
     token?: string,
     fetchFunction?: (input: RequestInfo | URL, init?: RequestInit) => Promise<Response>
-): Promise<T | null> {
+): Promise<T> {
     if (!token) {
         tokenStore.subscribe(t => (token = t))();
     }
@@ -28,7 +28,5 @@ export default async function <T>(
         headers
     });
 
-    if (response.ok)
-        return (await response.json()) as any;
-    return null;
+    return await response.json();
 }

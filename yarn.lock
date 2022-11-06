@@ -216,6 +216,16 @@
   resolved "https://registry.yarnpkg.com/@polka/url/-/url-1.0.0-next.21.tgz#5de5a2385a35309427f6011992b544514d559aa1"
   integrity sha512-a5Sab1C4/icpTZVzZc5Ghpz88yQtGOyNqYXcZgOssB2uuAr+wF/MvN6bgtW32q7HHrvBki+BsZ0OuNv6EV3K9g==
 
+"@svelte-drama/suspense@^0.3.9":
+  version "0.3.9"
+  resolved "https://registry.yarnpkg.com/@svelte-drama/suspense/-/suspense-0.3.9.tgz#25e883f72dd6bbf03452414bb06208325d5cc8da"
+  integrity sha512-nVd0Yt9WWyxAvHjc+raMy6AfGS3VTVkhzHblZUMox7UZWFHM4K3DPKtObrJE8VWlPsw6YaTStWch+ycqsN9Qmw==
+
+"@svelte-drama/swr@^0.2.8":
+  version "0.2.8"
+  resolved "https://registry.yarnpkg.com/@svelte-drama/swr/-/swr-0.2.8.tgz#bfc6956e0b1e0863ddc22cec90b05ecc58d715c7"
+  integrity sha512-mrDzCFkA628H1cWaeqnQKK/381xW+QJBGinkHrsvJzcg2iVR/4IHvEYOLyU48vLqFnyFg6XhG2baCNJE4IloVg==
+
 "@sveltejs/adapter-auto@next":
   version "1.0.0-next.84"
   resolved "https://registry.yarnpkg.com/@sveltejs/adapter-auto/-/adapter-auto-1.0.0-next.84.tgz#33aad16a6702ffba8b9155b7e32be556899a9357"
