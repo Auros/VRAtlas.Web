@@ -1,0 +1,100 @@
+/* =~= Crimson Theme - made by GitHub user @ak4zh for the Skeleton community theme contest.  =~= */
+/* Modified for VRAtlas */
+
+:root {
+	/* =~= Theme Styles =~= */
+	--theme-font-family-base: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+		'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+	--theme-font-family-heading: system-ui;
+	--theme-font-color-base: var(--color-surface-900);
+	--theme-font-color-dark: var(--color-surface-50);
+	--theme-rounded-base: 24px;
+	--theme-rounded-container: 24px;
+	--theme-border-base: 1px;
+	/* =~= Theme On-X Colors =~= */
+	--on-primary: 255 255 255;
+	--on-secondary: 255 255 255;
+	--on-tertiary: 0 0 0;
+	--on-success: 0 0 0;
+	--on-warning: 0 0 0;
+	--on-error: 0 0 0;
+	--on-surface: 255 255 255;
+	/* =~= Theme Colors  =~= */
+	/* primary | #6c0fb8 */
+	--color-primary-50: 233 219 244; /* ⬅ #e9dbf4 */
+	--color-primary-100: 226 207 241; /* ⬅ #e2cff1 */
+	--color-primary-200: 218 195 237; /* ⬅ #dac3ed */
+	--color-primary-300: 196 159 227; /* ⬅ #c49fe3 */
+	--color-primary-400: 152 87 205; /* ⬅ #9857cd */
+	--color-primary-500: 108 15 184; /* ⬅ #6c0fb8 */
+	--color-primary-600: 97 14 166; /* ⬅ #610ea6 */
+	--color-primary-700: 81 11 138; /* ⬅ #510b8a */
+	--color-primary-800: 65 9 110; /* ⬅ #41096e */
+	--color-primary-900: 53 7 90; /* ⬅ #35075a */
+	/* secondary | #4685af */
+	--color-secondary-50: 227 237 243; /* ⬅ #e3edf3 */
+	--color-secondary-100: 218 231 239; /* ⬅ #dae7ef */
+	--color-secondary-200: 209 225 235; /* ⬅ #d1e1eb */
+	--color-secondary-300: 181 206 223; /* ⬅ #b5cedf */
+	--color-secondary-400: 126 170 199; /* ⬅ #7eaac7 */
+	--color-secondary-500: 70 133 175; /* ⬅ #4685af */
+	--color-secondary-600: 63 120 158; /* ⬅ #3f789e */
+	--color-secondary-700: 53 100 131; /* ⬅ #356483 */
+	--color-secondary-800: 42 80 105; /* ⬅ #2a5069 */
+	--color-secondary-900: 34 65 86; /* ⬅ #224156 */
+	/* tertiary | #c0b6b4 */
+	--color-tertiary-50: 246 244 244; /* ⬅ #f6f4f4 */
+	--color-tertiary-100: 242 240 240; /* ⬅ #f2f0f0 */
+	--color-tertiary-200: 239 237 236; /* ⬅ #efedec */
+	--color-tertiary-300: 230 226 225; /* ⬅ #e6e2e1 */
+	--color-tertiary-400: 211 204 203; /* ⬅ #d3cccb */
+	--color-tertiary-500: 192 182 180; /* ⬅ #c0b6b4 */
+	--color-tertiary-600: 173 164 162; /* ⬅ #ada4a2 */
+	--color-tertiary-700: 144 137 135; /* ⬅ #908987 */
+	--color-tertiary-800: 115 109 108; /* ⬅ #736d6c */
+	--color-tertiary-900: 94 89 88; /* ⬅ #5e5958 */
+	/* success | #c1dd97 */
+	--color-success-50: 246 250 239; /* ⬅ #f6faef */
+	--color-success-100: 243 248 234; /* ⬅ #f3f8ea */
+	--color-success-200: 240 247 229; /* ⬅ #f0f7e5 */
+	--color-success-300: 230 241 213; /* ⬅ #e6f1d5 */
+	--color-success-400: 212 231 182; /* ⬅ #d4e7b6 */
+	--color-success-500: 193 221 151; /* ⬅ #c1dd97 */
+	--color-success-600: 174 199 136; /* ⬅ #aec788 */
+	--color-success-700: 145 166 113; /* ⬅ #91a671 */
+	--color-success-800: 116 133 91; /* ⬅ #74855b */
+	--color-success-900: 95 108 74; /* ⬅ #5f6c4a */
+	/* warning | #e4c25e */
+	--color-warning-50: 251 246 231; /* ⬅ #fbf6e7 */
+	--color-warning-100: 250 243 223; /* ⬅ #faf3df */
+	--color-warning-200: 248 240 215; /* ⬅ #f8f0d7 */
+	--color-warning-300: 244 231 191; /* ⬅ #f4e7bf */
+	--color-warning-400: 236 212 142; /* ⬅ #ecd48e */
+	--color-warning-500: 228 194 94; /* ⬅ #e4c25e */
+	--color-warning-600: 205 175 85; /* ⬅ #cdaf55 */
+	--color-warning-700: 171 146 71; /* ⬅ #ab9247 */
+	--color-warning-800: 137 116 56; /* ⬅ #897438 */
+	--color-warning-900: 112 95 46; /* ⬅ #705f2e */
+	/* error | #d21919 */
+	--color-error-50: 248 221 221; /* ⬅ #f8dddd */
+	--color-error-100: 246 209 209; /* ⬅ #f6d1d1 */
+	--color-error-200: 244 198 198; /* ⬅ #f4c6c6 */
+	--color-error-300: 237 163 163; /* ⬅ #eda3a3 */
+	--color-error-400: 224 94 94; /* ⬅ #e05e5e */
+	--color-error-500: 210 25 25; /* ⬅ #d21919 */
+	--color-error-600: 189 23 23; /* ⬅ #bd1717 */
+	--color-error-700: 158 19 19; /* ⬅ #9e1313 */
+	--color-error-800: 126 15 15; /* ⬅ #7e0f0f */
+	--color-error-900: 103 12 12; /* ⬅ #670c0c */
+	/* surface | #2b2932 */
+	--color-surface-50: 223 223 224; /* ⬅ #dfdfe0 */
+	--color-surface-100: 213 212 214; /* ⬅ #d5d4d6 */
+	--color-surface-200: 202 202 204; /* ⬅ #cacacc */
+	--color-surface-300: 170 169 173; /* ⬅ #aaa9ad */
+	--color-surface-400: 107 105 112; /* ⬅ #6b6970 */
+	--color-surface-500: 43 41 50; /* ⬅ #2b2932 */
+	--color-surface-600: 39 37 45; /* ⬅ #27252d */
+	--color-surface-700: 32 31 38; /* ⬅ #201f26 */
+	--color-surface-800: 26 25 30; /* ⬅ #1a191e */
+	--color-surface-900: 21 20 25; /* ⬅ #151419 */
+}
