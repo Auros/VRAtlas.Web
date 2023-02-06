@@ -3,14 +3,20 @@
     import '@skeletonlabs/skeleton/styles/all.css';
     import '../app.postcss';
 
-    import { AppShell } from '@skeletonlabs/skeleton';
+    import { AppBar, AppShell } from '@skeletonlabs/skeleton';
 </script>
 
 <AppShell>
 	<!-- Header -->
 	<svelte:fragment slot="header">
-		<nav>
-			<p>Header</p>
+		<nav class="bg-purple-500">
+			<AppBar>
+				<svelte:fragment slot="trail">
+					<button class="btn variant-filled-primary btn-base">
+						Log In
+					</button>
+				</svelte:fragment>
+			</AppBar>
 		</nav>
 	</svelte:fragment>
 
