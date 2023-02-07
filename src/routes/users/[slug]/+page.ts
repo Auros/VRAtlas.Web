@@ -1,16 +1,9 @@
 import { getUserById } from '$lib';
 import type { PageLoad } from './$types';
 
-export const load: PageLoad = async ({ fetch, params, parent }) => {
-    const { queryClient } = await parent();
+export const load: PageLoad = async ({ params }) => {
     const userId = params.slug;
-
-    await queryClient.prefetchQuery({
-        queryKey: ['user', userId],
-        queryFn: () => getUserById(userId, fetch)
-    });
-
     return {
-        userId
+        user: getUserById(userId)
     };
 };
