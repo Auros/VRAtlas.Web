@@ -4,9 +4,11 @@
     import '../app.postcss';
 
     import { picture } from '$lib';
+    import { fly } from 'svelte/transition';
     import type { LayoutData } from './$types';
     import { QueryClientProvider } from '@tanstack/svelte-query';
-    import { AppBar, AppShell, Avatar, menu } from '@skeletonlabs/skeleton';
+    import { AppBar, AppShell, Avatar, ProgressRadial, menu } from '@skeletonlabs/skeleton';
+    import { navigating } from '$app/stores';
 
     export let data: LayoutData;
 </script>
@@ -51,7 +53,34 @@
 
         <!-- Main-->
         <main>
-            <slot />
+            <div class="transition-outer">
+                {#key data.path && $navigating}
+                    <div class="transition-inner">
+                        <div in:fly={{ x: -5, duration: 120, delay: 120 }} out:fly={{ x: 5, duration: 120 }}>
+                            {#if $navigating}
+                                <div class="container mx-auto flex justify-center items-center my-24">
+                                    <div class="w-40 h-40">
+                                        <ProgressRadial stroke={60} meter="stroke-primary-500" />
+                                    </div>
+                                </div>
+                            {:else}
+                                <slot />
+                            {/if}
+                        </div>
+                    </div>
+                {/key}
+            </div>
         </main>
     </AppShell>
 </QueryClientProvider>
+
+<style>
+    .transition-outer {
+        display: grid;
+        grid-template: 1fr 1fr;
+    }
+    .transition-inner {
+        grid-row: 1;
+        grid-column: 1;
+    }
+</style>
