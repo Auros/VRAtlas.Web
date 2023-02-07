@@ -37,7 +37,7 @@ export const load = (async ({ cookies, url, fetch }) => {
 
     // Setup the url for getting our tokens
     const params = new URLSearchParams();
-    params.set('redirectUri', authUrl.searchParams.get('redirect_uri')!);
+    params.set('redirectUri', authUrl.searchParams.get('redirect_uri') ?? 'MISCONFIGURED_WEBSITE');
     params.set('code', code);
 
     // Fetch the access token response.

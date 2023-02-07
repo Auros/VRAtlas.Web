@@ -37,5 +37,7 @@
         "vite": "^4.0.0"
     },
     "type": "module",
-    "dependencies": {}
+    "dependencies": {
+        "@tanstack/svelte-query": "^4.24.4"
+    }
 }
