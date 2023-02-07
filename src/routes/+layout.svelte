@@ -17,9 +17,11 @@
         <svelte:fragment slot="header">
             <AppBar class="h-20">
                 <svelte:fragment slot="lead">
-                    <h3 class="select-none">
-                        <b>VR Atlas</b>
-                    </h3>
+                    <a href="/">
+                        <h3 class="select-none">
+                            <b>VR Atlas</b>
+                        </h3>
+                    </a>
                 </svelte:fragment>
                 <svelte:fragment slot="trail">
                     {#if data.localUser}
