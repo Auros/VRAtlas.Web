@@ -54,7 +54,7 @@
         <!-- Main-->
         <main>
             <div class="transition-outer">
-                {#key data.path && $navigating}
+                {#key data.pathName && $navigating}
                     <div class="transition-inner">
                         <div in:fly={{ x: -5, duration: 120, delay: 120 }} out:fly={{ x: 5, duration: 120 }}>
                             {#if $navigating}

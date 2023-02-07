@@ -12,7 +12,7 @@ export const load: LayoutLoad = async ({ data: { token, localUser }, url: { path
     });
 
     return {
-        path: pathname,
+        pathName: pathname,
         queryClient,
         localUser,
         token
