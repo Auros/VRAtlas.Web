@@ -5,7 +5,6 @@
     export let data: PageData;
 
     $: groups = data.groups;
-
 </script>
 
 <AtlasMetaTags title="Your Groups" description="View the groups you've joined." />
@@ -23,7 +22,7 @@
         <hr class="!border-t-2 my-4" />
         <div class="grid xl:grid-cols-3 lg:grid-cols-2 gap-4">
             {#each groups as group}
-                <GroupCard group={group} />
+                <GroupCard {group} />
             {/each}
         </div>
     </div>

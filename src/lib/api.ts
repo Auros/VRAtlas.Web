@@ -4,15 +4,25 @@ import { PUBLIC_API_URL } from '$env/static/public';
 const api = {
     get: <T>(url: string, fetcher: typeof fetch, token?: string) => request<T>(fetcher, url, undefined, token),
     post: <T>(url: string, fetcher: typeof fetch, body: unknown, token: string) =>
-        request<T>(fetcher, url, {
-            method: 'POST',
-            body: JSON.stringify(body)
-        }, token),
+        request<T>(
+            fetcher,
+            url,
+            {
+                method: 'POST',
+                body: JSON.stringify(body)
+            },
+            token
+        ),
     put: <T>(url: string, fetcher: typeof fetch, body: unknown, token: string) =>
-        request<T>(fetcher, url, {
-            method: 'PUT',
-            body: JSON.stringify(body)
-        }, token)
+        request<T>(
+            fetcher,
+            url,
+            {
+                method: 'PUT',
+                body: JSON.stringify(body)
+            },
+            token
+        )
 };
 
 async function request<T>(fetcher: typeof fetch, url: string, init?: RequestInit, token?: string) {

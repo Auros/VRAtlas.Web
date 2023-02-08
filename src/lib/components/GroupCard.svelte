@@ -1,6 +1,6 @@
 <script lang="ts">
     import { picture } from '$lib';
-    import type { Group } from "$lib/types";
+    import type { Group } from '$lib/types';
     import { Avatar } from '@skeletonlabs/skeleton';
     import { AtlasMarkdown } from '$lib/components';
 

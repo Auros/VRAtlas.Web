@@ -1,4 +1,4 @@
-import type GroupMember from "./GroupMember";
+import type GroupMember from './GroupMember';
 
 type Group = {
     id: string;
@@ -8,6 +8,6 @@ type Group = {
     icon: string;
     banner: string;
     createdAt: string;
-}
+};
 
 export default Group;

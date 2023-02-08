@@ -40,7 +40,12 @@
                     <!-- Local User Context Menu -->
                     <span class="relative">
                         <button use:menu={{ menu: 'local-user-context-menu' }} type="button">
-                            <Avatar src={picture(data.localUser.picture)} alt={`${data.localUser.username}'s Avatar`} title={data.localUser.username} class="select-none" />
+                            <Avatar
+                                src={picture(data.localUser.picture)}
+                                alt={`${data.localUser.username}'s Avatar`}
+                                title={data.localUser.username}
+                                class="select-none"
+                            />
                         </button>
                         <nav class="list-nav card p-4 w-48 shadow-xl" data-menu="local-user-context-menu" aria-label="Local User">
                             <ul role="group">

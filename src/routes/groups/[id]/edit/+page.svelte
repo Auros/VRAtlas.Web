@@ -1,6 +1,6 @@
 <script lang="ts">
     import type { PageServerData, ActionData } from './$types';
-    import { AtlasMetaTags, Container } from "$lib/components";
+    import { AtlasMetaTags, Container } from '$lib/components';
     import { applyAction, enhance, type SubmitFunction } from '$app/forms';
     import { ProgressRadial, toastStore } from '@skeletonlabs/skeleton';
 
@@ -25,8 +25,8 @@
                 preset: 'success',
                 timeout: 5000
             });
-        }
-    }
+        };
+    };
 </script>
 
 <AtlasMetaTags title="Edit Group" description="Edit a group." />
@@ -43,7 +43,15 @@
                 <input type="hidden" name="id" value={group.id} required />
                 <label class="label">
                     <span>Description</span>
-                    <textarea class="textarea" rows="4" name="description" placeholder="Supports Markdown" value={group.description} maxlength={2000} disabled={uploading} />
+                    <textarea
+                        class="textarea"
+                        rows="4"
+                        name="description"
+                        placeholder="Supports Markdown"
+                        value={group.description}
+                        maxlength={2000}
+                        disabled={uploading}
+                    />
                 </label>
                 <hr class="!border-t-2 my-4" />
                 <h3>Display</h3>
@@ -59,9 +67,7 @@
                 </label>
                 <hr class="!border-t-2 my-4" />
                 <div class="flex flex-row gap-2">
-                    <button type="submit" class="btn variant-filled-primary w-32" disabled={uploading}>
-                        Save
-                    </button>
+                    <button type="submit" class="btn variant-filled-primary w-32" disabled={uploading}> Save </button>
                     {#if uploading}
                         <div class="w-10 h-10">
                             <ProgressRadial stroke={80} meter="stroke-primary-500 dark:stroke-surface-5" />

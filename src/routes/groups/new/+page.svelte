@@ -11,8 +11,8 @@
             await applyAction(result);
             uploading = false;
             await update();
-        }
-    }
+        };
+    };
 </script>
 
 <AtlasMetaTags title="New Group" description="Create a new group." />
@@ -42,9 +42,7 @@
             </div>
             <hr class="!border-t-2 my-4" />
             <div class="flex flex-row gap-2">
-                <button type="submit" class="btn variant-filled-primary w-32" disabled={uploading}>
-                    Create
-                </button>
+                <button type="submit" class="btn variant-filled-primary w-32" disabled={uploading}> Create </button>
                 {#if uploading}
                     <div class="w-10 h-10">
                         <ProgressRadial stroke={80} meter="stroke-primary-500 dark:stroke-surface-5" />

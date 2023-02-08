@@ -6,7 +6,7 @@ const config = {
     kit: {
         adapter: adapter(),
         csrf: {
-            checkOrigin: process.env.MODE !== "dev"
+            checkOrigin: process.env.MODE !== 'dev'
         }
     },
     preprocess: [

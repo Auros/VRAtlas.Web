@@ -15,7 +15,7 @@ const getUserById = async (id: string) => {
     return user;
 };
 
-const uploadImage = async(blob: FormDataEntryValue, token: string) => {
+const uploadImage = async (blob: FormDataEntryValue, token: string) => {
     const { uploadUrl } = await api.get<{ uploadUrl: string }>('/upload/url', fetch, token);
 
     const form = new FormData();
@@ -25,14 +25,14 @@ const uploadImage = async(blob: FormDataEntryValue, token: string) => {
     const response = await fetch(uploadUrl, {
         method: 'POST',
         body: form
-    })
+    });
 
     if (!response.ok) {
         console.log(await response.text());
-        throw error(response.status, "Could not upload image.");
+        throw error(response.status, 'Could not upload image.');
     }
 
     return id;
-}
+};
 
 export { picture, getUserById, uploadImage };
