@@ -1,4 +1,5 @@
-import { api, type User } from '$lib';
+import { api } from '$lib';
+import type { User } from '$lib/types';
 import type { LayoutServerLoad } from './$types';
 
 export const load = (async ({ locals, fetch }) => {

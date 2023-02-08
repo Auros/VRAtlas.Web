@@ -1,6 +1,11 @@
 <script lang="ts">
-    import { AtlasMetaTags } from '$lib/components';
-    import Container from '$lib/components/Container.svelte';
+    import type { PageData } from './$types';
+    import { Container, AtlasMetaTags } from '$lib/components';
+
+    export let data: PageData;
+
+    $: groups = data.groups;
+
 </script>
 
 <AtlasMetaTags title="Your Groups" description="View the groups you've joined." />
@@ -12,9 +17,16 @@
                 <h2>Your Groups</h2>
             </div>
             <div>
-                <a href="/" class="btn variant-ghost-primary">New Group</a>
+                <a href="/groups/new" class="btn variant-ghost-primary">New Group</a>
             </div>
         </div>
         <hr class="!border-t-2 my-4" />
+        <div class="grid grid-cols-3 gap-4">
+            {#each groups as group}
+                <div class="card variant-glass-surface p-4">
+                    <h4>{group.name}</h4>
+                </div>
+            {/each}
+        </div>
     </div>
 </Container>

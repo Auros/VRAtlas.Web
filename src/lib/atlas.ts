@@ -1,6 +1,7 @@
-import { PUBLIC_CDN_URL } from '$env/static/public';
 import api from './api';
 import type User from './types/User';
+import { error } from '@sveltejs/kit';
+import { PUBLIC_CDN_URL } from '$env/static/public';
 
 type ImageSize = 'mini' | 'small' | 'medium' | 'large' | 'full';
 
@@ -14,4 +15,24 @@ const getUserById = async (id: string) => {
     return user;
 };
 
-export { picture, getUserById };
+const uploadImage = async(blob: FormDataEntryValue, token: string) => {
+    const { uploadUrl } = await api.get<{ uploadUrl: string }>('/upload/url', fetch, token);
+
+    const form = new FormData();
+    form.append('file', blob);
+
+    const id = uploadUrl.substring(uploadUrl.lastIndexOf('/') + 1);
+    const response = await fetch(uploadUrl, {
+        method: 'POST',
+        body: form
+    })
+
+    if (!response.ok) {
+        console.log(await response.text());
+        throw error(response.status, "Could not upload image.");
+    }
+
+    return id;
+}
+
+export { picture, getUserById, uploadImage };
