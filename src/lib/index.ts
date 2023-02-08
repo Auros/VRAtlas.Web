@@ -1,2 +1,2 @@
 export { default as api } from './api';
-export { picture, getUserById } from './atlas';
+export { picture, getUserById, uploadImage } from './atlas';

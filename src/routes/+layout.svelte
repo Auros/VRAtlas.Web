@@ -8,7 +8,7 @@
     import { fly } from 'svelte/transition';
     import type { LayoutData } from './$types';
     import { navigating, page } from '$app/stores';
-    import { AppBar, AppShell, Avatar, ProgressRadial, menu } from '@skeletonlabs/skeleton';
+    import { AppBar, AppShell, Avatar, ProgressRadial, menu, Toast } from '@skeletonlabs/skeleton';
 
     let animatedPageTransitions = false;
 
@@ -21,6 +21,8 @@
 
     export let data: LayoutData;
 </script>
+
+<Toast />
 
 <AppShell>
     <!-- Header -->

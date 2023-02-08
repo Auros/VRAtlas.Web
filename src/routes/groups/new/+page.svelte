@@ -18,7 +18,7 @@
 <AtlasMetaTags title="New Group" description="Create a new group." />
 
 <Container>
-    <div class="card p-4 cursor-progress">
+    <div class="card p-4" class:cursor-progress={uploading}>
         <h2>Create New Group</h2>
         <hr class="!border-t-2 my-4" />
         <form method="POST" use:enhance={upload}>

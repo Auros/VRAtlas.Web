@@ -1,6 +1,5 @@
-import { api } from '$lib';
+import { api, uploadImage } from '$lib';
 import type { Actions } from './$types';
-import { uploadImage } from '$lib/atlas';
 import type Group from '$lib/types/Group';
 import { redirect } from '@sveltejs/kit';
 
@@ -20,7 +19,7 @@ export const actions = {
             description,
             icon,
             banner
-        }, token)
+        }, token);
 
         throw redirect(307, `/groups/${group.id}`);
     }
