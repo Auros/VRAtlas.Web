@@ -29,7 +29,7 @@
                 </label>
                 <label class="label">
                     <span>Description</span>
-                    <textarea class="textarea" rows="4" name="description" placeholder="Supports Markdown" disabled={uploading} />
+                    <textarea class="textarea" rows="4" name="description" placeholder="Supports Markdown" maxlength={2000} disabled={uploading} />
                 </label>
                 <label class="label">
                     <span>Icon</span>
