@@ -15,7 +15,7 @@
     }
 </script>
 
-<AtlasMetaTags title="Your Groups" description="View the groups you've joined." />
+<AtlasMetaTags title="New Group" description="Create a new group." />
 
 <Container>
     <div class="card p-4 cursor-progress">
@@ -29,7 +29,7 @@
                 </label>
                 <label class="label">
                     <span>Description</span>
-                    <textarea class="textarea" rows="4" name="description" placeholder="Description for your group" disabled={uploading} />
+                    <textarea class="textarea" rows="4" name="description" placeholder="Supports Markdown" disabled={uploading} />
                 </label>
                 <label class="label">
                     <span>Icon</span>

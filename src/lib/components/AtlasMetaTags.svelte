@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { PUBLIC_SERVING_URL } from '$env/static/public';
     import { MetaTags } from 'svelte-meta-tags';
 
     export let title: string;
@@ -15,7 +16,7 @@
         type: 'website',
         title,
         description,
-        url: url ? `/${url}` : undefined,
+        url: url ? `${PUBLIC_SERVING_URL}${url}` : undefined,
         images: image ? [{ url: image }] : undefined
     }}
 />

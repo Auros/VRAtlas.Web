@@ -23,9 +23,9 @@
         <hr class="!border-t-2 my-4" />
         <div class="grid grid-cols-3 gap-4">
             {#each groups as group}
-                <div class="card variant-glass-surface p-4">
+                <a href={`/groups/${group.id}`} class="card card-hover variant-glass-surface p-4">
                     <h4>{group.name}</h4>
-                </div>
+                </a>
             {/each}
         </div>
     </div>

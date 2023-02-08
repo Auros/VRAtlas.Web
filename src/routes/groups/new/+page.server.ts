@@ -2,6 +2,7 @@ import { api } from '$lib';
 import type { Actions } from './$types';
 import { uploadImage } from '$lib/atlas';
 import type Group from '$lib/types/Group';
+import { redirect } from '@sveltejs/kit';
 
 export const actions = {
     default: async ({ cookies, request }) => {
@@ -21,8 +22,6 @@ export const actions = {
             banner
         }, token)
 
-        return {
-            groupId: group.id
-        }
+        throw redirect(307, `/groups/${group.id}`);
     }
 } satisfies Actions;
