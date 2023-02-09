@@ -1,8 +1,8 @@
 import { getUserById } from '$lib';
 import type { PageLoad } from './$types';
 
-export const load: PageLoad = async ({ params: { id } }) => {
+export const load: PageLoad = async ({ params: { id }, fetch }) => {
     return {
-        user: getUserById(id)
+        user: getUserById(id, fetch)
     };
 };

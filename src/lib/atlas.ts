@@ -11,8 +11,8 @@ const picture = (id: string, size: ImageSize = 'medium'): string => {
     return `${PUBLIC_CDN_URL}/${id}/${size}`;
 };
 
-const getUserById = async (id: string) => {
-    const user = await api.get<User>(`/users/${id}`, fetch);
+const getUserById = async (id: string, fetcher: typeof fetch) => {
+    const user = await api.get<User>(`/users/${id}`, fetcher);
     return user;
 };
 
