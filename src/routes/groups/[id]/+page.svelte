@@ -136,11 +136,14 @@
             <img src={picture(group.banner, 'large')} alt={`${group.name}'s Banner'`} class="select-none object-cover bg-black/50 w-full aspect-[24/4]" />
         </header>
         <div class="p-4">
-            <div class="flex flex-row items-center gap-4">
+            <div class="flex sm:flex-row flex-col items-center gap-4">
                 <Avatar src={picture(group.icon)} width="w-16" class="select-none" />
                 <h1 class="flex-grow align-middle">{group.name}</h1>
                 {#if canEdit}
-                    <a href={`/groups/${group.id}/edit`} class="btn variant-ghost-primary w-20"> Edit </a>
+                    <div class="flex flex-row gap-4">
+                        <a href={`/groups/${group.id}/event`} class="btn variant-ghost-primary w-40"> New Event </a>
+                        <a href={`/groups/${group.id}/edit`} class="btn variant-ghost-primary w-20"> Edit </a>
+                    </div>
                 {/if}
             </div>
             <hr class="!border-t-2 my-4" />

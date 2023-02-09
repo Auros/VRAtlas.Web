@@ -1,8 +1,8 @@
+import { error } from '@sveltejs/kit';
 import { api, uploadImage } from '$lib';
 import type { Group } from '$lib/types';
-import type { Actions, PageServerLoad } from './$types';
 import { GroupMemberRole } from '$lib/types';
-import { error } from '@sveltejs/kit';
+import type { Actions, PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ parent, params: { id }, fetch }) => {
     const { localUser } = await parent();

@@ -5,9 +5,10 @@
     import { AtlasMarkdown } from '$lib/components';
 
     export let group: Group;
+    export let clickable: boolean = true;
 </script>
 
-<a href={`/groups/${group.id}`} class="card card-hover variant-glass-surface overflow-hidden">
+<a href={clickable ? `/groups/${group.id}` : undefined} class="card card-hover variant-glass-surface overflow-hidden">
     <header>
         <Avatar src={picture(group.icon)} width="2xl:w-16 xl:w-14 lg:w-16 md:w-24 w-16" class="absolute top-2 left-2" />
         <img src={picture(group.banner)} alt={`${group.name}'s Banner'`} class="select-none object-cover bg-black/50 w-full aspect-[24/4]" />
@@ -16,7 +17,7 @@
         <h4>{group.name}</h4>
         <hr class="!border-t-2 my-4" />
         {#if group.description !== ''}
-            <p class="max-h-24 overflow-auto">
+            <p class="max-h-36 overflow-auto">
                 <AtlasMarkdown text={group.description} />
             </p>
         {:else}
