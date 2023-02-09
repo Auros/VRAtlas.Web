@@ -5,7 +5,7 @@
     import type { ActionResult } from '@sveltejs/kit';
     import { applyAction, deserialize } from '$app/forms';
     import { type Group, GroupMemberRole, type User } from '$lib/types';
-    import { Container, AtlasMetaTags, AtlasMarkdown } from '$lib/components';
+    import { Container, AtlasMetaTags, AtlasMarkdown, EventCard } from '$lib/components';
     import { Avatar, ListBox, ListBoxItem, menu, toastStore } from '@skeletonlabs/skeleton';
 
     export let data: PageData;
@@ -21,7 +21,7 @@
     $: canEdit = isOwner || isManager;
     $: isOwner = data.localUser && group.members.some((m) => m.user.id === data.localUser?.id && m.role === GroupMemberRole.Owner);
     $: isManager = data.localUser && group.members.some((m) => m.user.id === data.localUser?.id && m.role === GroupMemberRole.Manager);
-
+    
     const memberRoleChanged = async (userId: string, role: GroupMemberRole) => {
         modifyingMember = true;
         const data = new FormData();
@@ -189,7 +189,7 @@
         </header>
         <hr class="!border-t-2 my-4" />
         <div class="grid md:grid-cols-6 gap-4">
-            {#each group.members as member (member.role)}
+            {#each group.members as member}
                 <div class="card variant-glass-surface p-4">
                     <div class="flex flex-col items-center gap-2">
                         <a href={`/users/${member.user.id}`}>
@@ -218,4 +218,72 @@
             {/each}
         </div>
     </div>
+    {#if data.live.events.length}
+        <div class="card p-4 mt-8">
+            <header>
+                <div class="flex flex-row gap-4">
+                    <div class="flex-grow">
+                        <h2>Ongoing Events</h2>
+                    </div>
+                </div>
+            </header>
+            <hr class="!border-t-2 my-4" />
+            <div class="grid md:grid-cols-4 gap-4">
+                {#each data.live.events as event}
+                    <EventCard event={event} />
+                {/each}
+            </div>
+        </div>
+    {/if}
+    {#if data.upcoming.events.length}
+        <div class="card p-4 mt-8">
+            <header>
+                <div class="flex flex-row gap-4">
+                    <div class="flex-grow">
+                        <h2>Upcoming Events</h2>
+                    </div>
+                </div>
+            </header>
+            <hr class="!border-t-2 my-4" />
+            <div class="grid md:grid-cols-4 gap-4">
+                {#each data.upcoming.events as event}
+                    <EventCard event={event} />
+                {/each}
+            </div>
+        </div>
+    {/if}
+    {#if data.unlisted && canEdit && data.unlisted.events.length}
+        <div class="card p-4 mt-8">
+            <header>
+                <div class="flex flex-row gap-4">
+                    <div class="flex-grow">
+                        <h2>Unlisted Events</h2>
+                    </div>
+                </div>
+            </header>
+            <hr class="!border-t-2 my-4" />
+            <div class="grid md:grid-cols-6 gap-4">
+                {#each data.unlisted.events as event}
+                    <EventCard event={event} />
+                {/each}
+            </div>
+        </div>
+    {/if}
+    {#if data.concluded && canEdit && data.concluded.events.length}
+        <div class="card p-4 mt-8">
+            <header>
+                <div class="flex flex-row gap-4">
+                    <div class="flex-grow">
+                        <h2>Past Events</h2>
+                    </div>
+                </div>
+            </header>
+            <hr class="!border-t-2 my-4" />
+            <div class="grid md:grid-cols-6 gap-4">
+                {#each data.concluded.events as event}
+                    <EventCard event={event} />
+                {/each}
+            </div>
+        </div>
+    {/if}
 </Container>

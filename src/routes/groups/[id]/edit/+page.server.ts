@@ -30,10 +30,8 @@ export const actions = {
         const iconEntry = data.get('icon');
         const bannerEntry = data.get('banner');
 
-        // Checks if the icon and banner entries are filled. If so, uploads the image. If not, uses the previous value.
-        const icon = iconEntry && (iconEntry as Blob).size !== 0 ? await uploadImage(iconEntry as FormDataEntryValue, token) : data.get('current-icon');
-        const banner =
-            bannerEntry && (bannerEntry as Blob).size !== 0 ? await uploadImage(bannerEntry as FormDataEntryValue, token) : data.get('current-banner');
+        const icon = iconEntry && (iconEntry as Blob).size !== 0 ? await uploadImage(iconEntry as FormDataEntryValue, token) : null;
+        const banner = bannerEntry && (bannerEntry as Blob).size !== 0 ? await uploadImage(bannerEntry as FormDataEntryValue, token) : null;
 
         await api.put<Group>(
             '/groups',

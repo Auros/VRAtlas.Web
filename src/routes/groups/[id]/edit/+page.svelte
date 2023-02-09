@@ -55,8 +55,6 @@
                 </label>
                 <hr class="!border-t-2 my-4" />
                 <h3>Display</h3>
-                <input type="hidden" name="current-icon" value={group.icon} required />
-                <input type="hidden" name="current-banner" value={group.banner} required />
                 <label class="label">
                     <span>Icon</span>
                     <input class="input" type="file" name="icon" disabled={uploading} />

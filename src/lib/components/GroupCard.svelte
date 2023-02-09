@@ -16,7 +16,7 @@
         <h4>{group.name}</h4>
         <hr class="!border-t-2 my-4" />
         {#if group.description !== ''}
-            <p class="max-h-20 hover:max-h-full">
+            <p class="max-h-24 overflow-auto">
                 <AtlasMarkdown text={group.description} />
             </p>
         {:else}
