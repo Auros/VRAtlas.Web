@@ -8,7 +8,7 @@
     import { fly } from 'svelte/transition';
     import type { LayoutData } from './$types';
     import { navigating, page } from '$app/stores';
-    import { AppBar, AppShell, Avatar, ProgressRadial, menu, Toast } from '@skeletonlabs/skeleton';
+    import { AppBar, AppShell, Avatar, ProgressRadial, Toast, tooltip, menu } from '@skeletonlabs/skeleton';
 
     let animatedPageTransitions = false;
 
@@ -36,35 +36,38 @@
                 </a>
             </svelte:fragment>
             <svelte:fragment slot="trail">
-                {#if data.localUser}
-                    <!-- Local User Context Menu -->
-                    <span class="relative">
-                        <button use:menu={{ menu: 'local-user-context-menu' }} type="button">
-                            <Avatar
-                                src={picture(data.localUser.picture)}
-                                alt={`${data.localUser.username}'s Avatar`}
-                                title={data.localUser.username}
-                                class="select-none"
-                            />
-                        </button>
-                        <nav class="list-nav card p-4 w-48 shadow-xl" data-menu="local-user-context-menu" aria-label="Local User">
-                            <ul role="group">
-                                <li role="menuitem">
-                                    <a href={`/users/${data.localUser.id}`}> Profile </a>
-                                </li>
-                                <li role="menuitem">
-                                    <a href={`/groups`}> Groups </a>
-                                </li>
-                                <li role="menuitem">
-                                    <a href="/logout" class="option w-full"> Logout </a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </span>
-                {:else}
-                    <!-- Login Button -->
-                    <a href="/login" class="btn variant-filled-primary btn-base"> Log In </a>
-                {/if}
+                <div class="flex flex-row items-center text-center gap-4">
+                    <pre use:tooltip={{ content: 'All times on the website are localized to this time zone.', position: 'bottom' }}>{Intl.DateTimeFormat().resolvedOptions().timeZone}</pre>
+                    {#if data.localUser}
+                        <!-- Local User Context Menu -->
+                        <span class="relative">
+                            <button use:menu={{ menu: 'local-user-context-menu' }} type="button">
+                                <Avatar
+                                    src={picture(data.localUser.picture)}
+                                    alt={`${data.localUser.username}'s Avatar`}
+                                    title={data.localUser.username}
+                                    class="select-none"
+                                />
+                            </button>
+                            <nav class="list-nav card p-4 w-48 shadow-xl" data-menu="local-user-context-menu" aria-label="Local User">
+                                <ul role="group">
+                                    <li role="menuitem">
+                                        <a href={`/users/${data.localUser.id}`}> Profile </a>
+                                    </li>
+                                    <li role="menuitem">
+                                        <a href={`/groups`}> Groups </a>
+                                    </li>
+                                    <li role="menuitem">
+                                        <a href="/logout" class="option w-full"> Logout </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </span>
+                    {:else}
+                        <!-- Login Button -->
+                        <a href="/login" class="btn variant-filled-primary btn-base"> Log In </a>
+                    {/if}
+                </div>
             </svelte:fragment>
         </AppBar>
     </svelte:fragment>
