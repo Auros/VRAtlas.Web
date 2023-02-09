@@ -28,7 +28,7 @@
         data.append('id', group.id);
         data.append('userId', userId);
         data.append('role', nameForRole(role));
-        
+
         const response = await fetch(`/groups/${group.id}`, {
             method: 'POST',
             body: data
@@ -49,9 +49,9 @@
                 timeout: 2000
             });
         }
-    }
+    };
 
-    // Debouncer for searching for users reactively 
+    // Debouncer for searching for users reactively
     const userSearch = () => {
         const value = userSearchQuery;
         clearTimeout(userSearchTimer);
@@ -63,28 +63,33 @@
             }
             try {
                 // Fetches the relevant users based on the search, then filters out the ones that are already in the group.
-                usersInSearch = (await api.get<User[]>(`/users/search?query=${value}`, fetch)).filter(u => group.members.some(m => m.user.id !== u.id));
+                usersInSearch = (await api.get<User[]>(`/users/search?query=${value}`, fetch)).filter((u) => group.members.some((m) => m.user.id !== u.id));
             } catch {
                 console.log('Error searching for users!');
             }
-        }, 750)
-    }
+        }, 750);
+    };
 
     const addSelectedUser = async () => {
         // Optimistically remove the selected user from the search
-        usersInSearch = usersInSearch.filter(u => u.id !== selectedUser);
-        
+        usersInSearch = usersInSearch.filter((u) => u.id !== selectedUser);
+
         try {
             // Add the user
-            data.group = await api.put<Group>(`/groups/members/add`, fetch, {
-                id: group.id,
-                userId: selectedUser,
-                role: GroupMemberRole.Standard
-            }, data.token ?? '');
+            data.group = await api.put<Group>(
+                `/groups/members/add`,
+                fetch,
+                {
+                    id: group.id,
+                    userId: selectedUser,
+                    role: GroupMemberRole.Standard
+                },
+                data.token ?? ''
+            );
 
             // Trigger update on data prop
             data = data;
-            
+
             // Show a toast the user.
             toastStore.trigger({
                 message: `Added user to group.`,
@@ -94,16 +99,21 @@
         } catch {
             console.log('Error adding user to group!');
         }
-    }
+    };
 
     const removeMember = async (id: string) => {
         try {
             // Remove the user
-            data.group = await api.put<Group>(`/groups/members/remove`, fetch, {
-                id: group.id,
-                userId: id,
-                role: GroupMemberRole.Standard
-            }, data.token ?? '');
+            data.group = await api.put<Group>(
+                `/groups/members/remove`,
+                fetch,
+                {
+                    id: group.id,
+                    userId: id,
+                    role: GroupMemberRole.Standard
+                },
+                data.token ?? ''
+            );
 
             // Trigger update on data prop
             data = data;
@@ -114,11 +124,8 @@
                 preset: 'warning',
                 timeout: 2000
             });
-        } catch {
-
-        }
-    }
-
+        } catch {}
+    };
 </script>
 
 <AtlasMetaTags title={group.name} description={group.description} url={`/groups/${group.id}`} />
@@ -159,7 +166,7 @@
                                 <div class="h-28 overflow-auto">
                                     <ListBox>
                                         {#each usersInSearch as user}
-                                            <ListBoxItem bind:group={selectedUser} name={user.id} value={user.id} on:click={() => selectedUser = user.id}>
+                                            <ListBoxItem bind:group={selectedUser} name={user.id} value={user.id} on:click={() => (selectedUser = user.id)}>
                                                 <svelte:fragment slot="lead">
                                                     <Avatar src={picture(user.picture, 'small')} width="w-10" />
                                                 </svelte:fragment>
@@ -168,7 +175,12 @@
                                         {/each}
                                     </ListBox>
                                 </div>
-                                <button type="button" class="btn variant-ghost-primary absolute right-4" disabled={selectedUser === ''} on:click={addSelectedUser}>Add</button>
+                                <button
+                                    type="button"
+                                    class="btn variant-ghost-primary absolute right-4"
+                                    disabled={selectedUser === ''}
+                                    on:click={addSelectedUser}>Add</button
+                                >
                             </div>
                         </span>
                     </div>
@@ -184,12 +196,20 @@
                             <Avatar src={picture(member.user.picture)} width="lg:w-32 md:w-16 w-32" />
                         </a>
                         <h3>{member.user.username}</h3>
-                        {#if isOwner && (member.user.id !== data.localUser?.id)}
-                            <select class="select" disabled={modifyingMember} class:cursor-progress={modifyingMember} bind:value={member.role} on:change={() => memberRoleChanged(member.user.id, member.role)}>
+                        {#if isOwner && member.user.id !== data.localUser?.id}
+                            <select
+                                class="select"
+                                disabled={modifyingMember}
+                                class:cursor-progress={modifyingMember}
+                                bind:value={member.role}
+                                on:change={() => memberRoleChanged(member.user.id, member.role)}
+                            >
                                 <option value={GroupMemberRole.Standard}>Standard</option>
                                 <option value={GroupMemberRole.Manager}>Manager</option>
                             </select>
-                            <button class="btn-icon variant-filled-error scale-50 absolute right-0 top-0" on:click={() => removeMember(member.user.id)}>X</button>
+                            <button class="btn-icon variant-filled-error scale-50 absolute right-0 top-0" on:click={() => removeMember(member.user.id)}
+                                >X</button
+                            >
                         {:else}
                             <h6>{nameForRole(member.role)}</h6>
                         {/if}

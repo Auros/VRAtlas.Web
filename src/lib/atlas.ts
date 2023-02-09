@@ -39,21 +39,21 @@ const uploadImage = async (blob: FormDataEntryValue, token: string) => {
 const nameForRole = (role: GroupMemberRole) => {
     switch (role) {
         case GroupMemberRole.Manager:
-            return "Manager";
+            return 'Manager';
         case GroupMemberRole.Owner:
-            return "Owner";
+            return 'Owner';
         case GroupMemberRole.Standard:
-            return "Standard";
+            return 'Standard';
     }
 };
 
 const roleForName = (role: string) => {
     switch (role) {
-        case "Manager":
+        case 'Manager':
             return GroupMemberRole.Manager;
-        case "Owner":
+        case 'Owner':
             return GroupMemberRole.Owner;
-        case "Standard":
+        case 'Standard':
             return GroupMemberRole.Standard;
     }
 };

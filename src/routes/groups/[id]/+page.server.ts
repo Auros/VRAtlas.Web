@@ -1,5 +1,5 @@
-import { api, roleForName } from "$lib";
-import type { Actions } from "./$types";
+import { api, roleForName } from '$lib';
+import type { Actions } from './$types';
 
 export const actions = {
     default: async ({ cookies, request, fetch }) => {
@@ -10,10 +10,15 @@ export const actions = {
         const userId = data.get('userId');
         const role = roleForName(data.get('role') as string);
 
-        await api.put<unknown>('/groups/members/add', fetch, {
-            id,
-            userId,
-            role
-        }, token);
+        await api.put<unknown>(
+            '/groups/members/add',
+            fetch,
+            {
+                id,
+                userId,
+                role
+            },
+            token
+        );
     }
-} satisfies Actions
+} satisfies Actions;
