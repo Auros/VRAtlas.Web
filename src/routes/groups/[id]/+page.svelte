@@ -269,7 +269,7 @@
             </div>
         </div>
     {/if}
-    {#if data.concluded && canEdit && data.concluded.events.length}
+    {#if data.concluded && data.concluded.events.length}
         <div class="card p-4 mt-8">
             <header>
                 <div class="flex flex-row gap-4">
