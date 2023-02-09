@@ -1,6 +1,7 @@
 import api from './api';
 import type User from './types/User';
 import { error } from '@sveltejs/kit';
+import { GroupMemberRole } from './types';
 import { PUBLIC_CDN_URL } from '$env/static/public';
 
 type ImageSize = 'mini' | 'small' | 'medium' | 'large' | 'full';
@@ -35,4 +36,26 @@ const uploadImage = async (blob: FormDataEntryValue, token: string) => {
     return id;
 };
 
-export { picture, getUserById, uploadImage };
+const nameForRole = (role: GroupMemberRole) => {
+    switch (role) {
+        case GroupMemberRole.Manager:
+            return "Manager";
+        case GroupMemberRole.Owner:
+            return "Owner";
+        case GroupMemberRole.Standard:
+            return "Standard";
+    }
+};
+
+const roleForName = (role: string) => {
+    switch (role) {
+        case "Manager":
+            return GroupMemberRole.Manager;
+        case "Owner":
+            return GroupMemberRole.Owner;
+        case "Standard":
+            return GroupMemberRole.Standard;
+    }
+};
+
+export { picture, getUserById, uploadImage, nameForRole, roleForName };
