@@ -1,6 +1,6 @@
 <script lang="ts">
+    import type { PageServerData } from './$types';
     import { ProgressRadial, tooltip } from '@skeletonlabs/skeleton';
-    import type { PageServerData, ActionData } from './$types';
     import { AtlasMetaTags, Container, GroupCard } from '$lib/components';
     import { applyAction, enhance, type SubmitFunction } from '$app/forms';
 
