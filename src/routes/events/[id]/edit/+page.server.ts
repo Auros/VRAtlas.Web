@@ -46,7 +46,8 @@ export const actions = {
 
         const name = form.get('name');
         const tags = form.getAll('tag');
-        const stars = form.getAll('star');
+        const starsIds = form.getAll('star-id');
+        const starsTitles = form.getAll('star-title');
         const poster = form.get('poster');
         const description = form.get('description');
         
@@ -61,7 +62,12 @@ export const actions = {
             description,
             media,
             tags,
-            stars
+            stars: starsIds.map((id, index) => {
+                return {
+                    star: id,
+                    title: starsTitles[index]
+                }
+            })
         }, token ?? '')
 
         throw redirect(307, `/events/${id}`);

@@ -53,17 +53,17 @@
                 </div>
             </div>
             <div class="grid lg:grid-cols-4 grid-cols-2 gap-4 md:order-last order-first">
-                {#each event.stars.filter(s => s.status !== 1) as star}
-                    <div class="card p-2 flex flex-row">
-                        <a href={`/users/${star.user.id}`} class="flex-shrink">
+                {#each event.stars.filter(s => s.status === 1) as star}
+                    <a href={`/users/${star.user.id}`} class="card card-hover p-2 flex flex-row">
+                        <div class="flex-shrink">
                             <Avatar src={picture(star.user.picture)} width="w-14" />
-                        </a>
+                        </div>
                         <div class="flex-grow px-2">
                             <p><b>{star.user.username}</b></p>
                             <hr />
-                            <p class="text-purple-400">Event Star</p>
+                            <p class="text-purple-400">{star.title ?? 'Event Star'}</p>
                         </div>
-                    </div>
+                    </a>
                 {/each}
             </div>
         </div>

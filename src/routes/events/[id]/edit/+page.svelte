@@ -19,7 +19,7 @@
     let now = new Date();
     let uploading = false;
     let tags: string[] = [];
-    let stars: { user: User }[] = event?.stars ?? [];
+    let stars: { user: User, title: string }[] = event?.stars ?? [];
     let maximumDate = new Date(now.getTime() + 1000 * 60 * 60 * 24 * 90); // 90 days
 
     onMount(() => {
@@ -86,20 +86,23 @@
                 <div class="flex flex-row gap-2">
                     <h3>Stars</h3>
                     <UserSelector text="Add Star" ignore={stars.map(s => s.user.id)} on:user-select={e => {
-                        stars.push({ user: e.detail.user });
+                        stars.push({ user: e.detail.user, title: '' });
                         stars = stars;
                     }} />
                 </div>
 
                 <div class="grid md:grid-cols-6 gap-4">
-                    {#each stars as { user }}
-                        <input type="hidden" name="star" value={user.id}>
+                    {#each stars as { user, title} }
+                        <input type="hidden" name="star-id" value={user.id}>
                         <div class="card variant-glass-surface p-4">
                             <div class="flex flex-col items-center gap-2">
                                 <a href={`/users/${user.id}`}>
                                     <Avatar src={picture(user.picture)} width="lg:w-32 md:w-16 w-32" />
                                 </a>
                                 <h3>{user.username}</h3>
+                                <label class="label" for="star-title">
+                                    <input id="star-title" class="input" type="text" name="star-title" placeholder="Title" value={title} disabled={uploading} />
+                                </label>
                                 <button
                                     type="button"
                                     class="btn-icon variant-filled-error scale-50 absolute right-0 top-0"

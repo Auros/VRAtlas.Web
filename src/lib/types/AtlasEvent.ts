@@ -15,6 +15,7 @@ type AtlasEvent = {
     stars: {
         user: User;
         status: number;
+        title: string;
     }[];
 };
 
