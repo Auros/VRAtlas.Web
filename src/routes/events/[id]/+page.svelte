@@ -44,7 +44,7 @@
                     {/if}
                 </div>
                 <hr class="!border-t-2 my-4" />
-                <div class="text-surface-200">
+                <div class="dark:text-surface-200 text-surface-500">
                     {#if event.description !== ''}
                         <AtlasMarkdown text={event.description} />
                     {:else}
@@ -53,7 +53,7 @@
                 </div>
             </div>
             <div class="grid lg:grid-cols-4 grid-cols-2 gap-4 md:order-last order-first">
-                {#each event.stars.filter(s => s.status === 1) as star}
+                {#each event.stars.filter(s => s.status !== 1) as star}
                     <a href={`/users/${star.user.id}`} class="card card-hover p-2 flex flex-row">
                         <div class="flex-shrink">
                             <Avatar src={picture(star.user.picture)} width="w-14" />
@@ -61,7 +61,7 @@
                         <div class="flex-grow px-2">
                             <p><b>{star.user.username}</b></p>
                             <hr />
-                            <p class="text-purple-400">{star.title ?? 'Event Star'}</p>
+                            <p class="dark:text-purple-400 text-purple-600">{star.title ?? 'Event Star'}</p>
                         </div>
                     </a>
                 {/each}

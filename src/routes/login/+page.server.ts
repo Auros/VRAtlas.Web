@@ -45,7 +45,8 @@ export const load = (async ({ cookies, url, fetch }) => {
 
     // Set the token in the cookies
     cookies.set('token', tokens.accessToken, {
-        maxAge: tokens.expires_in
+        maxAge: tokens.expires_in,
+        path: '/'
     });
 
     throw redirect(307, '/');
