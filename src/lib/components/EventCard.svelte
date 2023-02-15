@@ -1,8 +1,11 @@
 <script lang="ts">
+    import dayjs from 'dayjs';
     import { picture } from "$lib";
     import type { AtlasEvent } from "$lib/types";
     import AtlasMarkdown from "./AtlasMarkdown.svelte";
+    import RelativeTime from 'dayjs/plugin/relativeTime';
 
+    dayjs.extend(RelativeTime);
     export let event: AtlasEvent;
 </script>
 
@@ -15,6 +18,13 @@
     <div class="p-4">
         <h3><b>{event.name}</b></h3>
         <hr class="!border-t-2 my-4" />
+        {#if event.startTime}
+            <div class="text-center flex flex-col">
+                <span class="text-xl">{dayjs(event.startTime).format('ddd, MMM D').toUpperCase()}</span>
+                <span class="text-xl">{dayjs(event.startTime).format('h:mm A')}</span>
+            </div>
+            <hr class="!border-t-2 my-4" />
+        {/if}
         {#if event.description !== ''}
             <p class="max-h-64 overflow-auto">
                 <AtlasMarkdown text={event.description} />

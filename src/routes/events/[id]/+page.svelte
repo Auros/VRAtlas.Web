@@ -1,10 +1,13 @@
 <script lang="ts">
+    import dayjs from 'dayjs';
     import { picture } from '$lib';
     import type { PageData } from './$types';
     import { GroupMemberRole } from '$lib/types';
-    import { AtlasMarkdown, AtlasMetaTags, Container, GroupCard } from '$lib/components';
     import { Avatar } from '@skeletonlabs/skeleton';
+    import RelativeTime from 'dayjs/plugin/relativeTime';
+    import { AtlasMarkdown, AtlasMetaTags, Container, GroupCard } from '$lib/components';
 
+    dayjs.extend(RelativeTime);
     export let data: PageData;
 
     $: event = data.event;
@@ -22,6 +25,7 @@
 <Container>
     <div class="flex md:flex-row flex-col gap-4">
         <div class="basis-1/4 flex flex-col gap-4">
+            <!-- Event Poster -->
             <div class="card overflow-hidden">
                 <header style={`background-image: url(${picture(event.media, 'large')})`}>
                     <div class="backdrop-blur-lg">
@@ -29,6 +33,7 @@
                     </div>
                 </header>
             </div>
+            <!-- Group Card -->
             <div class="card overflow-hidden">
                 <GroupCard group={group} />
             </div>
@@ -36,14 +41,33 @@
         <div class="basis-3/4 md:order-last order-first flex flex-col gap-4">
             <div class="card p-4">
                 <div class="flex flex-row gap-4">
+                    <!-- Event Title -->
                     <div class="flex-grow">
                         <h1>{event.name}</h1>
                     </div>
+                    <!-- Edit Button -->
                     {#if canEdit}
                         <a href={`/events/${event.id}/edit`} class="btn variant-ghost-primary">Edit</a>
                     {/if}
                 </div>
                 <hr class="!border-t-2 my-4" />
+                <!-- Time and Tags -->
+                {#if event.startTime || event.tags.length}
+                    <div class="flex flex-col gap-2">
+                        {#if event.startTime}
+                            <div>
+                                <div class="text-lg">STARTS <b>@</b> {new Date(event.startTime).toLocaleString()} ({dayjs(event.startTime).fromNow()})</div>
+                            </div>
+                        {/if}
+                        <div class="flex flex-row gap-2">
+                            {#each event.tags as tag}
+                                <span class="chip variant-filled-surface">{tag}</span>
+                            {/each}
+                        </div>
+                    </div>
+                    <hr class="!border-t-2 my-4" />
+                {/if}
+                <!-- Event Description -->
                 <div class="dark:text-surface-200 text-surface-500">
                     {#if event.description !== ''}
                         <AtlasMarkdown text={event.description} />
@@ -52,8 +76,9 @@
                     {/if}
                 </div>
             </div>
+            <!-- Event Stars -->
             <div class="grid lg:grid-cols-4 grid-cols-2 gap-4 md:order-last order-first">
-                {#each event.stars.filter(s => s.status !== 1) as star}
+                {#each event.stars.filter(s => s.status === 1) as star}
                     <a href={`/users/${star.user.id}`} class="card card-hover p-2 flex flex-row">
                         <div class="flex-shrink">
                             <Avatar src={picture(star.user.picture)} width="w-14" />

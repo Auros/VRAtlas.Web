@@ -41,6 +41,7 @@
     },
     "type": "module",
     "dependencies": {
+        "dayjs": "^1.11.7",
         "isomorphic-dompurify": "^0.26.0",
         "marked": "^4.2.12",
         "svelty-picker": "^3.4.2"
