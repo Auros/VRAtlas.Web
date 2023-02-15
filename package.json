@@ -42,6 +42,7 @@
     "type": "module",
     "dependencies": {
         "isomorphic-dompurify": "^0.26.0",
-        "marked": "^4.2.12"
+        "marked": "^4.2.12",
+        "svelty-picker": "^3.4.2"
     }
 }

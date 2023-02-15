@@ -210,8 +210,10 @@
                                 <option value={GroupMemberRole.Standard}>Standard</option>
                                 <option value={GroupMemberRole.Manager}>Manager</option>
                             </select>
-                            <button class="btn-icon variant-filled-error scale-50 absolute right-0 top-0" on:click={() => removeMember(member.user.id)}
-                                >X</button
+                            <button
+                                type="button"
+                                class="btn-icon variant-filled-error scale-50 absolute right-0 top-0"
+                                on:click={() => removeMember(member.user.id)}>X</button
                             >
                         {:else}
                             <h6>{nameForRole(member.role)}</h6>
