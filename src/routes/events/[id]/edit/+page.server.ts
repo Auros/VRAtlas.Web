@@ -1,7 +1,7 @@
 import { api, uploadImage } from '$lib';
 import { error, redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
-import { type AtlasEvent, GroupMemberRole as GMR } from '$lib/types';
+import { type AtlasEvent, GroupMemberRole as GMR, EventStatus } from '$lib/types';
 
 export const load = (async ({ parent, params: { id }, fetch }) => {
     const { localUser } = await parent();
@@ -36,7 +36,7 @@ export const actions = {
         const shouldUpdateEnd = !event.endTime || new Date(event.endTime) !== new Date(end);
 
         // Abomination of a comparison
-        if (shouldUpdateStart || shouldUpdateEnd) {
+        if ((event.status === EventStatus.Announced || event.status === EventStatus.Unlisted) && (shouldUpdateStart || shouldUpdateEnd)) {
             await api.put('/events/schedule', fetch, {
                 id,
                 startTime: shouldUpdateStart ? start : event.startTime,

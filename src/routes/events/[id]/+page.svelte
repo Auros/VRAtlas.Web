@@ -1,14 +1,17 @@
 <script lang="ts">
     import dayjs from 'dayjs';
-    import { picture } from '$lib';
+    import { api, picture } from '$lib';
     import type { PageData } from './$types';
-    import { GroupMemberRole } from '$lib/types';
-    import { Avatar } from '@skeletonlabs/skeleton';
+    import { invalidateAll } from '$app/navigation';
+    import { modalStore } from '@skeletonlabs/skeleton';
     import RelativeTime from 'dayjs/plugin/relativeTime';
+    import { EventStatus, GroupMemberRole } from '$lib/types';
     import { AtlasMarkdown, AtlasMetaTags, Container, GroupCard } from '$lib/components';
+    import { Avatar, ProgressRadial, toastStore, type ModalSettings } from '@skeletonlabs/skeleton';
 
     dayjs.extend(RelativeTime);
     export let data: PageData;
+    let performingAction = false;
 
     $: event = data.event;
     $: group = data.event.owner;
@@ -17,6 +20,56 @@
     $: canEdit = isOwner || isManager;
     $: isOwner = data.localUser && group.members.some((m) => m.user.id === data.localUser?.id && m.role === GroupMemberRole.Owner);
     $: isManager = data.localUser && group.members.some((m) => m.user.id === data.localUser?.id && m.role === GroupMemberRole.Manager);
+
+    const confirm = ((action: string, body: string, endpoint: string, message: string) => {
+        const announcement: ModalSettings = {
+            type: 'confirm',
+            title: `${action} Event`,
+            body: body,
+            response: async (confirmed: boolean) => {
+                if (!confirmed) {
+                    // Do nothing
+                    return;
+                }
+                performingAction = true;
+                await api.put<void>(`/events/${endpoint}`, fetch, { id: event.id }, data.token ?? '');
+                await invalidateAll();
+                performingAction = false;
+                toastStore.trigger({
+                    message,
+                    preset: 'success'
+                })
+            }
+        }
+        modalStore.trigger(announcement);
+    })
+
+    const confirmAnnouncement = () => {
+        confirm(
+            'Announce',
+            `Are you sure you want to announce the event "${event.name}"? This action cannot be undone, and it will notify everyone who follows all relevant topics (event, group, event stars, etc).`,
+            'announce',
+            'Successfully Announced Event'
+        );
+    }
+
+    const confirmStart = () => {
+        confirm(
+            'Start',
+            `Are you sure you want to start the event "${event.name}"? This action cannot be undone, and it will notify everyone who follows all relevant topics (event, group, event stars, etc).`,
+            'start',
+            'Successfully Started Event'
+        );
+    }
+
+    const confirmConclude = () => {
+        confirm(
+            'Conclude',
+            `Are you sure you want to conclude the event "${event.name}"?`,
+            'conclude',
+            'Successfully Concluded Event'
+        );
+    }
     
 </script>
 
@@ -45,8 +98,23 @@
                     <div class="flex-grow">
                         <h1>{event.name}</h1>
                     </div>
-                    <!-- Edit Button -->
+                    <!-- Editor Button -->
                     {#if canEdit}
+                        {#if event.startTime} <!-- Event start time is required for these actions -->
+                            {#if performingAction}
+                                <ProgressRadial stroke={80} meter="stroke-primary-500 dark:stroke-surface-5" />
+                            {:else}
+                                {#if event.status === EventStatus.Unlisted}
+                                    <button on:click={confirmAnnouncement} class="btn variant-ghost-warning">Announce</button>
+                                {/if}
+                                {#if event.status === EventStatus.Announced}
+                                    <button on:click={confirmStart} class="btn variant-ghost-warning">Start</button>
+                                {/if}
+                                {#if event.status === EventStatus.Started}
+                                    <button on:click={confirmConclude} class="btn variant-ghost-warning">Conclude</button>
+                                {/if}
+                            {/if}
+                        {/if}
                         <a href={`/events/${event.id}/edit`} class="btn variant-ghost-primary">Edit</a>
                     {/if}
                 </div>

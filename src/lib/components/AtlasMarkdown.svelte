@@ -5,4 +5,6 @@
     export let text: string;
 </script>
 
-{@html DOMPurify.sanitize(marked(text))}
+<article>
+    {@html DOMPurify.sanitize(marked(text))}
+</article>

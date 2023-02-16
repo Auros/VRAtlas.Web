@@ -41,6 +41,10 @@ async function request<T>(fetcher: typeof fetch, url: string, init?: RequestInit
         // TODO: If it's a validation error, include it in the thrown error.
         throw error(response.status, text);
     }
+    if (response.status === 204) {
+        return { } as T;
+    }
+
     return (await response.json()) as T;
 }
 
