@@ -59,7 +59,9 @@
                                         <a href={`/groups`}> Groups </a>
                                     </li>
                                     <li role="menuitem">
-                                        <a href="/logout" class="option w-full"> Logout </a>
+                                        <form method="POST" action="/logout">
+                                            <button type="submit" class="option w-full"> Logout </button>
+                                        </form>
                                     </li>
                                 </ul>
                             </nav>

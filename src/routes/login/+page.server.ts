@@ -1,5 +1,5 @@
 import api from '$lib/api';
-import type { PageServerLoad } from './$types';
+import type { Actions, PageServerLoad } from './$types';
 import { error, redirect } from '@sveltejs/kit';
 import { PUBLIC_OAUTH_URL } from '$env/static/public';
 
@@ -8,7 +8,7 @@ type Tokens = {
     expires_in: number;
 };
 
-export const load = (async ({ cookies, url, fetch }) => {
+export const load = (async ({ cookies, url, fetch, locals }) => {
     let challenge = cookies.get('challenge');
     const code = url.searchParams.get('code');
     const authUrl = new URL(PUBLIC_OAUTH_URL);
@@ -43,11 +43,23 @@ export const load = (async ({ cookies, url, fetch }) => {
     // Fetch the access token response.
     const tokens = await api.get<Tokens>(`/auth/token?${params.toString()}`, fetch);
 
-    // Set the token in the cookies
+    // Set the token in the cookies and locals
+    locals.token = tokens.accessToken;
     cookies.set('token', tokens.accessToken, {
         maxAge: tokens.expires_in,
         path: '/'
     });
 
-    throw redirect(307, '/');
+    console.log('got token');
+    return {
+        token: tokens.accessToken
+    }
+
 }) satisfies PageServerLoad;
+
+export const actions = {
+    default: async () => {
+        // This form exists just to allow the browser to refresh the page in order to update the cookies.
+        // I'm not sure why it won't update otherwise.
+    }
+} satisfies Actions
