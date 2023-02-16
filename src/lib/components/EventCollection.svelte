@@ -12,7 +12,7 @@
             <div class="flex-grow">
                 <h2>{type} Events</h2>
             </div>
-            <button type="button" class="btn variant-ghost-primary">View More</button>
+            <!--<button type="button" class="btn variant-ghost-primary">View More</button>-->
         </div>
     </header>
     <hr class="!border-t-2 my-4" />
