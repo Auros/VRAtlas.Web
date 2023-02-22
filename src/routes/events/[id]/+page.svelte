@@ -21,7 +21,7 @@
     $: isOwner = data.localUser && group.members.some((m) => m.user.id === data.localUser?.id && m.role === GroupMemberRole.Owner);
     $: isManager = data.localUser && group.members.some((m) => m.user.id === data.localUser?.id && m.role === GroupMemberRole.Manager);
 
-    const confirm = ((action: string, body: string, endpoint: string, message: string) => {
+    const confirm = (action: string, body: string, endpoint: string, message: string) => {
         const announcement: ModalSettings = {
             type: 'confirm',
             title: `${action} Event`,
@@ -38,11 +38,11 @@
                 toastStore.trigger({
                     message,
                     preset: 'success'
-                })
+                });
             }
-        }
+        };
         modalStore.trigger(announcement);
-    })
+    };
 
     const confirmAnnouncement = () => {
         confirm(
@@ -51,7 +51,7 @@
             'announce',
             'Successfully Announced Event'
         );
-    }
+    };
 
     const confirmStart = () => {
         confirm(
@@ -60,17 +60,11 @@
             'start',
             'Successfully Started Event'
         );
-    }
+    };
 
     const confirmConclude = () => {
-        confirm(
-            'Conclude',
-            `Are you sure you want to conclude the event "${event.name}"?`,
-            'conclude',
-            'Successfully Concluded Event'
-        );
-    }
-    
+        confirm('Conclude', `Are you sure you want to conclude the event "${event.name}"?`, 'conclude', 'Successfully Concluded Event');
+    };
 </script>
 
 <AtlasMetaTags title={event.name} description={`An event hosted by ${group.name}`} />
@@ -82,13 +76,17 @@
             <div class="card overflow-hidden">
                 <header style={`background-image: url(${picture(event.media, 'large')})`}>
                     <div class="backdrop-blur-lg">
-                        <img src={picture(event.media, 'large')} alt={`${event.name}'s Poster`} class="select-none object-contain bg-black/50 w-full aspect-[3/4]" />
+                        <img
+                            src={picture(event.media, 'large')}
+                            alt={`${event.name}'s Poster`}
+                            class="select-none object-contain bg-black/50 w-full aspect-[3/4]"
+                        />
                     </div>
                 </header>
             </div>
             <!-- Group Card -->
             <div class="card overflow-hidden">
-                <GroupCard group={group} />
+                <GroupCard {group} />
             </div>
         </div>
         <div class="basis-3/4 md:order-last order-first flex flex-col gap-4">
@@ -101,7 +99,8 @@
                     <FollowButton id={event.id} type={3} />
                     <!-- Editor Button -->
                     {#if canEdit}
-                        {#if event.startTime} <!-- Event start time is required for these actions -->
+                        {#if event.startTime}
+                            <!-- Event start time is required for these actions -->
                             {#if performingAction}
                                 <ProgressRadial stroke={80} meter="stroke-primary-500 dark:stroke-surface-5" />
                             {:else}
@@ -147,7 +146,7 @@
             </div>
             <!-- Event Stars -->
             <div class="grid lg:grid-cols-4 grid-cols-2 gap-4 md:order-last order-first">
-                {#each event.stars.filter(s => s.status === 1) as star}
+                {#each event.stars.filter((s) => s.status === 1) as star}
                     <a href={`/users/${star.user.id}`} class="card card-hover p-2 flex flex-row">
                         <div class="flex-shrink">
                             <Avatar src={picture(star.user.picture)} width="w-14" />

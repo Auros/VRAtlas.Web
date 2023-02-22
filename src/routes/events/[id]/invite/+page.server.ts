@@ -1,7 +1,7 @@
-import { api } from "$lib";
-import { redirect } from "@sveltejs/kit";
-import type { AtlasEvent } from "$lib/types";
-import type { Actions, PageServerLoad } from "./$types";
+import { api } from '$lib';
+import { redirect } from '@sveltejs/kit';
+import type { AtlasEvent } from '$lib/types';
+import type { Actions, PageServerLoad } from './$types';
 
 export const load = (async ({ parent, params: { id }, fetch }) => {
     const { localUser } = await parent();
@@ -12,18 +12,18 @@ export const load = (async ({ parent, params: { id }, fetch }) => {
     const event = await api.get<AtlasEvent>(`/events/${id}`, fetch);
     const stars = event.stars;
 
-    const hasPendingInvite = stars.some(s => s.user.id === localUser.id && s.status === 0);
+    const hasPendingInvite = stars.some((s) => s.user.id === localUser.id && s.status === 0);
     if (!hasPendingInvite) {
         throw redirect(307, `/events/${id}`);
     }
 
     return {
         event
-    }
+    };
 }) satisfies PageServerLoad;
 
 export const actions = {
-    default: async ({ locals, request, fetch, params: { id }}) => {
+    default: async ({ locals, request, fetch, params: { id } }) => {
         const token = locals.token;
         const form = await request.formData();
 
@@ -32,6 +32,6 @@ export const actions = {
 
         return {
             success: true
-        }
+        };
     }
 } satisfies Actions;

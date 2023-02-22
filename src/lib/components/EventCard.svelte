@@ -1,8 +1,8 @@
 <script lang="ts">
     import dayjs from 'dayjs';
-    import { picture } from "$lib";
-    import type { AtlasEvent } from "$lib/types";
-    import AtlasMarkdown from "./AtlasMarkdown.svelte";
+    import { picture } from '$lib';
+    import type { AtlasEvent } from '$lib/types';
+    import AtlasMarkdown from './AtlasMarkdown.svelte';
     import RelativeTime from 'dayjs/plugin/relativeTime';
 
     dayjs.extend(RelativeTime);

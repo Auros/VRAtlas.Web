@@ -3,20 +3,20 @@
     import type { User } from '$lib/types';
     import { createEventDispatcher } from 'svelte';
     import { Avatar, ListBox, ListBoxItem, menu } from '@skeletonlabs/skeleton';
-    
+
     export let text = 'Add User';
     export let ignore: string[] = [];
 
-    let selectedUser: string = '';
-    let usersInSearch: User[] = [];
-    let userSearchQuery: string = '';
+    let selectedUser = '';
+    let userSearchQuery = '';
     let userSearchTimer: NodeJS.Timeout;
+    let usersInSearch: User[] = [];
 
     const dispatch = createEventDispatcher();
 
     const addSelectedUser = async () => {
-        const user = usersInSearch.find(u => u.id === selectedUser) as User;
-        
+        const user = usersInSearch.find((u) => u.id === selectedUser) as User;
+
         // Optimistically remove the selected user from the search
         usersInSearch = usersInSearch.filter((u) => u.id !== selectedUser);
 
@@ -43,8 +43,8 @@
             }
         }, 750);
     };
-
 </script>
+
 <span class="relative">
     <button type="button" class="btn variant-ghost-primary" use:menu={{ menu: 'add-user', interactive: true }}>{text}</button>
     <div class="card p-4 w-96 h-64 space-y-4" data-menu="add-user">
@@ -61,11 +61,6 @@
                 {/each}
             </ListBox>
         </div>
-        <button
-            type="button"
-            class="btn variant-ghost-primary absolute right-4"
-            disabled={selectedUser === ''}
-            on:click={addSelectedUser}>Add</button
-        >
+        <button type="button" class="btn variant-ghost-primary absolute right-4" disabled={selectedUser === ''} on:click={addSelectedUser}>Add</button>
     </div>
 </span>

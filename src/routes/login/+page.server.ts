@@ -52,8 +52,7 @@ export const load = (async ({ cookies, url, fetch, locals }) => {
 
     return {
         token: tokens.accessToken
-    }
-
+    };
 }) satisfies PageServerLoad;
 
 export const actions = {
@@ -61,4 +60,4 @@ export const actions = {
         // This form exists just to allow the browser to refresh the page in order to update the cookies.
         // I'm not sure why it won't update otherwise.
     }
-} satisfies Actions
+} satisfies Actions;

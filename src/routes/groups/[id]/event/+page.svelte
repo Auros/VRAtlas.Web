@@ -5,7 +5,7 @@
     import { applyAction, enhance, type SubmitFunction } from '$app/forms';
 
     export let data: PageServerData;
-    
+
     let uploading = false;
 
     const upload: SubmitFunction = () => {
@@ -16,7 +16,6 @@
             await update();
         };
     };
-
 </script>
 
 <AtlasMetaTags title="New Event" description="Create a new event." />
@@ -28,8 +27,8 @@
                 <h2>Create Event</h2>
                 <hr class="!border-t-2 my-4" />
                 <p>
-                    Events are the core of the VR Atlas. Create one to publicize your event!
-                    You can customize the description, times, and more once you create the event.
+                    Events are the core of the VR Atlas. Create one to publicize your event! You can customize the description, times, and more once you create
+                    the event.
                 </p>
                 <br />
                 <p>You are creating an event for the group <span class="text-primary-400"><b>{data.group.name}</b></span>.</p>

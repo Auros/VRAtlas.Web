@@ -4,16 +4,7 @@
     import { Link } from '@steeze-ui/heroicons';
     import { Icon } from '@steeze-ui/svelte-icon';
     import { AtlasMetaTags, Container, FollowButton } from '$lib/components';
-    import
-    {
-        Github,
-        Soundcloud,
-        Bandcamp,
-        Twitter,
-        Spotify,
-        Youtube,
-        Twitch
-    } from '@steeze-ui/simple-icons';
+    import { Github, Soundcloud, Bandcamp, Twitter, Spotify, Youtube, Twitch } from '@steeze-ui/simple-icons';
 
     export let data: PageData;
 

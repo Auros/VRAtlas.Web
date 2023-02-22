@@ -3,6 +3,6 @@ type NotificationSettings = {
     atThirtyMinutes: boolean;
     atOneHour: boolean;
     atOneDay: boolean;
-}
+};
 
-export default NotificationSettings
+export default NotificationSettings;

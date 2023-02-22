@@ -2,7 +2,7 @@ import { api, uploadImage } from '$lib';
 import { GroupMemberRole } from '$lib/types';
 import { error, redirect } from '@sveltejs/kit';
 import type { AtlasEvent, Group } from '$lib/types';
-import type { PageServerLoad, Actions } from "./$types";
+import type { PageServerLoad, Actions } from './$types';
 
 export const load = (async ({ parent, params: { id }, fetch }) => {
     const { localUser } = await parent();
@@ -17,7 +17,6 @@ export const load = (async ({ parent, params: { id }, fetch }) => {
     return {
         group
     };
-
 }) satisfies PageServerLoad;
 
 export const actions = {
@@ -35,11 +34,11 @@ export const actions = {
             fetch,
             {
                 name,
-                group, 
+                group,
                 media
             },
             token
-        )
+        );
         throw redirect(307, `/events/${event.id}`);
     }
 } satisfies Actions;

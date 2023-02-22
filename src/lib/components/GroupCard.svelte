@@ -5,7 +5,7 @@
     import { AtlasMarkdown } from '$lib/components';
 
     export let group: Group;
-    export let clickable: boolean = true;
+    export let clickable = true;
 </script>
 
 <a href={clickable ? `/groups/${group.id}` : undefined} class="card card-hover variant-glass-surface overflow-hidden">

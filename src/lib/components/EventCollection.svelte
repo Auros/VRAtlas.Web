@@ -1,6 +1,6 @@
 <script lang="ts">
-    import EventCard from "./EventCard.svelte";
-    import type { AtlasEvent } from "$lib/types";
+    import EventCard from './EventCard.svelte';
+    import type { AtlasEvent } from '$lib/types';
 
     export let type: string;
     export let events: AtlasEvent[] | undefined;
@@ -19,7 +19,7 @@
     {#if events && events.length}
         <div class="grid lg:grid-cols-6 grid-cols-3 gap-4">
             {#each events as event}
-                <EventCard event={event} />
+                <EventCard {event} />
             {/each}
         </div>
     {:else}

@@ -12,4 +12,4 @@ export const actions = {
             expires: new Date(0)
         });
     }
-} satisfies Actions
+} satisfies Actions;

@@ -37,41 +37,51 @@ export const actions = {
 
         // Abomination of a comparison
         if ((event.status === EventStatus.Announced || event.status === EventStatus.Unlisted) && (shouldUpdateStart || shouldUpdateEnd)) {
-            await api.put('/events/schedule', fetch, {
-                id,
-                startTime: shouldUpdateStart ? start : event.startTime,
-                endTime: shouldUpdateEnd ? end : event.endTime,
-            }, token ?? '')
+            await api.put(
+                '/events/schedule',
+                fetch,
+                {
+                    id,
+                    startTime: shouldUpdateStart ? start : event.startTime,
+                    endTime: shouldUpdateEnd ? end : event.endTime
+                },
+                token ?? ''
+            );
         }
 
         const tags = form.getAll('tag');
         const starsIds = form.getAll('star-id');
         const starsTitles = form.getAll('star-title');
-        
+
         const name = form.get('name');
         const poster = form.get('poster');
         const autoStart = form.get('auto-start');
         const description = form.get('description');
-        
+
         let media: string | null = null;
         if (poster && (poster as Blob).size !== 0) {
             media = await uploadImage(poster, token ?? '');
         }
 
-        await api.put('/events', fetch, {
-            id,
-            name,
-            description,
-            media,
-            tags,
-            stars: starsIds.map((id, index) => {
-                return {
-                    star: id,
-                    title: starsTitles[index]
-                }
-            }),
-            autoStart: autoStart === 'on'
-        }, token ?? '')
+        await api.put(
+            '/events',
+            fetch,
+            {
+                id,
+                name,
+                description,
+                media,
+                tags,
+                stars: starsIds.map((id, index) => {
+                    return {
+                        star: id,
+                        title: starsTitles[index]
+                    };
+                }),
+                autoStart: autoStart === 'on'
+            },
+            token ?? ''
+        );
 
         throw redirect(307, `/events/${id}`);
     }

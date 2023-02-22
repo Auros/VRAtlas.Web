@@ -23,7 +23,7 @@ const api = {
             },
             token
         ),
-    delete: <T>(url: string, fetcher: typeof fetch, token: string) => request<T>(fetcher, url, { method: 'DELETE' }, token),
+    delete: <T>(url: string, fetcher: typeof fetch, token: string) => request<T>(fetcher, url, { method: 'DELETE' }, token)
 };
 
 async function request<T>(fetcher: typeof fetch, url: string, init?: RequestInit, token?: string) {
@@ -43,7 +43,7 @@ async function request<T>(fetcher: typeof fetch, url: string, init?: RequestInit
         throw error(response.status, text);
     }
     if (response.status === 204) {
-        return { } as T;
+        return {} as T;
     }
 
     return (await response.json()) as T;

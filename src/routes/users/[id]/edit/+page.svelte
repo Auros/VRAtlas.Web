@@ -10,18 +10,18 @@
 
     $: user = data.user;
     let uploading = false;
-    let links: { id: number, value: string }[] = [];
+    let links: { id: number; value: string }[] = [];
     let linkIdIncrementer = 0;
 
     onMount(() => {
-        user.links.forEach(l => {
+        user.links.forEach((l) => {
             links.push({
                 id: linkIdIncrementer++,
                 value: l
             });
-        })
+        });
         links = links;
-    })
+    });
 
     const upload = (() => {
         uploading = true;
@@ -39,8 +39,7 @@
                 timeout: 5000
             });
         };
-    }) satisfies SubmitFunction
-
+    }) satisfies SubmitFunction;
 </script>
 
 <AtlasMetaTags title="Edit Profile" description={`Edit your profile.`} />
@@ -55,31 +54,27 @@
             <div class="space-y-4">
                 <label class="label">
                     <span>Bio</span>
-                    <textarea
-                        class="textarea"
-                        rows="4"
-                        name="biography"
-                        value={user.biography}
-                        maxlength={500}
-                        disabled={uploading}
-                    />
+                    <textarea class="textarea" rows="4" name="biography" value={user.biography} maxlength={500} disabled={uploading} />
                 </label>
-                <p>Links <button type="button" on:click={() => {
-                    links.push({
-                        id: linkIdIncrementer++,
-                        value: ''
-                    })
-                    links = links;
-                }} disabled={links.length >= 10}><b>(+)</b></button></p>
+                <p>
+                    Links <button
+                        type="button"
+                        on:click={() => {
+                            links.push({
+                                id: linkIdIncrementer++,
+                                value: ''
+                            });
+                            links = links;
+                        }}
+                        disabled={links.length >= 10}><b>(+)</b></button
+                    >
+                </p>
                 {#each links as link}
                     <div class="flex flex-row">
                         <label class="label flex-grow" for="link">
-                            <input required type="url" title="Link" name="link" bind:value={link.value} disabled={uploading}>
+                            <input required type="url" title="Link" name="link" bind:value={link.value} disabled={uploading} />
                         </label>
-                        <button
-                            type="button"
-                            class="btn-icon variant-filled-error scale-50"
-                            on:click={() => links = links.filter(l => l.id !== link.id)}>
+                        <button type="button" class="btn-icon variant-filled-error scale-50" on:click={() => (links = links.filter((l) => l.id !== link.id))}>
                             X
                         </button>
                     </div>

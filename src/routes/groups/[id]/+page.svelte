@@ -10,10 +10,10 @@
 
     export let data: PageData;
 
+    let selectedUser = '';
+    let userSearchQuery = '';
     let modifyingMember = false;
-    let selectedUser: string = '';
     let usersInSearch: User[] = [];
-    let userSearchQuery: string = '';
     let userSearchTimer: NodeJS.Timeout;
 
     $: group = data.group;
@@ -21,7 +21,7 @@
     $: canEdit = isOwner || isManager;
     $: isOwner = data.localUser && group.members.some((m) => m.user.id === data.localUser?.id && m.role === GroupMemberRole.Owner);
     $: isManager = data.localUser && group.members.some((m) => m.user.id === data.localUser?.id && m.role === GroupMemberRole.Manager);
-    
+
     const memberRoleChanged = async (userId: string, role: GroupMemberRole) => {
         modifyingMember = true;
         const data = new FormData();
@@ -124,7 +124,9 @@
                 preset: 'warning',
                 timeout: 2000
             });
-        } catch {}
+        } catch (e) {
+            console.log(e);
+        }
     };
 </script>
 
@@ -236,7 +238,7 @@
             <hr class="!border-t-2 my-4" />
             <div class="grid md:grid-cols-4 gap-4">
                 {#each data.live.events as event}
-                    <EventCard event={event} />
+                    <EventCard {event} />
                 {/each}
             </div>
         </div>
@@ -253,7 +255,7 @@
             <hr class="!border-t-2 my-4" />
             <div class="grid md:grid-cols-4 gap-4">
                 {#each data.upcoming.events as event}
-                    <EventCard event={event} />
+                    <EventCard {event} />
                 {/each}
             </div>
         </div>
@@ -270,7 +272,7 @@
             <hr class="!border-t-2 my-4" />
             <div class="grid md:grid-cols-6 gap-4">
                 {#each data.unlisted.events as event}
-                    <EventCard event={event} />
+                    <EventCard {event} />
                 {/each}
             </div>
         </div>
@@ -287,7 +289,7 @@
             <hr class="!border-t-2 my-4" />
             <div class="grid md:grid-cols-6 gap-4">
                 {#each data.concluded.events as event}
-                    <EventCard event={event} />
+                    <EventCard {event} />
                 {/each}
             </div>
         </div>

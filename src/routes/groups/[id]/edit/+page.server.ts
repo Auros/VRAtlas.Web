@@ -17,7 +17,7 @@ export const load = (async ({ parent, params: { id }, fetch }) => {
     return {
         group
     };
-}) satisfies PageServerLoad
+}) satisfies PageServerLoad;
 
 export const actions = {
     default: async ({ cookies, request }) => {

@@ -9,9 +9,9 @@
     let uploading = false;
     export let data: PageData;
     export let form: ActionData;
-    
+
     let accepted = false;
-    onMount(() => accepted = false);
+    onMount(() => (accepted = false));
 
     const upload = (({ data: formData }) => {
         uploading = true;
@@ -47,7 +47,7 @@
         <form method="POST" use:enhance={upload}>
             <div class="flex flex-row gap-4">
                 <button type="submit" class="btn variant-ghost-error w-32">Reject</button>
-                <button type="submit" on:click={() => accepted = true} class="btn variant-ghost-success w-32">Accept</button>
+                <button type="submit" on:click={() => (accepted = true)} class="btn variant-ghost-success w-32">Accept</button>
             </div>
         </form>
         <EventCard event={data.event} />

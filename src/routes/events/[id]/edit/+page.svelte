@@ -18,7 +18,7 @@
     let now = new Date();
     let uploading = false;
     let tags: string[] = [];
-    let stars: { user: User, title: string }[] = event?.stars ?? [];
+    let stars: { user: User; title: string }[] = event?.stars ?? [];
     let maximumDate = new Date(now.getTime() + 1000 * 60 * 60 * 24 * 90); // 90 days
 
     onMount(() => {
@@ -36,7 +36,6 @@
             await update();
         };
     };
-    
 </script>
 
 <Container>
@@ -45,13 +44,22 @@
         <hr class="!border-t-2 my-4" />
         <form method="POST" use:enhance={upload}>
             <div class="space-y-4">
-
                 <!-- Basic -->
 
                 <input type="hidden" name="id" value={event.id} required />
                 <label class="label" for="name">
                     <span>Name</span>
-                    <input id="name" class="input" type="text" name="name" placeholder="Event Name" value={event.name} maxlength={128} required disabled={uploading} />
+                    <input
+                        id="name"
+                        class="input"
+                        type="text"
+                        name="name"
+                        placeholder="Event Name"
+                        value={event.name}
+                        maxlength={128}
+                        required
+                        disabled={uploading}
+                    />
                 </label>
                 <label class="label">
                     <span>Description</span>
@@ -65,7 +73,7 @@
                         disabled={uploading}
                     />
                 </label>
-                <input type="hidden" name="previousposter" value={event.media}>
+                <input type="hidden" name="previousposter" value={event.media} />
                 <label class="label">
                     <span use:tooltip={{ content: 'The visual associated with the event.' }}>Poster</span>
                     <span class="text-warning-500 text-sm">Recommended Aspect Ratio - 3:4</span>
@@ -74,7 +82,14 @@
 
                 <label class="flex items-center space-x-2">
                     <input class="checkbox" type="checkbox" name="auto-start" checked={data.event.autoStart} />
-                    <p use:tooltip={{ content: 'With this on, the event will automatically start once it reaches its Start Time, sending notifications to those who follow it.' }}>Auto Start</p>
+                    <p
+                        use:tooltip={{
+                            content:
+                                'With this on, the event will automatically start once it reaches its Start Time, sending notifications to those who follow it.'
+                        }}
+                    >
+                        Auto Start
+                    </p>
                 </label>
 
                 <!-- svelte-ignore a11y-label-has-associated-control -->
@@ -84,10 +99,11 @@
                         name="tags"
                         bind:value={tags}
                         allowUpperCase
-                        validation={(value) => tags.length <= 50 && value.length <= 64 && !tags.map(t => t.toLowerCase()).includes(value.toLowerCase())} />
+                        validation={(value) => tags.length <= 50 && value.length <= 64 && !tags.map((t) => t.toLowerCase()).includes(value.toLowerCase())}
+                    />
                 </label>
                 {#each tags as tag}
-                    <input name="tag" value={tag} type="hidden">
+                    <input name="tag" value={tag} type="hidden" />
                 {/each}
 
                 <!-- Event Stars -->
@@ -95,16 +111,20 @@
                 <div class="flex flex-row gap-2">
                     <h3>Stars</h3>
                     {#if stars.length <= 25}
-                        <UserSelector text="Add Star" ignore={stars.map(s => s.user.id)} on:user-select={e => {
-                            stars.push({ user: e.detail.user, title: '' });
-                            stars = stars;
-                        }} />
+                        <UserSelector
+                            text="Add Star"
+                            ignore={stars.map((s) => s.user.id)}
+                            on:user-select={(e) => {
+                                stars.push({ user: e.detail.user, title: '' });
+                                stars = stars;
+                            }}
+                        />
                     {/if}
                 </div>
 
                 <div class="grid md:grid-cols-6 gap-4">
                     {#each stars as { user, title }}
-                        <input type="hidden" name="star-id" value={user.id}>
+                        <input type="hidden" name="star-id" value={user.id} />
                         <div class="card variant-glass-surface p-4">
                             <div class="flex flex-col items-center gap-2">
                                 <a href={`/users/${user.id}`}>
@@ -112,21 +132,31 @@
                                 </a>
                                 <h3>{user.username}</h3>
                                 <label class="label" for="star-title">
-                                    <input id="star-title" class="input" type="text" name="star-title" placeholder="Title" maxlength={64} bind:value={title} disabled={uploading} />
+                                    <input
+                                        id="star-title"
+                                        class="input"
+                                        type="text"
+                                        name="star-title"
+                                        placeholder="Title"
+                                        maxlength={64}
+                                        bind:value={title}
+                                        disabled={uploading}
+                                    />
                                 </label>
                                 <button
                                     type="button"
                                     class="btn-icon variant-filled-error scale-50 absolute right-0 top-0"
-                                    on:click={() => stars = stars.filter(s => s.user.id !== user.id)}>
+                                    on:click={() => (stars = stars.filter((s) => s.user.id !== user.id))}
+                                >
                                     X
                                 </button>
                             </div>
                         </div>
                     {/each}
                 </div>
-                
+
                 <!-- Time -->
-                
+
                 <h3>Time</h3>
 
                 <!-- svelte-ignore a11y-label-has-associated-control -->
@@ -139,14 +169,15 @@
                         startDate={now}
                         endDate={maximumDate}
                         bind:value={startTime}
-                        required />
+                        required
+                    />
                 </label>
 
                 {#if startTime !== '' && new Date(startTime).getTime() > 1}
-                <input type="hidden" name="event-start" value={new Date(startTime).toISOString()}>
+                    <input type="hidden" name="event-start" value={new Date(startTime).toISOString()} />
                     {formatDate(new Date(startTime), 'DD, MM d, yyyy @ H:i P', en, 'standard')}
                 {/if}
-                
+
                 <!-- svelte-ignore a11y-label-has-associated-control -->
                 <label class="label">
                     <span>End Time</span>
@@ -156,13 +187,14 @@
                         format="yyyy-mm-ddThh:ii:ss"
                         startDate={startTime}
                         endDate={maximumDate}
-                        disabled={startTime === '' || (new Date(startTime).getTime() <= 1 )}
+                        disabled={startTime === '' || new Date(startTime).getTime() <= 1}
                         bind:value={endTime}
-                        required />
+                        required
+                    />
                 </label>
 
                 {#if endTime !== '' && new Date(endTime).getTime() > 1}
-                    <input type="hidden" name="event-end" value={new Date(endTime).toISOString()}>
+                    <input type="hidden" name="event-end" value={new Date(endTime).toISOString()} />
                     {formatDate(new Date(endTime), 'DD, MM d, yyyy @ H:i P', en, 'standard')}
                 {/if}
 
@@ -175,7 +207,6 @@
                         </div>
                     {/if}
                 </div>
-
             </div>
         </form>
     </div>

@@ -1,11 +1,10 @@
 <script lang="ts">
-    import hero from '$lib/images/hero.png'
+    import hero from '$lib/images/hero.png';
     import type { PageData } from './$types';
     import { MetaTags } from 'svelte-meta-tags';
     import { Container, EventCollection } from '$lib/components';
 
     export let data: PageData;
-
 </script>
 
 <MetaTags title="Home" titleTemplate="%s • VR Atlas" description="The open source hub for finding events occurring in virtual reality." />

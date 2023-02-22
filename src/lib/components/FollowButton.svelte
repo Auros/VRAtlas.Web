@@ -1,8 +1,8 @@
 <script lang="ts">
-    import api from "$lib/api";
-    import { onMount } from "svelte";
-    import { page } from "$app/stores";
-    import { toastStore } from "@skeletonlabs/skeleton";
+    import api from '$lib/api';
+    import { onMount } from 'svelte';
+    import { page } from '$app/stores';
+    import { toastStore } from '@skeletonlabs/skeleton';
 
     enum EntityType {
         Unknown,
@@ -22,10 +22,10 @@
         const token = $page.data.token;
         const follow = await api.get<{ status: boolean }>(`/follows/${id}`, fetch, token);
         isFollowing = follow.status;
-    })
+    });
 
     const clicked = async () => {
-        processing= true;
+        processing = true;
         const token = $page.data.token;
         if (isFollowing) {
             // Unfollow the current entity
@@ -52,7 +52,7 @@
                     {
                         id,
                         type,
-                        metadata                       
+                        metadata
                     },
                     token
                 );
@@ -69,8 +69,7 @@
             }
         }
         processing = false;
-    }
-
+    };
 </script>
 
 <button
@@ -78,6 +77,7 @@
     class:variant-ghost-primary={!isFollowing}
     class:variant-ghost-error={isFollowing === true}
     disabled={isFollowing === null || processing}
-    on:click={clicked}>
+    on:click={clicked}
+>
     {isFollowing ? 'Unfollow' : 'Follow'}
 </button>

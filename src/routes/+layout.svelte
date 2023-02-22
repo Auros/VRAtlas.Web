@@ -12,7 +12,7 @@
     import { PUBLIC_API_URL } from '$env/static/public';
     import { AppBar, AppShell, Avatar, ProgressRadial, Toast, tooltip, menu, Modal } from '@skeletonlabs/skeleton';
     import { HubConnectionBuilder } from '@microsoft/signalr';
-    
+
     export let data: LayoutData;
     let animatedPageTransitions = false;
 
@@ -20,7 +20,7 @@
     onMount(async () => {
         let doTransitions = window.matchMedia(`(prefers-reduced-motion: reduce)`) === undefined;
         if (!doTransitions) {
-            doTransitions = window.matchMedia(`(prefers-reduced-motion: reduce)`).matches !== true;;
+            doTransitions = window.matchMedia(`(prefers-reduced-motion: reduce)`).matches !== true;
         }
         animatedPageTransitions = doTransitions;
 
@@ -29,26 +29,20 @@
         }
 
         const options = data.token ? { accessTokenFactory: () => data.token as string } : {};
-        const connection = new HubConnectionBuilder()
-            .withUrl(`${PUBLIC_API_URL}/hub/atlas`, options)
-            .build();
+        const connection = new HubConnectionBuilder().withUrl(`${PUBLIC_API_URL}/hub/atlas`, options).build();
 
         try {
-            
-            connection.on('notificationReceived', data => {
+            connection.on('notificationReceived', (data) => {
                 console.log(data);
-            })
+            });
 
-            await connection.start()
+            await connection.start();
             console.log('Connected to VR Atlas Notification Hub');
-
-
         } catch (e) {
-            console.error('Failed to connect to VR Atlas Notification Hub', e)
+            console.error('Failed to connect to VR Atlas Notification Hub', e);
             return;
         }
     });
-
 </script>
 
 <Modal />
@@ -67,7 +61,11 @@
             </svelte:fragment>
             <svelte:fragment slot="trail">
                 <div class="flex flex-row items-center text-center gap-4">
-                    <pre use:tooltip={{ content: 'All times on the website are localized to this time zone.', position: 'bottom' }}>{Intl.DateTimeFormat().resolvedOptions().timeZone}</pre>
+                    <pre
+                        use:tooltip={{
+                            content: 'All times on the website are localized to this time zone.',
+                            position: 'bottom'
+                        }}>{Intl.DateTimeFormat().resolvedOptions().timeZone}</pre>
                     {#if data.localUser}
                         <!-- Local User Context Menu -->
                         <span class="relative">
