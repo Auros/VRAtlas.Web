@@ -3,7 +3,7 @@
     import type { PageData } from './$types';
     import { Link } from '@steeze-ui/heroicons';
     import { Icon } from '@steeze-ui/svelte-icon';
-    import { AtlasMetaTags, Container } from '$lib/components';
+    import { AtlasMetaTags, Container, FollowButton } from '$lib/components';
     import
     {
         Github,
@@ -30,10 +30,12 @@
             </div>
             <div class="flex-grow flex flex-col gap-2">
                 <div class="flex-grow">
-                    <div class="flex flex-row">
+                    <div class="flex flex-row gap-2">
                         <h2 class="flex-grow">{user.username}</h2>
                         {#if user.id === data.localUser?.id}
                             <a href={`/users/${user.id}/edit`} class="btn variant-ghost-primary">Edit Profile</a>
+                        {:else}
+                            <FollowButton id={user.id} type={1} />
                         {/if}
                     </div>
                     {#if user.biography}

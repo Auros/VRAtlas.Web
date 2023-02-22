@@ -1,12 +1,12 @@
 <script lang="ts">
     import type { PageData } from './$types';
-    import { picture, nameForRole, api } from '$lib';
     import { invalidateAll } from '$app/navigation';
+    import { picture, nameForRole, api } from '$lib';
     import type { ActionResult } from '@sveltejs/kit';
     import { applyAction, deserialize } from '$app/forms';
     import { type Group, GroupMemberRole, type User } from '$lib/types';
-    import { Container, AtlasMetaTags, AtlasMarkdown, EventCard } from '$lib/components';
     import { Avatar, ListBox, ListBoxItem, menu, toastStore } from '@skeletonlabs/skeleton';
+    import { Container, AtlasMetaTags, AtlasMarkdown, EventCard, FollowButton } from '$lib/components';
 
     export let data: PageData;
 
@@ -139,12 +139,13 @@
             <div class="flex sm:flex-row flex-col items-center gap-4">
                 <Avatar src={picture(group.icon)} width="w-16" class="select-none" />
                 <h1 class="flex-grow align-middle">{group.name}</h1>
-                {#if canEdit}
-                    <div class="flex flex-row gap-4">
+                <div class="flex flex-row gap-4">
+                    <FollowButton id={group.id} type={2} />
+                    {#if canEdit}
                         <a href={`/groups/${group.id}/event`} class="btn variant-ghost-primary w-40"> New Event </a>
                         <a href={`/groups/${group.id}/edit`} class="btn variant-ghost-primary w-20"> Edit </a>
-                    </div>
-                {/if}
+                    {/if}
+                </div>
             </div>
             <hr class="!border-t-2 my-4" />
             {#if group.description !== ''}

@@ -6,7 +6,7 @@
     import { modalStore } from '@skeletonlabs/skeleton';
     import RelativeTime from 'dayjs/plugin/relativeTime';
     import { EventStatus, GroupMemberRole } from '$lib/types';
-    import { AtlasMarkdown, AtlasMetaTags, Container, GroupCard } from '$lib/components';
+    import { AtlasMarkdown, AtlasMetaTags, Container, FollowButton, GroupCard } from '$lib/components';
     import { Avatar, ProgressRadial, toastStore, type ModalSettings } from '@skeletonlabs/skeleton';
 
     dayjs.extend(RelativeTime);
@@ -98,6 +98,7 @@
                     <div class="flex-grow">
                         <h1>{event.name}</h1>
                     </div>
+                    <FollowButton id={event.id} type={3} />
                     <!-- Editor Button -->
                     {#if canEdit}
                         {#if event.startTime} <!-- Event start time is required for these actions -->

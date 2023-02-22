@@ -22,7 +22,8 @@ const api = {
                 body: JSON.stringify(body)
             },
             token
-        )
+        ),
+    delete: <T>(url: string, fetcher: typeof fetch, token: string) => request<T>(fetcher, url, { method: 'DELETE' }, token),
 };
 
 async function request<T>(fetcher: typeof fetch, url: string, init?: RequestInit, token?: string) {

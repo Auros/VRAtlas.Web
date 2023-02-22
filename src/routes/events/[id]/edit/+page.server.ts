@@ -44,13 +44,14 @@ export const actions = {
             }, token ?? '')
         }
 
-        const name = form.get('name');
         const tags = form.getAll('tag');
         const starsIds = form.getAll('star-id');
         const starsTitles = form.getAll('star-title');
+        
+        const name = form.get('name');
         const poster = form.get('poster');
-        const description = form.get('description');
         const autoStart = form.get('auto-start');
+        const description = form.get('description');
         
         let media: string | null = null;
         if (poster && (poster as Blob).size !== 0) {
