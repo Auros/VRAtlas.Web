@@ -19,7 +19,7 @@
 </div>
 
 <Container>
-    <EventCollection type="Live" events={data.live?.events} />
-    <EventCollection type="Upcoming" events={data.upcoming?.events} />
-    <EventCollection type="Past" events={data.concluded?.events} />
+    <EventCollection type="Live" events={data.live?.events} more={'started'} />
+    <EventCollection type="Upcoming" events={data.upcoming?.events} more={'announced'} />
+    <EventCollection type="Past" events={data.concluded?.events} more={'concluded'} />
 </Container>

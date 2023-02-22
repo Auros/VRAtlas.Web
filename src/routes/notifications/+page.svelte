@@ -2,12 +2,12 @@
     import dayjs from "dayjs";
     import { api } from "$lib";
     import { page } from "$app/stores";
+    import { notificationStore } from "$lib/stores";
     import RelativeTime from 'dayjs/plugin/relativeTime';
     import InfiniteLoading from 'svelte-infinite-loading';
     import { AtlasMetaTags, Container } from "$lib/components";
     import { EntityType, type Notification } from "$lib/types";
     import type { InfiniteEvent } from 'svelte-infinite-loading';
-    import { notificationStore } from "$lib/stores";
 
     dayjs.extend(RelativeTime);
     let cursor: string | null = null;

@@ -85,8 +85,8 @@
                             {#await data.streamed.notifQuery}
                                 <!-- Loading... -->
                             {:then value}
-                                {#if value?.unread}
-                                    <span class="badge variant-filled-primary absolute bottom-4">{$notificationStore ?? value.unread}</span>
+                                {#if value?.unread || ($notificationStore && $notificationStore > 0)}
+                                    <span class="badge variant-filled-primary absolute bottom-4">{$notificationStore ?? value?.unread}</span>
                                 {/if}
                             {/await}
                             <Icon src={Bell} class="w-8 h-8 dark:text-[#e4e4e4] text-[#303030]" />

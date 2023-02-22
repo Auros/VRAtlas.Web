@@ -4,6 +4,8 @@
 
     export let type: string;
     export let events: AtlasEvent[] | undefined;
+    export let more: string | null = null;
+
 </script>
 
 <div class="card p-4 mt-8">
@@ -12,7 +14,9 @@
             <div class="flex-grow">
                 <h2>{type} Events</h2>
             </div>
-            <!--<button type="button" class="btn variant-ghost-primary">View More</button>-->
+            {#if more}
+                <a href={`/events?status=${more}`} type="button" class="btn variant-ghost-primary">View More</a>
+            {/if}
         </div>
     </header>
     <hr class="!border-t-2 my-4" />
