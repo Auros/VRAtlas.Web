@@ -7,19 +7,48 @@
     import { onMount } from 'svelte';
     import { fly } from 'svelte/transition';
     import type { LayoutData } from './$types';
+    import { browser } from '$app/environment';
     import { navigating, page } from '$app/stores';
+    import { PUBLIC_API_URL } from '$env/static/public';
     import { AppBar, AppShell, Avatar, ProgressRadial, Toast, tooltip, menu, Modal } from '@skeletonlabs/skeleton';
-
+    import { HubConnectionBuilder } from '@microsoft/signalr';
+    
+    export let data: LayoutData;
     let animatedPageTransitions = false;
 
     // If the user's browser requests reduced motion, disable the page transition animation.
-    onMount(
-        () =>
-            (animatedPageTransitions =
-                window.matchMedia(`(prefers-reduced-motion: reduce)`) !== undefined || window.matchMedia(`(prefers-reduced-motion: reduce)`).matches !== true)
-    );
+    onMount(async () => {
+        let doTransitions = window.matchMedia(`(prefers-reduced-motion: reduce)`) === undefined;
+        if (!doTransitions) {
+            doTransitions = window.matchMedia(`(prefers-reduced-motion: reduce)`).matches !== true;;
+        }
+        animatedPageTransitions = doTransitions;
 
-    export let data: LayoutData;
+        if (!browser) {
+            return;
+        }
+
+        const options = data.token ? { accessTokenFactory: () => data.token as string } : {};
+        const connection = new HubConnectionBuilder()
+            .withUrl(`${PUBLIC_API_URL}/hub/atlas`, options)
+            .build();
+
+        try {
+            
+            connection.on('notificationReceived', data => {
+                console.log(data);
+            })
+
+            await connection.start()
+            console.log('Connected to VR Atlas Notification Hub');
+
+
+        } catch (e) {
+            console.error('Failed to connect to VR Atlas Notification Hub', e)
+            return;
+        }
+    });
+
 </script>
 
 <Modal />

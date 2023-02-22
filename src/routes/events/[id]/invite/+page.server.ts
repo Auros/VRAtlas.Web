@@ -27,7 +27,6 @@ export const actions = {
         const token = locals.token;
         const form = await request.formData();
 
-        console.log(id);
         const accept = form.get('accept') !== null;
         await api.put<unknown>(`/events/invite/${accept ? 'accept' : 'reject'}`, fetch, { id }, token ?? '');
 
