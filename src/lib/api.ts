@@ -37,7 +37,6 @@ async function request<T>(fetcher: typeof fetch, url: string, init?: RequestInit
     }
     init.headers = headers;
     const response = await fetcher(`${PUBLIC_API_URL}${url}`, init);
-    console.log(response);
     if (!response.ok) {
         const text = await response.text();
         // TODO: If it's a validation error, include it in the thrown error.

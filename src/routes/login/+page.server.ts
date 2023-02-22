@@ -50,7 +50,6 @@ export const load = (async ({ cookies, url, fetch, locals }) => {
         path: '/'
     });
 
-    console.log('got token');
     return {
         token: tokens.accessToken
     }
