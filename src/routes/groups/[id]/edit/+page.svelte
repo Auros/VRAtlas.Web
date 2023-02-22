@@ -49,7 +49,7 @@
                         name="description"
                         placeholder="Supports Markdown"
                         value={group.description}
-                        maxlength={2000}
+                        maxlength={1000}
                         disabled={uploading}
                     />
                 </label>

@@ -25,7 +25,7 @@
             <div class="space-y-2">
                 <label class="label">
                     <span>Name</span>
-                    <input class="input" type="text" name="name" placeholder="Group Name" required disabled={uploading} />
+                    <input class="input" type="text" name="name" placeholder="Group Name" maxlength={128} required disabled={uploading} />
                 </label>
                 <label class="label">
                     <span>Description</span>

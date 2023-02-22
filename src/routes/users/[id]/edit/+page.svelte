@@ -70,7 +70,7 @@
                         value: ''
                     })
                     links = links;
-                }}><b>(+)</b></button></p>
+                }} disabled={links.length >= 10}><b>(+)</b></button></p>
                 {#each links as link}
                     <div class="flex flex-row">
                         <label class="label flex-grow" for="link">

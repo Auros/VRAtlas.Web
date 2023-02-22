@@ -51,7 +51,7 @@
                 <input type="hidden" name="id" value={event.id} required />
                 <label class="label" for="name">
                     <span>Name</span>
-                    <input id="name" class="input" type="text" name="name" placeholder="Event Name" value={event.name} required disabled={uploading} />
+                    <input id="name" class="input" type="text" name="name" placeholder="Event Name" value={event.name} maxlength={128} required disabled={uploading} />
                 </label>
                 <label class="label">
                     <span>Description</span>
@@ -80,7 +80,11 @@
                 <!-- svelte-ignore a11y-label-has-associated-control -->
                 <label class="label">
                     <span>Tags</span>
-                    <InputChip name="tags" bind:value={tags} allowUpperCase validation={(value) => !tags.map(t => t.toLowerCase()).includes(value.toLowerCase())} />
+                    <InputChip
+                        name="tags"
+                        bind:value={tags}
+                        allowUpperCase
+                        validation={(value) => tags.length <= 50 && value.length <= 64 && !tags.map(t => t.toLowerCase()).includes(value.toLowerCase())} />
                 </label>
                 {#each tags as tag}
                     <input name="tag" value={tag} type="hidden">
@@ -90,14 +94,16 @@
 
                 <div class="flex flex-row gap-2">
                     <h3>Stars</h3>
-                    <UserSelector text="Add Star" ignore={stars.map(s => s.user.id)} on:user-select={e => {
-                        stars.push({ user: e.detail.user, title: '' });
-                        stars = stars;
-                    }} />
+                    {#if stars.length <= 25}
+                        <UserSelector text="Add Star" ignore={stars.map(s => s.user.id)} on:user-select={e => {
+                            stars.push({ user: e.detail.user, title: '' });
+                            stars = stars;
+                        }} />
+                    {/if}
                 </div>
 
                 <div class="grid md:grid-cols-6 gap-4">
-                    {#each stars as { user, title} }
+                    {#each stars as { user, title } }
                         <input type="hidden" name="star-id" value={user.id}>
                         <div class="card variant-glass-surface p-4">
                             <div class="flex flex-col items-center gap-2">
@@ -106,7 +112,7 @@
                                 </a>
                                 <h3>{user.username}</h3>
                                 <label class="label" for="star-title">
-                                    <input id="star-title" class="input" type="text" name="star-title" placeholder="Title" bind:value={title} disabled={uploading} />
+                                    <input id="star-title" class="input" type="text" name="star-title" placeholder="Title" maxlength={64} bind:value={title} disabled={uploading} />
                                 </label>
                                 <button
                                     type="button"
