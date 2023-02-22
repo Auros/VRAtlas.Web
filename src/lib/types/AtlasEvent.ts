@@ -17,6 +17,7 @@ type AtlasEvent = {
         status: number;
         title: string;
     }[];
+    autoStart: boolean;
 };
 
 export default AtlasEvent;

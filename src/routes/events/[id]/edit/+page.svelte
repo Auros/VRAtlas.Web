@@ -71,6 +71,12 @@
                     <span class="text-warning-500 text-sm">Recommended Aspect Ratio - 3:4</span>
                     <input class="input" type="file" name="poster" disabled={uploading} />
                 </label>
+
+                <label class="flex items-center space-x-2">
+                    <input class="checkbox" type="checkbox" name="auto-start" checked={data.event.autoStart} />
+                    <p use:tooltip={{ content: 'With this on, the event will automatically start once it reaches its Start Time, sending notifications to those who follow it.' }}>Auto Start</p>
+                </label>
+
                 <!-- svelte-ignore a11y-label-has-associated-control -->
                 <label class="label">
                     <span>Tags</span>

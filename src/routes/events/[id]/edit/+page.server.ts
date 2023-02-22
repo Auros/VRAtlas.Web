@@ -50,6 +50,7 @@ export const actions = {
         const starsTitles = form.getAll('star-title');
         const poster = form.get('poster');
         const description = form.get('description');
+        const autoStart = form.get('auto-start');
         
         let media: string | null = null;
         if (poster && (poster as Blob).size !== 0) {
@@ -67,7 +68,8 @@ export const actions = {
                     star: id,
                     title: starsTitles[index]
                 }
-            })
+            }),
+            autoStart
         }, token ?? '')
 
         throw redirect(307, `/events/${id}`);
