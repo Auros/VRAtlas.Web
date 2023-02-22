@@ -1,4 +1,5 @@
 <script lang="ts">
+    import dayjs from "dayjs";
     import { api } from "$lib";
     import { page } from "$app/stores";
     import RelativeTime from 'dayjs/plugin/relativeTime';
@@ -6,7 +7,7 @@
     import { AtlasMetaTags, Container } from "$lib/components";
     import { EntityType, type Notification } from "$lib/types";
     import type { InfiniteEvent } from 'svelte-infinite-loading';
-    import dayjs from "dayjs";
+    import { notificationStore } from "$lib/stores";
 
     dayjs.extend(RelativeTime);
     let cursor: string | null = null;
@@ -14,7 +15,8 @@
 
     type Query = {
         notifications: Notification[],
-        next: string | null
+        next: string | null,
+        unread: number
     }
 
     const infiniteHandler = (async ({ detail: { loaded, complete } }: InfiniteEvent) => {
@@ -27,6 +29,7 @@
         const url = cursor ? `/notifications?cursor=${cursor}` : `/notifications`;
         const query = await api.get<Query>(url, fetch, token);
         notifications  = [...notifications, ...query.notifications];
+        notificationStore.set(query.unread);
         cursor = query.next;
         loaded();
         if (!query.next) {
@@ -36,6 +39,8 @@
 
     const markAsRead = async (id: string) => {
         await api.put<unknown>('/notifications/read', fetch, { id }, $page.data.token);
+        const query = await api.get<Query>('/notifications', fetch, $page.data.token);
+        notificationStore.set(query.unread);
     }
 
     const getEntityName = (type?: EntityType) => {
@@ -74,7 +79,7 @@
 
                 <h4>{notif.title}</h4>
                 <hr class="!border-t-2 my-2" />
-                <p class="dark:text-surface-300 text-surface-600">{notif.description}</p>
+                <p class="dark:text-surface-300 text-surface-600">{notif.description}<b>{(notif.key === "EVENT_STAR_INVITED" ? '. Click to accept/deny.' : '')}</b></p>
                 <div class="text-sm">{new Date(notif.createdAt).toLocaleString()} ({dayjs(notif.createdAt).fromNow()})</div>
             </a>
         {/each}

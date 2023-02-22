@@ -11,10 +11,12 @@
     import { Bell } from '@steeze-ui/heroicons';
     import { Icon } from '@steeze-ui/svelte-icon';
     import { navigating, page } from '$app/stores';
+    import type { Notification } from '$lib/types';
     import { PUBLIC_API_URL } from '$env/static/public';
     import { HubConnectionBuilder } from '@microsoft/signalr';
-    import { AppBar, AppShell, Avatar, ProgressRadial, Toast, tooltip, menu, Modal } from '@skeletonlabs/skeleton';
-    import { invalidateAll } from '$app/navigation';
+    import { AppBar, AppShell, Avatar, ProgressRadial, Toast, tooltip, menu, Modal, toastStore } from '@skeletonlabs/skeleton';
+    import { goto } from '$app/navigation';
+    import { notificationStore } from '$lib/stores';
 
     export let data: LayoutData;
     let animatedPageTransitions = false;
@@ -31,19 +33,28 @@
             return;
         }
 
+        // Live notification handling via SignalR
         const options = data.token ? { accessTokenFactory: () => data.token as string } : {};
         const connection = new HubConnectionBuilder().withUrl(`${PUBLIC_API_URL}/hub/atlas`, options).build();
 
         try {
-            connection.on('notificationReceived', (data) => {
-                console.log(data);
+            connection.on('notificationReceived', (data: Notification) => {
+                toastStore.trigger({
+                    message: data.title,
+                    classes: 'bg-gradient-to-tr from-indigo-500 via-purple-500 to-purple-800 text-white',
+                    timeout: 10000,
+                    action: {
+                        label: 'View',
+                        response: () => goto('/notifications')
+                    }
+                })
             });
 
             await connection.start();
             console.log('Connected to VR Atlas Notification Hub');
+
         } catch (e) {
             console.error('Failed to connect to VR Atlas Notification Hub', e);
-            return;
         }
     });
 </script>
@@ -75,7 +86,7 @@
                                 <!-- Loading... -->
                             {:then value}
                                 {#if value?.unread}
-                                    <span class="badge variant-filled-primary absolute bottom-4">{value.unread}</span>
+                                    <span class="badge variant-filled-primary absolute bottom-4">{$notificationStore ?? value.unread}</span>
                                 {/if}
                             {/await}
                             <Icon src={Bell} class="w-8 h-8 dark:text-[#e4e4e4] text-[#303030]" />
@@ -118,7 +129,7 @@
     <main>
         {#if animatedPageTransitions}
             <div class="transition-outer">
-                {#key $page.url.pathname && $navigating}
+                {#key $page.url.pathname || $navigating}
                     <div class="transition-inner">
                         <div in:fly={{ x: -5, duration: 120, delay: 120 }} out:fly={{ x: 5, duration: 120 }}>
                             {#if $navigating}
