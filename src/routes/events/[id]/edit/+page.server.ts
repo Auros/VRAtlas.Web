@@ -70,7 +70,7 @@ export const actions = {
                     title: starsTitles[index]
                 }
             }),
-            autoStart
+            autoStart: autoStart === 'on'
         }, token ?? '')
 
         throw redirect(307, `/events/${id}`);
