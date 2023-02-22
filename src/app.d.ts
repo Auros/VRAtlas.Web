@@ -6,6 +6,8 @@ declare namespace App {
         token?: string;
     }
     // interface PageData {}
-    // interface Error {}
+    interface Error {
+        errors?: string[];
+    }
     // interface Platform {}
 }

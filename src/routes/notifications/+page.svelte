@@ -74,6 +74,7 @@
             <a
                 class="card card-hover p-4"
                 on:click={() => markAsRead(notif.id)}
+                class:variant-ghost-primary={!notif.read}
                 class:variant-soft-surface={notif.read}
                 href={`/${getEntityName(notif.entityType)}/${notif.entityId}${notif.key === "EVENT_STAR_INVITED" ? '/invite' : ''}`}>
 

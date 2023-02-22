@@ -85,7 +85,7 @@
                             {#await data.streamed.notifQuery}
                                 <!-- Loading... -->
                             {:then value}
-                                {#if value?.unread || ($notificationStore && $notificationStore > 0)}
+                                {#if value?.unread || $notificationStore}
                                     <span class="badge variant-filled-primary absolute bottom-4">{$notificationStore ?? value?.unread}</span>
                                 {/if}
                             {/await}

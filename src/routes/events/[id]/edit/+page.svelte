@@ -80,18 +80,6 @@
                     <input class="input" type="file" name="poster" disabled={uploading} />
                 </label>
 
-                <label class="flex items-center space-x-2">
-                    <input class="checkbox" type="checkbox" name="auto-start" checked={data.event.autoStart} />
-                    <p
-                        use:tooltip={{
-                            content:
-                                'With this on, the event will automatically start once it reaches its Start Time, sending notifications to those who follow it.'
-                        }}
-                    >
-                        Auto Start
-                    </p>
-                </label>
-
                 <!-- svelte-ignore a11y-label-has-associated-control -->
                 <label class="label">
                     <span>Tags</span>
@@ -102,6 +90,7 @@
                         validation={(value) => tags.length <= 50 && value.length <= 64 && !tags.map((t) => t.toLowerCase()).includes(value.toLowerCase())}
                     />
                 </label>
+
                 {#each tags as tag}
                     <input name="tag" value={tag} type="hidden" />
                 {/each}
@@ -197,6 +186,18 @@
                     <input type="hidden" name="event-end" value={new Date(endTime).toISOString()} />
                     {formatDate(new Date(endTime), 'DD, MM d, yyyy @ H:i P', en, 'standard')}
                 {/if}
+
+                <label class="flex items-center space-x-2">
+                    <input class="checkbox" type="checkbox" name="auto-start" checked={data.event.autoStart} />
+                    <p
+                        use:tooltip={{
+                            content:
+                                'With this on, the event will automatically start once it reaches its Start Time, sending notifications to those who follow it.'
+                        }}
+                    >
+                        Auto Start
+                    </p>
+                </label>
 
                 <hr class="!border-t-2 my-4" />
                 <div class="flex flex-row gap-2">
