@@ -8,10 +8,13 @@
     import { fly } from 'svelte/transition';
     import type { LayoutData } from './$types';
     import { browser } from '$app/environment';
+    import { Bell } from '@steeze-ui/heroicons';
+    import { Icon } from '@steeze-ui/svelte-icon';
     import { navigating, page } from '$app/stores';
     import { PUBLIC_API_URL } from '$env/static/public';
-    import { AppBar, AppShell, Avatar, ProgressRadial, Toast, tooltip, menu, Modal } from '@skeletonlabs/skeleton';
     import { HubConnectionBuilder } from '@microsoft/signalr';
+    import { AppBar, AppShell, Avatar, ProgressRadial, Toast, tooltip, menu, Modal } from '@skeletonlabs/skeleton';
+    import { invalidateAll } from '$app/navigation';
 
     export let data: LayoutData;
     let animatedPageTransitions = false;
@@ -67,6 +70,16 @@
                             position: 'bottom'
                         }}>{Intl.DateTimeFormat().resolvedOptions().timeZone}</pre>
                     {#if data.localUser}
+                        <a href="/notifications" class="relative mr-2">
+                            {#await data.streamed.notifQuery}
+                                <!-- Loading... -->
+                            {:then value}
+                                {#if value?.unread}
+                                    <span class="badge variant-filled-primary absolute bottom-4">{value.unread}</span>
+                                {/if}
+                            {/await}
+                            <Icon src={Bell} class="w-8 h-8 dark:text-[#e4e4e4] text-[#303030]" />
+                        </a>
                         <!-- Local User Context Menu -->
                         <span class="relative">
                             <button use:menu={{ menu: 'local-user-context-menu' }} type="button">
@@ -101,7 +114,6 @@
             </svelte:fragment>
         </AppBar>
     </svelte:fragment>
-
     <!-- Main-->
     <main>
         {#if animatedPageTransitions}

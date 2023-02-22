@@ -8,6 +8,10 @@ export const load = (async ({ locals, fetch }) => {
         token: locals.token,
 
         // Fetch the local user via token if it exists.
-        localUser: locals.token ? api.get<User>('/users/@me', fetch, locals.token) : null
+        localUser: locals.token ? api.get<User>('/users/@me', fetch, locals.token) : null,
+
+        streamed: {
+            notifQuery: locals.token ? api.get<{ unread: number }>('/notifications', fetch, locals.token) : null
+        }
     };
 }) satisfies LayoutServerLoad;
