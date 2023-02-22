@@ -103,7 +103,7 @@
                 </div>
 
                 <div class="grid md:grid-cols-6 gap-4">
-                    {#each stars as { user, title } }
+                    {#each stars as { user, title }}
                         <input type="hidden" name="star-id" value={user.id}>
                         <div class="card variant-glass-surface p-4">
                             <div class="flex flex-col items-center gap-2">
