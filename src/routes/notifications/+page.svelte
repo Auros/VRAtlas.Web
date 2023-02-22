@@ -75,11 +75,11 @@
                 class="card card-hover p-4"
                 on:click={() => markAsRead(notif.id)}
                 class:variant-soft-surface={notif.read}
-                href={`/${getEntityName(notif.entityType)}/${notif.entityId}${notif.key === "EVENT_STAR_INVITED" ? '/edit' : ''}`}>
+                href={`/${getEntityName(notif.entityType)}/${notif.entityId}${notif.key === "EVENT_STAR_INVITED" ? '/invite' : ''}`}>
 
                 <h4>{notif.title}</h4>
                 <hr class="!border-t-2 my-2" />
-                <p class="dark:text-surface-300 text-surface-600">{notif.description}<b>{(notif.key === "EVENT_STAR_INVITED" ? '. Click to accept/deny.' : '')}</b></p>
+                <p class="dark:text-surface-300 text-surface-600">{notif.description}<b>{(notif.key === "EVENT_STAR_INVITED" ? ' Click to accept/deny.' : '')}</b></p>
                 <div class="text-sm">{new Date(notif.createdAt).toLocaleString()} ({dayjs(notif.createdAt).fromNow()})</div>
             </a>
         {/each}
