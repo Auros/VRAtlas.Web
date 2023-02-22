@@ -4,7 +4,7 @@ import type { Group } from '$lib/types';
 import { GroupMemberRole } from '$lib/types';
 import type { Actions, PageServerLoad } from './$types';
 
-export const load: PageServerLoad = async ({ parent, params: { id }, fetch }) => {
+export const load = (async ({ parent, params: { id }, fetch }) => {
     const { localUser } = await parent();
     const group = await api.get<Group>(`/groups/${id}`, fetch);
 
@@ -17,7 +17,7 @@ export const load: PageServerLoad = async ({ parent, params: { id }, fetch }) =>
     return {
         group
     };
-};
+}) satisfies PageServerLoad
 
 export const actions = {
     default: async ({ cookies, request }) => {

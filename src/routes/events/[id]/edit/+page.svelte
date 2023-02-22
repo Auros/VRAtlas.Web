@@ -12,7 +12,6 @@
     export let data: PageServerData;
 
     $: event = data.event;
-    $: group = data.event.owner;
 
     let endTime = '';
     let startTime = '';
@@ -101,7 +100,7 @@
                                 </a>
                                 <h3>{user.username}</h3>
                                 <label class="label" for="star-title">
-                                    <input id="star-title" class="input" type="text" name="star-title" placeholder="Title" value={title} disabled={uploading} />
+                                    <input id="star-title" class="input" type="text" name="star-title" placeholder="Title" bind:value={title} disabled={uploading} />
                                 </label>
                                 <button
                                     type="button"
