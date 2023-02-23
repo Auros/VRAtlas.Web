@@ -61,7 +61,9 @@
     });
 </script>
 
+<!-- Singletons used throughout the website -->
 <Modal />
+
 <Toast />
 
 <AppShell>
@@ -69,11 +71,20 @@
     <svelte:fragment slot="header">
         <AppBar class="h-18">
             <svelte:fragment slot="lead">
-                <a href="/">
-                    <h3 class="select-none">
-                        <b>VR Atlas</b>
-                    </h3>
-                </a>
+                <div class="flex flex-row gap-3 items-center">
+                    <a href="/">
+                        <h3 class="select-none">
+                            <b>VR Atlas</b>
+                        </h3>
+                    </a>
+                    <span class="divider-vertical h-10" />
+                    <a href="/" class="hidden md:flex">
+                        <h5 class="select-none">Home</h5>
+                    </a>
+                    <a href="/about">
+                        <h5 class="select-none">About</h5>
+                    </a>
+                </div>
             </svelte:fragment>
             <svelte:fragment slot="trail">
                 <div class="flex flex-row items-center text-center gap-4">

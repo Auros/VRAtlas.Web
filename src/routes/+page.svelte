@@ -1,13 +1,12 @@
 <script lang="ts">
     import type { PageData } from './$types';
-    import { MetaTags } from 'svelte-meta-tags';
     import hero from '$lib/images/hero-blur-lite.webp';
-    import { Container, EventCollection } from '$lib/components';
+    import { AtlasMetaTags, Container, EventCollection } from '$lib/components';
 
     export let data: PageData;
 </script>
 
-<MetaTags title="Home" titleTemplate="%s • VR Atlas" description="The open source hub for finding events occurring in virtual reality." />
+<AtlasMetaTags title={`Home`} description={`The open source hub for finding events occurring in virtual reality.`} />
 
 <div class="overflow-hidden lg:h-[480px] h-64 lg:bg-[center_top_-14rem] bg-cover" style={`background-image: url(${hero})`}>
     <div class="backdrop-blur-lg w-full h-full grid place-items-center text-center">

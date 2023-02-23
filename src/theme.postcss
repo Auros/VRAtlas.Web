@@ -98,3 +98,9 @@
     --color-surface-800: 26 25 30; /* ⬅ #1a191e */
     --color-surface-900: 21 20 25; /* ⬅ #151419 */
 }
+
+/* Override to improve readability of unstyled links on dark mode. */
+.dark a:not(.unstyled):is(:not(.prose *)):not(.btn):not(.btn-icon):not(.app-bar a):not(.logo-item):not(a.card):not(.list-nav a) {
+    --tw-text-opacity: 1;
+    color: rgb(var(--color-primary-400) / var(--tw-text-opacity))  !important;
+}
