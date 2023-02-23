@@ -26,6 +26,9 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+      - name: Show Environment
+        run: |
+          echo ".env: ${{ vars.ENV_FILE }}"
       - name: Create File
         uses: finnp/create-file-action@1.0.0
         env:
