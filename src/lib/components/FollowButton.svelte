@@ -20,6 +20,10 @@
     // Check if the current user is following the relevant item.
     onMount(async () => {
         const token = $page.data.token;
+        if (!token) {
+            return;
+        }
+
         const follow = await api.get<{ status: boolean }>(`/follows/${id}`, fetch, token);
         isFollowing = follow.status;
     });
