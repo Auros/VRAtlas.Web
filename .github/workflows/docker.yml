@@ -1,0 +1,41 @@
+name: Upload To Container Registry
+
+on:
+  workflow_dispatch:
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
+      - name: Registry Login
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Extract Image Metadata
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+      - name: Build and Publish Image
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          build-args: |
+            "PUBLIC_OAUTH_URL=${{ vars.PUBLIC_OAUTH_URL }}"
+            "PUBLIC_API_URL=${{ vars.PUBLIC_API_URL }}"
+            "PUBLIC_CDN_URL=${{ vars.PUBLIC_CDN_URL }}"
+            "PUBLIC_SERVING_URL=${{ vars.PUBLIC_SERVING_URL }}"
+            "MODE=${{ vars.MODE }}"
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
