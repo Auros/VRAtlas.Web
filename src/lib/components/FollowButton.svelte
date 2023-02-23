@@ -77,6 +77,7 @@
 </script>
 
 <button
+    type="button"
     class="btn"
     class:variant-ghost-primary={!isFollowing}
     class:variant-ghost-error={isFollowing === true}
