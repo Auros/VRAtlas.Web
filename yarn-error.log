@@ -1,8 +1,8 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Users\Auros\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add -D @svltejs/adapter-vercel
+  C:\Program Files\nodejs\node.exe C:\Users\Auros\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add dayjs/plugin/relativeTime
 
 PATH: 
-  C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files (x86)\Tailscale IPN;C:\Program Files\dotnet\;C:\Program Files\Git\cmd;C:\Program Files\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files\nodejs\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\chocolatey\bin;C:\Program Files\Gource\cmd;C:\Users\Auros\.cargo\bin;C:\Users\Auros\scoop\shims;C:\Users\Auros\AppData\Local\Microsoft\WindowsApps;C:\Users\Auros\AppData\Local\JetBrains\Toolbox\scripts;C:\Users\Auros\AppData\Local\GitHubDesktop\bin;C:\Users\Auros\.dotnet\tools;C:\Users\Auros\AppData\Roaming\npm;C:\Users\Auros\AppData\Local\Programs\Microsoft VS Code\bin;D:\Portables;C:\Users\Auros\AppData\Local\Microsoft\WindowsApps;C:\Users\Auros\.dotnet\tools
+  C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files (x86)\Tailscale IPN;C:\Program Files\dotnet\;C:\Program Files\Git\cmd;C:\Program Files\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files\nodejs\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\chocolatey\bin;C:\Users\Auros\.cargo\bin;C:\Users\Auros\scoop\shims;C:\Users\Auros\AppData\Local\Microsoft\WindowsApps;C:\Users\Auros\AppData\Local\JetBrains\Toolbox\scripts;C:\Users\Auros\AppData\Local\GitHubDesktop\bin;C:\Users\Auros\.dotnet\tools;C:\Users\Auros\AppData\Roaming\npm;C:\Users\Auros\AppData\Local\Programs\Microsoft VS Code\bin;D:\Portables;C:\Users\Auros\AppData\Local\Microsoft\WindowsApps;C:\Users\Auros\.dotnet\tools
 
 Yarn version: 
   1.22.19
@@ -14,8 +14,8 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@svltejs%2fadapter-vercel: Not found
-      at Request.params.callback [as _callback] (C:\Users\Auros\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:66145:18)
+  Error: https://registry.yarnpkg.com/dayjs%2fplugin/relativeTime: Request "https://registry.yarnpkg.com/dayjs%2fplugin/relativeTime" returned a 405
+      at Request.params.callback [as _callback] (C:\Users\Auros\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:66154:18)
       at Request.self.callback (C:\Users\Auros\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:140890:22)
       at Request.emit (node:events:513:28)
       at Request.<anonymous> (C:\Users\Auros\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:141862:10)
@@ -38,17 +38,13 @@ npm manifest:
           "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
           "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
           "lint": "prettier --plugin-search-dir . --check . && eslint .",
-          "format": "prettier --plugin-search-dir . --write .",
-          "start": "node ./build"
+          "format": "prettier --plugin-search-dir . --write ."
       },
       "devDependencies": {
-          "@skeletonlabs/skeleton": "^0.132.5",
-          "@steeze-ui/heroicons": "^2.2.2",
-          "@steeze-ui/simple-icons": "^1.4.0",
-          "@steeze-ui/svelte-icon": "^1.3.2",
-          "@sveltejs/adapter-auto": "^2.0.0",
-          "@sveltejs/adapter-node": "^1.2.0",
-          "@sveltejs/kit": "^1.8.3",
+          "@skeletonlabs/skeleton": "^0.99.5",
+          "@sveltejs/adapter-auto": "^1.0.0",
+          "@sveltejs/adapter-node": "^1.1.7",
+          "@sveltejs/kit": "^1.0.0",
           "@tailwindcss/forms": "^0.5.3",
           "@tailwindcss/line-clamp": "^0.4.2",
           "@tailwindcss/typography": "^0.5.9",
@@ -63,7 +59,7 @@ npm manifest:
           "postcss": "^8.4.21",
           "prettier": "^2.8.0",
           "prettier-plugin-svelte": "^2.8.1",
-          "svelte": "^3.55.0",
+          "svelte": "^3.54.0",
           "svelte-check": "^3.0.1",
           "svelte-meta-tags": "^2.6.5",
           "svelte-preprocess": "^5.0.1",
@@ -74,12 +70,9 @@ npm manifest:
       },
       "type": "module",
       "dependencies": {
-          "@floating-ui/dom": "^1.2.1",
-          "@microsoft/signalr": "^7.0.3",
           "dayjs": "^1.11.7",
           "isomorphic-dompurify": "^0.26.0",
           "marked": "^4.2.12",
-          "svelte-infinite-loading": "^1.3.8",
           "svelty-picker": "^3.4.2"
       }
   }
@@ -217,18 +210,6 @@ Lockfile:
       minimatch "^3.1.2"
       strip-json-comments "^3.1.1"
   
-  "@floating-ui/core@^1.2.1":
-    version "1.2.1"
-    resolved "https://registry.yarnpkg.com/@floating-ui/core/-/core-1.2.1.tgz#074182a1d277f94569c50a6b456e62585d463c8e"
-    integrity sha512-LSqwPZkK3rYfD7GKoIeExXOyYx6Q1O4iqZWwIehDNuv3Dv425FIAE8PRwtAx1imEolFTHgBEcoFHm9MDnYgPCg==
-  
-  "@floating-ui/dom@^1.2.1":
-    version "1.2.1"
-    resolved "https://registry.yarnpkg.com/@floating-ui/dom/-/dom-1.2.1.tgz#8f93906e1a3b9f606ce78afb058e874344dcbe07"
-    integrity sha512-Rt45SmRiV8eU+xXSB9t0uMYiQ/ZWGE/jumse2o3i5RGlyvcbqOF4q+1qBnzLE2kZ5JGhq0iMkcGXUKbFe7MpTA==
-    dependencies:
-      "@floating-ui/core" "^1.2.1"
-  
   "@humanwhocodes/config-array@^0.11.8":
     version "0.11.8"
     resolved "https://registry.yarnpkg.com/@humanwhocodes/config-array/-/config-array-0.11.8.tgz#03595ac2075a4dc0f191cc2131de14fbd7d410b9"
@@ -265,17 +246,6 @@ Lockfile:
     dependencies:
       "@jridgewell/resolve-uri" "3.1.0"
       "@jridgewell/sourcemap-codec" "1.4.14"
-  
-  "@microsoft/signalr@^7.0.3":
-    version "7.0.3"
-    resolved "https://registry.yarnpkg.com/@microsoft/signalr/-/signalr-7.0.3.tgz#fe5449bdb2c5170e97c8ce84cddd86b0760a7293"
-    integrity sha512-gQbrCQxvC/djy+/GBHFpNnAqubGLe0Hrp3ZO8x8NRGAU8jhj3QcHuxhq6N5Z3A0zI6IE/fMfX2xSheQxOwA3ZA==
-    dependencies:
-      abort-controller "^3.0.0"
-      eventsource "^2.0.2"
-      fetch-cookie "^2.0.3"
-      node-fetch "^2.6.7"
-      ws "^7.4.5"
   
   "@nodelib/fs.scandir@2.1.5":
     version "2.1.5"
@@ -343,63 +313,46 @@ Lockfile:
       estree-walker "^2.0.2"
       picomatch "^2.3.1"
   
-  "@skeletonlabs/skeleton@^0.132.5":
-    version "0.132.5"
-    resolved "https://registry.yarnpkg.com/@skeletonlabs/skeleton/-/skeleton-0.132.5.tgz#dc53100c4ea2de34c1312428e301bcab1b3abe64"
-    integrity sha512-xbw/2hWw7/BjIYjEw9fDNG/to9/nML6Lc7m/PPSHG7cP6+pQ5CwvNxAXhErCkIGICuAKXiesYglhw2PrZY6M2A==
-    dependencies:
-      svelte "^3.55.1"
+  "@skeletonlabs/skeleton@^0.99.5":
+    version "0.99.5"
+    resolved "https://registry.yarnpkg.com/@skeletonlabs/skeleton/-/skeleton-0.99.5.tgz#1601ad802f5cc16596f0e131766a77a6af7d1f65"
+    integrity sha512-P3YvmAItNk/IzT6ma9q1D3T8leiit+T4BgpVynWuKOZg9FVWakB1M88ncuuEOkk+nAH/cGtjIEtougGB9+ynNw==
   
-  "@steeze-ui/heroicons@^2.2.2":
-    version "2.2.2"
-    resolved "https://registry.yarnpkg.com/@steeze-ui/heroicons/-/heroicons-2.2.2.tgz#f0f93898c1d3fee0fe5f9a45be6903e3ba3d2f7c"
-    integrity sha512-VUkgSAbjLzsEuF4kDQDESANb/NNxqhkOMnrzD1VhB3tSGr7wVZ5FKS7aM2QZcKXjziwR6dbt7Nhs3fpZhqOi1A==
-  
-  "@steeze-ui/simple-icons@^1.4.0":
-    version "1.4.0"
-    resolved "https://registry.yarnpkg.com/@steeze-ui/simple-icons/-/simple-icons-1.4.0.tgz#516088813a5c24dad156b55fcc4887b6499155ff"
-    integrity sha512-/RKpk28U5O+Wtdb+Ck2ChQHdmDOoISp2VkCO/SgDTkz7aJTmPUX/rpz/oBxpvP3ZYY+8p7iG2zdrdWp486VURQ==
-  
-  "@steeze-ui/svelte-icon@^1.3.2":
-    version "1.3.2"
-    resolved "https://registry.yarnpkg.com/@steeze-ui/svelte-icon/-/svelte-icon-1.3.2.tgz#ae81d9568bd89c06842dd2d0b2f54c94367f474a"
-    integrity sha512-Y7tH9UKeDYLfBicWLw4n4mhgfuSwgEdtq9wog7H+DjvfpTvea5SEqjHI8onoKZonJqAaUBGVjH02LAiqRWu+cw==
-  
-  "@sveltejs/adapter-auto@^2.0.0":
-    version "2.0.0"
-    resolved "https://registry.yarnpkg.com/@sveltejs/adapter-auto/-/adapter-auto-2.0.0.tgz#902dba0c92e8c1d4b3128c53b370d6cc18f8f672"
-    integrity sha512-b+gkHFZgD771kgV3aO4avHFd7y1zhmMYy9i6xOK7m/rwmwaRO8gnF5zBc0Rgca80B2PMU1bKNxyBTHA14OzUAQ==
+  "@sveltejs/adapter-auto@^1.0.0":
+    version "1.0.2"
+    resolved "https://registry.yarnpkg.com/@sveltejs/adapter-auto/-/adapter-auto-1.0.2.tgz#c44591b1b1ef75e66c158067bab9d2789836fa54"
+    integrity sha512-UXpEO/gutERZnD+Z5Vi4J/ifD3WSRuCI7xwtLJTcKNQvJ6t5Xsj1X3Mw2F8Vv/XTUuxf7xPLYUgThU331r0Y9w==
     dependencies:
       import-meta-resolve "^2.2.0"
   
-  "@sveltejs/adapter-node@^1.2.0":
-    version "1.2.0"
-    resolved "https://registry.yarnpkg.com/@sveltejs/adapter-node/-/adapter-node-1.2.0.tgz#90224de708b25bc0e4674b3c1ebeb7a91ba80fe9"
-    integrity sha512-j0nxkrNZ4zBkOIOtqHUET5l8qvcFo64xNL2xv8F1QICkz746o5DVCGaJEPC3B2X2fTklXExxe80yXZhf38p6zg==
+  "@sveltejs/adapter-node@^1.1.7":
+    version "1.1.7"
+    resolved "https://registry.yarnpkg.com/@sveltejs/adapter-node/-/adapter-node-1.1.7.tgz#0bf087fa4b9c73987f8ac0d762e45bb5be0a5dda"
+    integrity sha512-N93uYDzH8+RlneYdfgS33nudVk9e8JhYy9vPOsJKeMCkWPb5ejJ0D+LUAEuyA1BOyA7ZkaVTupLStAG4nuhT2A==
     dependencies:
       "@rollup/plugin-commonjs" "^24.0.0"
       "@rollup/plugin-json" "^6.0.0"
       "@rollup/plugin-node-resolve" "^15.0.1"
       rollup "^3.7.0"
   
-  "@sveltejs/kit@^1.8.3":
-    version "1.8.3"
-    resolved "https://registry.yarnpkg.com/@sveltejs/kit/-/kit-1.8.3.tgz#1178d8d8b21a5139238cb1a9a3a31f83290b3794"
-    integrity sha512-32tiLy5PPpt2lquK2p53/5wR+ghAXw0HymIBEezmwmwtzx7Xf36xw3RG3fDYQ9gyzon89T+JRweXgAv/qhhvSQ==
+  "@sveltejs/kit@^1.0.0":
+    version "1.3.10"
+    resolved "https://registry.yarnpkg.com/@sveltejs/kit/-/kit-1.3.10.tgz#42cbffad4262ae116d946e7c7e3a0ec2092e4a65"
+    integrity sha512-I3DgWCwTYbTz4ZPCJIRkSDrKkMu0bsdk6ghqsOBVNqesf1wBdTdfkXhag3ESWgIEjUV3VUIWPQF7fnt7328mhQ==
     dependencies:
       "@sveltejs/vite-plugin-svelte" "^2.0.0"
       "@types/cookie" "^0.5.1"
       cookie "^0.5.0"
-      devalue "^4.3.0"
+      devalue "^4.2.3"
       esm-env "^1.0.0"
       kleur "^4.1.5"
-      magic-string "^0.29.0"
+      magic-string "^0.27.0"
       mime "^3.0.0"
       sade "^1.8.1"
       set-cookie-parser "^2.5.1"
       sirv "^2.0.2"
       tiny-glob "^0.2.9"
-      undici "5.20.0"
+      undici "5.16.0"
   
   "@sveltejs/vite-plugin-svelte@^2.0.0":
     version "2.0.2"
@@ -587,13 +540,6 @@ Lockfile:
     version "2.0.6"
     resolved "https://registry.yarnpkg.com/abab/-/abab-2.0.6.tgz#41b80f2c871d19686216b82309231cfd3cb3d291"
     integrity sha512-j2afSsaIENvHZN2B8GOpF566vZ5WVk5opAiMTvWgaQT8DkbOqsTfvNAvHoRGU2zzP8cPoqys+xHTRDWW8L+/BA==
-  
-  abort-controller@^3.0.0:
-    version "3.0.0"
-    resolved "https://registry.yarnpkg.com/abort-controller/-/abort-controller-3.0.0.tgz#eaf54d53b62bae4138e809ca225c8439a6efb392"
-    integrity sha512-h8lQ8tacZYnR3vNQTgibj+tODHI5/+l06Au2Pcriv/Gmet0eaj4TwWH41sO9wnHDiQsEj19q0drzdWdeAHtweg==
-    dependencies:
-      event-target-shim "^5.0.0"
   
   acorn-globals@^7.0.0:
     version "7.0.1"
@@ -928,10 +874,10 @@ Lockfile:
       defined "^1.0.0"
       minimist "^1.2.6"
   
-  devalue@^4.3.0:
-    version "4.3.0"
-    resolved "https://registry.yarnpkg.com/devalue/-/devalue-4.3.0.tgz#d86db8fee63a70317c2355be0d3d1b4d8f89a44e"
-    integrity sha512-n94yQo4LI3w7erwf84mhRUkUJfhLoCZiLyoOZ/QFsDbcWNZePrLwbQpvZBUG2TNxwV3VjCKPxkiiQA6pe3TrTA==
+  devalue@^4.2.3:
+    version "4.2.3"
+    resolved "https://registry.yarnpkg.com/devalue/-/devalue-4.2.3.tgz#313bb7e7cf74100bfddab9182b2d1b48ba14701a"
+    integrity sha512-JG6Q248aN0pgFL57e3zqTVeFraBe+5W2ugvv1mLXsJP6YYIYJhRZhAl7QP8haJrqob6X10F9NEkuCvNILZTPeQ==
   
   didyoumean@^1.2.2:
     version "1.2.2"
@@ -1195,16 +1141,6 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/esutils/-/esutils-2.0.3.tgz#74d2eb4de0b8da1293711910d50775b9b710ef64"
     integrity sha512-kVscqXk4OCp68SZ0dkgEKVi6/8ij300KBWTJq32P/dYeWTSwK41WyTxalN1eRmA5Z9UU/LX9D7FWSmV9SAYx6g==
   
-  event-target-shim@^5.0.0:
-    version "5.0.1"
-    resolved "https://registry.yarnpkg.com/event-target-shim/-/event-target-shim-5.0.1.tgz#5d4d3ebdf9583d63a5333ce2deb7480ab2b05789"
-    integrity sha512-i/2XbnSz/uxRCU6+NdVJgKWDTM427+MqYbkQzD321DuCQJUqOuJKIA0IM2+W2xtYHdKOmZ4dR6fExsd4SXL+WQ==
-  
-  eventsource@^2.0.2:
-    version "2.0.2"
-    resolved "https://registry.yarnpkg.com/eventsource/-/eventsource-2.0.2.tgz#76dfcc02930fb2ff339520b6d290da573a9e8508"
-    integrity sha512-IzUmBGPR3+oUG9dUeXynyNmf91/3zUSJg1lCktzKw47OXuhco54U3r9B7O4XX+Rb1Itm9OZ2b0RkTs10bICOxA==
-  
   fast-deep-equal@^3.1.1, fast-deep-equal@^3.1.3:
     version "3.1.3"
     resolved "https://registry.yarnpkg.com/fast-deep-equal/-/fast-deep-equal-3.1.3.tgz#3a7d56b559d6cbc3eb512325244e619a65c6c525"
@@ -1237,14 +1173,6 @@ Lockfile:
     integrity sha512-wBrocU2LCXXa+lWBt8RoIRD89Fi8OdABODa/kEnyeyjS5aZO5/GNvI5sEINADqP/h8M29UHTHUb53sUu5Ihqdw==
     dependencies:
       reusify "^1.0.4"
-  
-  fetch-cookie@^2.0.3:
-    version "2.1.0"
-    resolved "https://registry.yarnpkg.com/fetch-cookie/-/fetch-cookie-2.1.0.tgz#6e127909912f9e527533b045aab555c06b33801b"
-    integrity sha512-39+cZRbWfbibmj22R2Jy6dmTbAWC+oqun1f1FzQaNurkPDUP4C38jpeZbiXCR88RKRVDp8UcDrbFXkNhN+NjYg==
-    dependencies:
-      set-cookie-parser "^2.4.8"
-      tough-cookie "^4.0.0"
   
   file-entry-cache@^6.0.1:
     version "6.0.1"
@@ -1655,13 +1583,6 @@ Lockfile:
     dependencies:
       "@jridgewell/sourcemap-codec" "^1.4.13"
   
-  magic-string@^0.29.0:
-    version "0.29.0"
-    resolved "https://registry.yarnpkg.com/magic-string/-/magic-string-0.29.0.tgz#f034f79f8c43dba4ae1730ffb5e8c4e084b16cf3"
-    integrity sha512-WcfidHrDjMY+eLjlU+8OvwREqHwpgCeKVBUpQ3OhYYuvfaYCUgcbuBzappNzZvg/v8onU3oQj+BYpkOJe9Iw4Q==
-    dependencies:
-      "@jridgewell/sourcemap-codec" "^1.4.13"
-  
   marked@^4.2.12:
     version "4.2.12"
     resolved "https://registry.yarnpkg.com/marked/-/marked-4.2.12.tgz#d69a64e21d71b06250da995dcd065c11083bebb5"
@@ -1762,13 +1683,6 @@ Lockfile:
     version "1.4.0"
     resolved "https://registry.yarnpkg.com/natural-compare/-/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
     integrity sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==
-  
-  node-fetch@^2.6.7:
-    version "2.6.9"
-    resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.9.tgz#7c7f744b5cc6eb5fd404e0c7a9fec630a55657e6"
-    integrity sha512-DJm/CJkZkRjKKj4Zi4BsKVZh3ValV5IR5s7LVZnW+6YMh0W1BfNA8XSs6DLMGYlId5F3KnA70uu2qepcR08Qqg==
-    dependencies:
-      whatwg-url "^5.0.0"
   
   node-releases@^2.0.8:
     version "2.0.10"
@@ -2112,7 +2026,7 @@ Lockfile:
     dependencies:
       lru-cache "^6.0.0"
   
-  set-cookie-parser@^2.4.8, set-cookie-parser@^2.5.1:
+  set-cookie-parser@^2.5.1:
     version "2.5.1"
     resolved "https://registry.yarnpkg.com/set-cookie-parser/-/set-cookie-parser-2.5.1.tgz#ddd3e9a566b0e8e0862aca974a6ac0e01349430b"
     integrity sha512-1jeBGaKNGdEq4FgIrORu/N570dwoPYio8lSoYLWmX7sQ//0JY08Xh9o5pBcgmHQ/MbsYp/aZnOe1s1lIsbLprQ==
@@ -2218,11 +2132,6 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/svelte-hmr/-/svelte-hmr-0.15.1.tgz#d11d878a0bbb12ec1cba030f580cd2049f4ec86b"
     integrity sha512-BiKB4RZ8YSwRKCNVdNxK/GfY+r4Kjgp9jCLEy0DuqAKfmQtpL38cQK3afdpjw4sqSs4PLi3jIPJIFp259NkZtA==
   
-  svelte-infinite-loading@^1.3.8:
-    version "1.3.8"
-    resolved "https://registry.yarnpkg.com/svelte-infinite-loading/-/svelte-infinite-loading-1.3.8.tgz#c479938bd5ca69264fe591ffbbb013b368afe578"
-    integrity sha512-hn4o848LKd2Q+M11hiMWnfFxM1GHKVDi92HPZ1FYvfed4bEeRZL+QvFAQzhy1SACq6Si0CAJcQFUZpIYmAEnpQ==
-  
   svelte-meta-tags@^2.6.5:
     version "2.6.5"
     resolved "https://registry.yarnpkg.com/svelte-meta-tags/-/svelte-meta-tags-2.6.5.tgz#32ea5ef53f2dc9065ec8931efc31076b75ae9387"
@@ -2242,7 +2151,7 @@ Lockfile:
       sorcery "^0.11.0"
       strip-indent "^3.0.0"
   
-  svelte@^3.55.0, svelte@^3.55.1:
+  svelte@^3.54.0:
     version "3.55.1"
     resolved "https://registry.yarnpkg.com/svelte/-/svelte-3.55.1.tgz#6f93b153e5248039906ce5fe196efdb9e05dfce8"
     integrity sha512-S+87/P0Ve67HxKkEV23iCdAh/SX1xiSfjF1HOglno/YTbSTW7RniICMCofWGdJJbdjw3S+0PfFb1JtGfTXE0oQ==
@@ -2311,7 +2220,7 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/totalist/-/totalist-3.0.0.tgz#4ef9c58c5f095255cdc3ff2a0a55091c57a3a1bd"
     integrity sha512-eM+pCBxXO/njtF7vdFsHuqb+ElbxqtI4r5EAvk6grfAFyJ6IvWlSkfZ5T9ozC6xWw3Fj1fGoSmrl0gUs46JVIw==
   
-  tough-cookie@^4.0.0, tough-cookie@^4.1.2:
+  tough-cookie@^4.1.2:
     version "4.1.2"
     resolved "https://registry.yarnpkg.com/tough-cookie/-/tough-cookie-4.1.2.tgz#e53e84b85f24e0b65dd526f46628db6c85f6b874"
     integrity sha512-G9fqXWoYFZgTc2z8Q5zaHy/vJMjm+WV0AkAeHxVCQiEB1b+dGvWzFW6QV07cY5jQ5gRkeid2qIkzkxUnmoQZUQ==
@@ -2327,11 +2236,6 @@ Lockfile:
     integrity sha512-l7FvfAHlcmulp8kr+flpQZmVwtu7nfRV7NZujtN0OqES8EL4O4e0qqzL0DC5gAvx/ZC/9lk6rhcUwYvkBnBnYA==
     dependencies:
       punycode "^2.1.1"
-  
-  tr46@~0.0.3:
-    version "0.0.3"
-    resolved "https://registry.yarnpkg.com/tr46/-/tr46-0.0.3.tgz#8184fd347dac9cdc185992f3a6622e14b9d9ab6a"
-    integrity sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==
   
   tslib@^1.8.1:
     version "1.14.1"
@@ -2374,10 +2278,10 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.9.5.tgz#095979f9bcc0d09da324d58d03ce8f8374cbe65a"
     integrity sha512-1FXk9E2Hm+QzZQ7z+McJiHL4NW1F2EzMu9Nq9i3zAaGqibafqYwCVU6WyWAuyQRRzOlxou8xZSyXLEN8oKj24g==
   
-  undici@5.20.0:
-    version "5.20.0"
-    resolved "https://registry.yarnpkg.com/undici/-/undici-5.20.0.tgz#6327462f5ce1d3646bcdac99da7317f455bcc263"
-    integrity sha512-J3j60dYzuo6Eevbawwp1sdg16k5Tf768bxYK4TUJRH7cBM4kFCbf3mOnM/0E3vQYXvpxITbbWmBafaDbxLDz3g==
+  undici@5.16.0:
+    version "5.16.0"
+    resolved "https://registry.yarnpkg.com/undici/-/undici-5.16.0.tgz#6b64f9b890de85489ac6332bd45ca67e4f7d9943"
+    integrity sha512-KWBOXNv6VX+oJQhchXieUznEmnJMqgXMbs0xxH2t8q/FUAWSJvOSr/rMaZKnX5RIVq7JDn0JbP4BOnKG2SGXLQ==
     dependencies:
       busboy "^1.6.0"
   
@@ -2438,11 +2342,6 @@ Lockfile:
     dependencies:
       xml-name-validator "^4.0.0"
   
-  webidl-conversions@^3.0.0:
-    version "3.0.1"
-    resolved "https://registry.yarnpkg.com/webidl-conversions/-/webidl-conversions-3.0.1.tgz#24534275e2a7bc6be7bc86611cc16ae0a5654871"
-    integrity sha512-2JAn3z8AR6rjK8Sm8orRC0h/bcl/DqL7tRPdGZ4I1CjdF+EaMLmYxBHyXuKL849eucPFhvBoxMsflfOb8kxaeQ==
-  
   webidl-conversions@^7.0.0:
     version "7.0.0"
     resolved "https://registry.yarnpkg.com/webidl-conversions/-/webidl-conversions-7.0.0.tgz#256b4e1882be7debbf01d05f0aa2039778ea080a"
@@ -2468,14 +2367,6 @@ Lockfile:
       tr46 "^3.0.0"
       webidl-conversions "^7.0.0"
   
-  whatwg-url@^5.0.0:
-    version "5.0.0"
-    resolved "https://registry.yarnpkg.com/whatwg-url/-/whatwg-url-5.0.0.tgz#966454e8765462e37644d3626f6742ce8b70965d"
-    integrity sha512-saE57nupxk6v3HY35+jzBwYa0rKSy0XR8JSxZPwgLr7ys0IBzhGviA1/TUGJLmSVqs8pb9AnvICXEuOHLprYTw==
-    dependencies:
-      tr46 "~0.0.3"
-      webidl-conversions "^3.0.0"
-  
   which@^2.0.1:
     version "2.0.2"
     resolved "https://registry.yarnpkg.com/which/-/which-2.0.2.tgz#7c6a8dd0a636a0327e10b59c9286eee93f3f51b1"
@@ -2492,11 +2383,6 @@ Lockfile:
     version "1.0.2"
     resolved "https://registry.yarnpkg.com/wrappy/-/wrappy-1.0.2.tgz#b5243d8f3ec1aa35f1364605bc0d1036e30ab69f"
     integrity sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ==
-  
-  ws@^7.4.5:
-    version "7.5.9"
-    resolved "https://registry.yarnpkg.com/ws/-/ws-7.5.9.tgz#54fa7db29f4c7cec68b1ddd3a89de099942bb591"
-    integrity sha512-F+P9Jil7UiSKSkppIiD94dN07AwvFixvLIj1Og1Rl9GGMuNipJnV9JzjD6XuqmAeiswGvUmNLjr5cFuXwNS77Q==
   
   ws@^8.11.0:
     version "8.12.0"
