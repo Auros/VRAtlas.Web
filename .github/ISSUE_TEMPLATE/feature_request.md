@@ -3,7 +3,7 @@ name: Feature request
 about: Have an idea or feature that you think would be good for the project? Request
   here!
 title: ''
-labels: ''
+labels: enhancement
 assignees: ''
 
 ---
