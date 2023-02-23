@@ -72,7 +72,7 @@
                 {#each links as link}
                     <div class="flex flex-row">
                         <label class="label flex-grow" for="link">
-                            <input required type="url" title="Link" name="link" bind:value={link.value} disabled={uploading} />
+                            <input class="input" type="url" title="Link" name="link" bind:value={link.value} disabled={uploading} required />
                         </label>
                         <button type="button" class="btn-icon variant-filled-error scale-50" on:click={() => (links = links.filter((l) => l.id !== link.id))}>
                             X
