@@ -104,7 +104,7 @@
                                     class="select-none"
                                 />
                             </button>
-                            <nav class="list-nav card p-4 w-48 shadow-xl" data-popup="local-user-context-menu" aria-label="Local User">
+                            <nav class="list-nav card p-4 w-48 shadow-xl z-10" data-popup="local-user-context-menu" aria-label="Local User">
                                 <ul role="group">
                                     <li role="menuitem">
                                         <a href={`/users/${data.localUser.id}`}> Profile </a>
