@@ -5,14 +5,18 @@
     import AtlasMarkdown from './AtlasMarkdown.svelte';
     import RelativeTime from 'dayjs/plugin/relativeTime';
 
+    type ImageSize = 'mini' | 'small' | 'medium' | 'large' | 'full';
+
     dayjs.extend(RelativeTime);
     export let event: AtlasEvent;
+    export let posterSize: ImageSize = 'large';
+
 </script>
 
 <div class="card card-hover variant-glass-surface hover:overflow-visible overflow-hidden">
-    <header style={`background-image: url(${picture(event.media, 'large')})`}>
+    <header style={`background-image: url(${picture(event.media, posterSize)})`}>
         <a href={`/events/${event.id}`} class="backdrop-blur-lg">
-            <img src={picture(event.media, 'large')} alt={`${event.name}'s Poster`} class="select-none object-contain bg-black/50 w-full aspect-[3/4]" />
+            <img src={picture(event.media, posterSize)} alt={`${event.name}'s Poster`} class="select-none object-contain bg-black/50 w-full aspect-[3/4]" />
         </a>
     </header>
     <div class="p-4">
