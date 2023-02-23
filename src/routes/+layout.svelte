@@ -140,7 +140,7 @@
         </AppBar>
     </svelte:fragment>
     <!-- Main-->
-    <main>
+    <main class="md:mr-0" class:mr-2={$page.url.pathname !== '/'}>
         {#if animatedPageTransitions}
             <div class="transition-outer">
                 {#key $page.url.pathname || $navigating}
