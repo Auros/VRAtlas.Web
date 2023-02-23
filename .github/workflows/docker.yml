@@ -26,18 +26,16 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-      - name: Show Environment
-        run: |
-          echo ".env: ${{ secrets.ENV_FILE }}"
-      - name: Create File
-        uses: finnp/create-file-action@1.0.0
-        env:
-            FILE_NAME: ".env"
-            FILE_DATA: ${{ secrets.ENV_FILE }}
       - name: Build and Publish Image
         uses: docker/build-push-action@v3
         with:
           context: .
+          build-args: |
+            "PUBLIC_OAUTH_URL=${{ secrets.PUBLIC_OAUTH_URL }}"
+            "PUBLIC_API_URL=${{ secrets.PUBLIC_API_URL }}"
+            "PUBLIC_CDN_URL=${{ secrets.PUBLIC_CDN_URL }}"
+            "PUBLIC_SERVING_URL=${{ secrets.PUBLIC_SERVING_URL }}"
+            "MODE=${{ secrets.MODE }}"
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
