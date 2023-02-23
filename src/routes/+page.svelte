@@ -1,7 +1,7 @@
 <script lang="ts">
-    import hero from '$lib/images/hero.png';
     import type { PageData } from './$types';
     import { MetaTags } from 'svelte-meta-tags';
+    import hero from '$lib/images/hero-blur-lite.webp';
     import { Container, EventCollection } from '$lib/components';
 
     export let data: PageData;
