@@ -5,6 +5,7 @@
 
     import { picture } from '$lib';
     import { onMount } from 'svelte';
+    import { goto } from '$app/navigation';
     import { fly } from 'svelte/transition';
     import type { LayoutData } from './$types';
     import { browser } from '$app/environment';
@@ -12,11 +13,10 @@
     import { Icon } from '@steeze-ui/svelte-icon';
     import { navigating, page } from '$app/stores';
     import type { Notification } from '$lib/types';
+    import { notificationStore } from '$lib/stores';
     import { PUBLIC_API_URL } from '$env/static/public';
     import { HubConnectionBuilder } from '@microsoft/signalr';
     import { AppBar, AppShell, Avatar, ProgressRadial, Toast, tooltip, menu, Modal, toastStore } from '@skeletonlabs/skeleton';
-    import { goto } from '$app/navigation';
-    import { notificationStore } from '$lib/stores';
 
     export let data: LayoutData;
     let animatedPageTransitions = false;
@@ -75,7 +75,7 @@
             </svelte:fragment>
             <svelte:fragment slot="trail">
                 <div class="flex flex-row items-center text-center gap-4">
-                    <pre
+                    <pre class="hidden md:flex"
                         use:tooltip={{
                             content: 'All times on the website are localized to this time zone.',
                             position: 'bottom'
