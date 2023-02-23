@@ -1,38 +1,30 @@
-# create-svelte
+# VRAtlas (Website)
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+The VR Atlas is an open-source project created and maintained by me. It aims to provide an easy way for people involved in virtual reality to find more events taking place in VR, while also enabling developer and community participation to enhance the platform.
 
-## Creating a project
+## Live
 
-If you're seeing this, you've probably already done this step. Congrats!
-
-```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+You can visit the website at [vratlas.io](https://vratlas.io)
 
 ## Developing
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+**Requirements:**
 
-```bash
-npm run dev
+* Node 16
+* Yarn
+* IDE of your choice: Highly Recommend VS Code with the [Svelte for VS Code](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode) extension
+* VRAtlas.API: Follow the setup guide to setup the [API](https://github.com/Auros/VRAtlas.API)
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+**Environment:**
+
+Create a `.env` at the project root with the following keys:
+```env
+PUBLIC_OAUTH_URL=<insert auth0 url>
+PUBLIC_API_URL=<insert dev API>
+PUBLIC_CDN_URL=<insert image cdn API URL>
+PUBLIC_SERVING_URL=<insert public serving url> # used for generating embed links
+NODE_TLS_REJECT_UNAUTHORIZED=0 # use if running the backend OR frontend under http
+MODE=dev
 ```
 
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+Run `yarn dev` to spin up the dev server, navigate to your proxy address (recommended, explained in API setup), or the port listed.
