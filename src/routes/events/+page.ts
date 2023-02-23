@@ -1,8 +1,7 @@
 import { EventStatus } from '$lib/types';
 import type { PageLoad } from './$types';
 
-export const load: PageLoad = async ({ url }) => {
-
+export const load = (async ({ url }) => {
     const statusText = url.searchParams.get('status')?.toLowerCase();
     let status = EventStatus.Announced;
     if (statusText === 'started') {
@@ -13,5 +12,5 @@ export const load: PageLoad = async ({ url }) => {
 
     return {
         status
-    }
-};
+    };
+}) satisfies PageLoad;

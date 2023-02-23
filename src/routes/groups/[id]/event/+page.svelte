@@ -1,6 +1,6 @@
 <script lang="ts">
     import type { PageServerData } from './$types';
-    import { ProgressRadial, tooltip } from '@skeletonlabs/skeleton';
+    import { ProgressRadial, popup } from '@skeletonlabs/skeleton';
     import { AtlasMetaTags, Container, GroupCard } from '$lib/components';
     import { applyAction, enhance, type SubmitFunction } from '$app/forms';
 
@@ -47,7 +47,11 @@
                             <input class="input" type="text" name="name" placeholder="Event Name" required disabled={uploading} />
                         </label>
                         <label class="label">
-                            <span use:tooltip={{ content: 'The visual associated with the event.' }}>Poster</span>
+                            <span use:popup={{ event: 'hover', target: 'visualTooltip' }}>Poster</span>
+                            <div class="text-xs text-center card variant-filled-primary p-2 whitespace-nowrap shadow-xl" data-popup="visualTooltip">
+                                The visual associated with the event.
+                                <div class="arrow variant-filled-primary" />
+                            </div>
                             <span class="text-warning-500">*Recommended Aspect Ratio - 3:4</span>
                             <input class="input" type="file" name="poster" required disabled={uploading} />
                         </label>

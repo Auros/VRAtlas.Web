@@ -37,7 +37,7 @@
                 performingAction = false;
                 toastStore.trigger({
                     message,
-                    preset: 'success'
+                    background: 'success'
                 });
             }
         };

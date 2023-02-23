@@ -33,13 +33,13 @@
                 await api.delete<unknown>(`/follows/${id}`, fetch, token);
                 toastStore.trigger({
                     message: 'Unfollowed',
-                    preset: 'success'
+                    background: 'success'
                 });
                 isFollowing = false;
             } catch {
                 toastStore.trigger({
                     message: 'Could not unfollow entity.',
-                    preset: 'error'
+                    background: 'error'
                 });
             }
         } else {
@@ -58,13 +58,13 @@
                 );
                 toastStore.trigger({
                     message: 'Followed',
-                    preset: 'success'
+                    background: 'success'
                 });
                 isFollowing = true;
             } catch {
                 toastStore.trigger({
                     message: 'Could not follow entity.',
-                    preset: 'error'
+                    background: 'error'
                 });
             }
         }

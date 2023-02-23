@@ -1,9 +1,8 @@
 <script lang="ts">
     import { page } from '$app/stores';
-    import { Container } from "$lib/components";
+    import { Container } from '$lib/components';
 
     $: errors = $page.error?.errors;
-
 </script>
 
 <Container>

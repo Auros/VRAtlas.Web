@@ -1,4 +1,4 @@
-import type EntityType from "./EntityType";
+import type EntityType from './EntityType';
 
 type Notification = {
     id: string;
@@ -10,6 +10,6 @@ type Notification = {
     entityType?: EntityType;
     createdAt: string;
     read: boolean;
-}
+};
 
 export default Notification;

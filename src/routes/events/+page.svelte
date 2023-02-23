@@ -1,10 +1,10 @@
 <script lang="ts">
-    import { api } from "$lib";
-    import type { PageData } from "./$types";
+    import { api } from '$lib';
+    import type { PageData } from './$types';
     import InfiniteLoading from 'svelte-infinite-loading';
     import { EventStatus, type AtlasEvent } from '$lib/types';
     import type { InfiniteEvent } from 'svelte-infinite-loading';
-    import { Container, AtlasMetaTags, EventCard } from "$lib/components";
+    import { Container, AtlasMetaTags, EventCard } from '$lib/components';
 
     let cursor: string | null = null;
     let events: AtlasEvent[] = [];
@@ -12,20 +12,20 @@
     export let data: PageData;
 
     type Query = {
-        events: AtlasEvent[],
-        next: string | null
-    }
+        events: AtlasEvent[];
+        next: string | null;
+    };
 
-    const infiniteHandler = (async ({ detail: { loaded, complete } }: InfiniteEvent) => {
+    const infiniteHandler = async ({ detail: { loaded, complete } }: InfiniteEvent) => {
         const url = cursor ? `/events?cursor=${cursor}&size=20&status=${data.status}` : `/events?size=20&status=${data.status}`;
         const query = await api.get<Query>(url, fetch);
-        events  = [...events, ...query.events];
+        events = [...events, ...query.events];
         cursor = query.next;
         loaded();
         if (!query.next) {
             complete();
         }
-    });
+    };
 
     const getTitle = () => {
         const status = data.status;
@@ -36,8 +36,7 @@
         } else if (status === EventStatus.Concluded) {
             return 'Past Events';
         }
-    }
-
+    };
 </script>
 
 <AtlasMetaTags title={`Events`} description={`View events on the VR Atlas.`} />
@@ -53,7 +52,7 @@
     <br />
     <div class="grid md:grid-cols-4 grid-cols-2 gap-2">
         {#each events as event}
-            <EventCard event={event} />
+            <EventCard {event} />
         {/each}
     </div>
     <br />

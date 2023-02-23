@@ -7,7 +7,7 @@
     import SveltyPicker, { formatDate } from 'svelty-picker';
     import { Container, UserSelector } from '$lib/components';
     import { applyAction, enhance, type SubmitFunction } from '$app/forms';
-    import { Avatar, InputChip, ProgressRadial, tooltip } from '@skeletonlabs/skeleton';
+    import { Avatar, InputChip, ProgressRadial, popup } from '@skeletonlabs/skeleton';
 
     export let data: PageServerData;
 
@@ -75,7 +75,11 @@
                 </label>
                 <input type="hidden" name="previousposter" value={event.media} />
                 <label class="label">
-                    <span use:tooltip={{ content: 'The visual associated with the event.' }}>Poster</span>
+                    <span use:popup={{ event: 'hover', target: 'visualTooltip' }}>Poster</span>
+                    <div class="text-xs text-center card variant-filled-primary p-2 whitespace-nowrap shadow-xl" data-popup="visualTooltip">
+                        The visual associated with the event.
+                        <div class="arrow variant-filled-primary" />
+                    </div>
                     <span class="text-warning-500 text-sm">Recommended Aspect Ratio - 3:4</span>
                     <input class="input" type="file" name="poster" disabled={uploading} />
                 </label>
@@ -84,6 +88,7 @@
                 <label class="label">
                     <span>Tags</span>
                     <InputChip
+                        disabled
                         name="tags"
                         bind:value={tags}
                         allowUpperCase
@@ -153,7 +158,7 @@
                     <span>Start Time</span>
                     <SveltyPicker
                         name="event-start-raw"
-                        inputClasses="form-control"
+                        inputClasses="input"
                         format="yyyy-mm-ddThh:ii:ss"
                         startDate={now}
                         endDate={maximumDate}
@@ -164,7 +169,7 @@
 
                 {#if startTime !== '' && new Date(startTime).getTime() > 1}
                     <input type="hidden" name="event-start" value={new Date(startTime).toISOString()} />
-                    {formatDate(new Date(startTime), 'DD, MM d, yyyy @ H:i P', en, 'standard')}
+                    <p>{formatDate(new Date(startTime), 'DD, MM d, yyyy @ H:i P', en, 'standard')}</p>
                 {/if}
 
                 <!-- svelte-ignore a11y-label-has-associated-control -->
@@ -172,7 +177,7 @@
                     <span>End Time</span>
                     <SveltyPicker
                         name="event-end-raw"
-                        inputClasses="form-control"
+                        inputClasses="input"
                         format="yyyy-mm-ddThh:ii:ss"
                         startDate={startTime}
                         endDate={maximumDate}
@@ -184,19 +189,18 @@
 
                 {#if endTime !== '' && new Date(endTime).getTime() > 1}
                     <input type="hidden" name="event-end" value={new Date(endTime).toISOString()} />
-                    {formatDate(new Date(endTime), 'DD, MM d, yyyy @ H:i P', en, 'standard')}
+                    <p>{formatDate(new Date(endTime), 'DD, MM d, yyyy @ H:i P', en, 'standard')}</p>
                 {/if}
 
                 <label class="flex items-center space-x-2">
                     <input class="checkbox" type="checkbox" name="auto-start" checked={data.event.autoStart} />
-                    <p
-                        use:tooltip={{
-                            content:
-                                'With this on, the event will automatically start once it reaches its Start Time, sending notifications to those who follow it.'
-                        }}
-                    >
+                    <p use:popup={{ event: 'hover', target: 'autoStartTooltip' }}>
                         Auto Start
                     </p>
+                    <div class="text-xs text-center card variant-filled-primary p-2 whitespace-nowrap shadow-xl" data-popup="autoStartTooltip">
+                        With this on, the event will automatically start once it reaches its Start Time, sending notifications to those who follow it.
+                        <div class="arrow variant-filled-primary" />
+                    </div>
                 </label>
 
                 <hr class="!border-t-2 my-4" />

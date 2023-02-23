@@ -10,7 +10,6 @@
     dayjs.extend(RelativeTime);
     export let event: AtlasEvent;
     export let posterSize: ImageSize = 'large';
-
 </script>
 
 <div class="card card-hover variant-glass-surface hover:overflow-visible overflow-hidden">

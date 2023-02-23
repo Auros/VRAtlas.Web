@@ -5,7 +5,6 @@
     export let type: string;
     export let events: AtlasEvent[] | undefined;
     export let more: string | null = null;
-
 </script>
 
 <div class="card p-4 mt-8">
@@ -23,7 +22,7 @@
     {#if events && events.length}
         <div class="grid lg:grid-cols-6 grid-cols-3 gap-4">
             {#each events as event}
-                <EventCard {event} posterSize={"small"} />
+                <EventCard {event} posterSize={'small'} />
             {/each}
         </div>
     {:else}

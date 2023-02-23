@@ -35,7 +35,7 @@
             }
             toastStore.trigger({
                 message: 'Successfully updated profile.',
-                preset: 'success',
+                background: 'success',
                 timeout: 5000
             });
         };

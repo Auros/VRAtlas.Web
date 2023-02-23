@@ -5,7 +5,7 @@
     import type { ActionResult } from '@sveltejs/kit';
     import { applyAction, deserialize } from '$app/forms';
     import { type Group, GroupMemberRole, type User } from '$lib/types';
-    import { Avatar, ListBox, ListBoxItem, menu, toastStore } from '@skeletonlabs/skeleton';
+    import { Avatar, ListBox, ListBoxItem, popup, toastStore } from '@skeletonlabs/skeleton';
     import { Container, AtlasMetaTags, AtlasMarkdown, EventCard, FollowButton } from '$lib/components';
 
     export let data: PageData;
@@ -45,7 +45,7 @@
         if (result.type === 'success') {
             toastStore.trigger({
                 message: `Changed user's role to ${nameForRole(role)}`,
-                preset: 'success',
+                background: 'success',
                 timeout: 2000
             });
         }
@@ -93,7 +93,7 @@
             // Show a toast the user.
             toastStore.trigger({
                 message: `Added user to group.`,
-                preset: 'success',
+                background: 'success',
                 timeout: 2000
             });
         } catch {
@@ -121,7 +121,7 @@
             // Show a toast the user.
             toastStore.trigger({
                 message: `Removed user from group.`,
-                preset: 'warning',
+                background: 'warning',
                 timeout: 2000
             });
         } catch (e) {
@@ -166,8 +166,8 @@
                 {#if canEdit}
                     <div>
                         <span class="relative">
-                            <button type="button" class="btn variant-ghost-primary" use:menu={{ menu: 'add-member', interactive: true }}>Add Member</button>
-                            <div class="card p-4 w-96 h-64 space-y-4" data-menu="add-member">
+                            <button type="button" class="btn variant-ghost-primary" use:popup={{ event: 'click', target: 'add-member' }}>Add Member</button>
+                            <div class="card p-4 w-96 h-64 space-y-4 z-10" data-popup="add-member">
                                 <input bind:value={userSearchQuery} class="input" type="text" placeholder="Search for users..." on:input={() => userSearch()} />
                                 <div class="h-28 overflow-auto">
                                     <ListBox>

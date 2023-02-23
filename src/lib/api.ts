@@ -38,15 +38,14 @@ async function request<T>(fetcher: typeof fetch, url: string, init?: RequestInit
     init.headers = headers;
     const response = await fetcher(`${PUBLIC_API_URL}${url}`, init);
     if (!response.ok) {
-        let text = await response.text();
-        console.log(text)
+        const text = await response.text();
         if (text.startsWith('{')) {
             const json = JSON.parse(text);
             if (json.errors) {
                 throw error(response.status, {
                     errors: json.errors as string[],
                     message: 'An error occured while making a request to the API.'
-                })
+                });
             }
         }
         throw error(response.status, text);

@@ -16,10 +16,12 @@
     import { notificationStore } from '$lib/stores';
     import { PUBLIC_API_URL } from '$env/static/public';
     import { HubConnectionBuilder } from '@microsoft/signalr';
-    import { AppBar, AppShell, Avatar, ProgressRadial, Toast, tooltip, menu, Modal, toastStore } from '@skeletonlabs/skeleton';
+    import { computePosition, autoUpdate, flip, shift, offset, arrow } from '@floating-ui/dom';
+    import { AppBar, AppShell, Avatar, ProgressRadial, Toast, popup, Modal, toastStore, storePopup } from '@skeletonlabs/skeleton';
 
     export let data: LayoutData;
     let animatedPageTransitions = false;
+    storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
 
     // If the user's browser requests reduced motion, disable the page transition animation.
     onMount(async () => {
@@ -48,12 +50,11 @@
                         label: 'View',
                         response: () => goto('/notifications')
                     }
-                })
+                });
             });
 
             await connection.start();
             console.log('Connected to VR Atlas Notification Hub');
-
         } catch (e) {
             console.error('Failed to connect to VR Atlas Notification Hub', e);
         }
@@ -76,11 +77,12 @@
             </svelte:fragment>
             <svelte:fragment slot="trail">
                 <div class="flex flex-row items-center text-center gap-4">
-                    <pre class="hidden md:flex"
-                        use:tooltip={{
-                            content: 'All times on the website are localized to this time zone.',
-                            position: 'bottom'
-                        }}>{Intl.DateTimeFormat().resolvedOptions().timeZone}</pre>
+                    <div class="hidden md:flex p-2 variant-ghost-primary rounded-md select-none"
+                        use:popup={{ event: 'hover', target: 'timeTooltip', placement: 'bottom' }}>{Intl.DateTimeFormat().resolvedOptions().timeZone}
+                    </div>
+                    <div class="text-xs text-center card variant-filled-primary p-2 whitespace-nowrap shadow-xl" data-popup="timeTooltip">
+                        All times on the website are localized to this time zone.
+                    </div>
                     {#if data.localUser}
                         <a href="/notifications" class="relative mr-2">
                             {#await data.streamed.notifQuery}
@@ -94,7 +96,7 @@
                         </a>
                         <!-- Local User Context Menu -->
                         <span class="relative">
-                            <button use:menu={{ menu: 'local-user-context-menu' }} type="button">
+                            <button use:popup={{ event: 'click', target: 'local-user-context-menu' }} type="button">
                                 <Avatar
                                     src={picture(data.localUser.picture)}
                                     alt={`${data.localUser.username}'s Avatar`}
@@ -102,7 +104,7 @@
                                     class="select-none"
                                 />
                             </button>
-                            <nav class="list-nav card p-4 w-48 shadow-xl" data-menu="local-user-context-menu" aria-label="Local User">
+                            <nav class="list-nav card p-4 w-48 shadow-xl" data-popup="local-user-context-menu" aria-label="Local User">
                                 <ul role="group">
                                     <li role="menuitem">
                                         <a href={`/users/${data.localUser.id}`}> Profile </a>

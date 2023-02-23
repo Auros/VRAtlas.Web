@@ -2,7 +2,7 @@
     import { api, picture } from '$lib';
     import type { User } from '$lib/types';
     import { createEventDispatcher } from 'svelte';
-    import { Avatar, ListBox, ListBoxItem, menu } from '@skeletonlabs/skeleton';
+    import { Avatar, ListBox, ListBoxItem, popup } from '@skeletonlabs/skeleton';
 
     export let text = 'Add User';
     export let ignore: string[] = [];
@@ -46,8 +46,8 @@
 </script>
 
 <span class="relative">
-    <button type="button" class="btn variant-ghost-primary" use:menu={{ menu: 'add-user', interactive: true }}>{text}</button>
-    <div class="card p-4 w-96 h-64 space-y-4" data-menu="add-user">
+    <button type="button" class="btn variant-ghost-primary" use:popup={{ event: 'click', target: 'add-user' }}>{text}</button>
+    <div class="card p-4 w-96 h-64 space-y-4 z-10" data-popup="add-user">
         <input bind:value={userSearchQuery} class="input" type="text" placeholder="Search for users..." on:input={() => userSearch()} />
         <div class="h-28 overflow-auto">
             <ListBox>

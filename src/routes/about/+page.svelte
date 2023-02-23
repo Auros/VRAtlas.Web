@@ -1,10 +1,10 @@
 <script>
-    import { Container } from "$lib/components";
-    import { Icon } from "@steeze-ui/svelte-icon";
+    import { Container } from '$lib/components';
+    import { Icon } from '@steeze-ui/svelte-icon';
     import { QuestionMarkCircle } from '@steeze-ui/heroicons';
-    import { AccordionGroup, AccordionItem } from "@skeletonlabs/skeleton";
-
+    import { Accordion, AccordionItem } from '@skeletonlabs/skeleton';
 </script>
+
 <Container>
     <div class="card p-4">
         <div class="flex flex-row gap-4">
@@ -14,13 +14,12 @@
         </div>
         <hr class="!border-t-2 my-4" />
         <p>
-            The VR Atlas is an open-source project created and maintained by <a href="https://github.com/Auros" target="_blank" rel="noreferrer">Auros Nexus</a>.
-
-            It aims to provide an easy way for people involved in virtual reality to find more events taking place in VR, while also enabling developer and community
-            participation to enhance the platform.
+            The VR Atlas is an open-source project created and maintained by <a href="https://github.com/Auros" target="_blank" rel="noreferrer">Auros Nexus</a
+            >. It aims to provide an easy way for people involved in virtual reality to find more events taking place in VR, while also enabling developer and
+            community participation to enhance the platform.
         </p>
         <hr class="!border-t-2 my-4" />
-        <AccordionGroup>
+        <Accordion duration={200}>
             <AccordionItem>
                 <svelte:fragment slot="lead">
                     <Icon src={QuestionMarkCircle} class="w-6 h-6" />
@@ -28,10 +27,8 @@
                 <svelte:fragment slot="summary">
                     <b>Question</b>
                 </svelte:fragment>
-                <svelte:fragment slot="content">
-                    Answer
-                </svelte:fragment>
+                <svelte:fragment slot="content">Answer</svelte:fragment>
             </AccordionItem>
-        </AccordionGroup>
+        </Accordion>
     </div>
 </Container>
