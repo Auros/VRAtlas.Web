@@ -29,7 +29,8 @@
         }
         animatedPageTransitions = doTransitions;
 
-        if (!browser) {
+        // Don't connect to the notification hub unless we're logged in and are in the browser
+        if (!browser || !data.token) {
             return;
         }
 
