@@ -67,7 +67,7 @@
 <AppShell>
     <!-- Header -->
     <svelte:fragment slot="header">
-        <AppBar class="h-20">
+        <AppBar class="h-18">
             <svelte:fragment slot="lead">
                 <a href="/">
                     <h3 class="select-none">
