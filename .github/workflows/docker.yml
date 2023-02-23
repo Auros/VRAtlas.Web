@@ -28,12 +28,12 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
       - name: Show Environment
         run: |
-          echo ".env: ${{ vars.ENV_FILE }}"
+          echo ".env: ${{ secrets.ENV_FILE }}"
       - name: Create File
         uses: finnp/create-file-action@1.0.0
         env:
             FILE_NAME: ".env"
-            FILE_DATA: ${{ vars.ENV_FILE }}
+            FILE_DATA: ${{ secrets.ENV_FILE }}
       - name: Build and Publish Image
         uses: docker/build-push-action@v3
         with:
