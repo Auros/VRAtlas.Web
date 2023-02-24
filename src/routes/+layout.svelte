@@ -71,7 +71,7 @@
     <svelte:fragment slot="header">
         <AppBar class="h-18">
             <svelte:fragment slot="lead">
-                <div class="flex flex-row gap-3 items-center">
+                <div class="flex flex-row md:gap-6 gap-3 items-center">
                     <a href="/">
                         <h3 class="select-none">
                             <b>VR Atlas</b>
@@ -79,10 +79,10 @@
                     </a>
                     <span class="divider-vertical h-10" />
                     <a href="/" class="hidden md:flex">
-                        <h5 class="select-none">Home</h5>
+                        <div class="text-lg select-none">Home</div>
                     </a>
                     <a href="/about">
-                        <h5 class="select-none">About</h5>
+                        <div class="text-lg select-none">About</div>
                     </a>
                 </div>
             </svelte:fragment>
@@ -95,11 +95,11 @@
                         All times on the website are localized to this time zone.
                     </div>
                     {#if data.localUser}
-                        <a href="/notifications" class="relative mr-2">
+                        <a href="/notifications" aria-label="Your Notifications" class="relative mr-2">
                             {#await data.streamed.notifQuery}
                                 <!-- Loading... -->
                             {:then value}
-                                {#if value?.unread || $notificationStore}
+                                {#if value?.unread || ($notificationStore && $notificationStore > 0)}
                                     <span class="badge variant-filled-primary absolute bottom-4">{$notificationStore ?? value?.unread}</span>
                                 {/if}
                             {/await}
