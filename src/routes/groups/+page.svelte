@@ -13,7 +13,7 @@
     <div class="card p-4">
         <div class="flex flex-row gap-4">
             <div class="flex-grow">
-                <h2>Your Groups</h2>
+                <div class="text-3xl">Your Groups</div>
             </div>
             <div>
                 <a href="/groups/new" class="btn variant-ghost-primary">New Group</a>

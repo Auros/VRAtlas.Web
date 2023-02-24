@@ -34,12 +34,12 @@
 <Container>
     <div class="card p-4" class:cursor-progress={uploading}>
         <header>
-            <h2>Editing <span class="text-primary-600 dark:text-primary-300">{group.name}</span></h2>
+            <div class="text-3xl">Editing <span class="text-primary-600 dark:text-primary-300">{group.name}</span></div>
         </header>
         <hr class="!border-t-2 my-4" />
         <form method="POST" use:enhance={upload}>
             <div class="space-y-4">
-                <h3>Basic</h3>
+                <div>Basic</div>
                 <input type="hidden" name="id" value={group.id} required />
                 <label class="label">
                     <span>Description</span>
@@ -54,7 +54,7 @@
                     />
                 </label>
                 <hr class="!border-t-2 my-4" />
-                <h3>Display</h3>
+                <div class="text-2xl">Display</div>
                 <label class="label">
                     <span>Icon</span>
                     <input class="input" type="file" name="icon" disabled={uploading} />

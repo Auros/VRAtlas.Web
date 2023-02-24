@@ -14,7 +14,7 @@
         <img src={picture(group.banner)} alt={`${group.name}'s Banner'`} class="select-none object-cover bg-black/50 w-full aspect-[24/4]" />
     </header>
     <div class="p-4">
-        <h4>{group.name}</h4>
+        <div class="text-xl">{group.name}</div>
         <hr class="!border-t-2 my-4" />
         {#if group.description !== ''}
             <p class="max-h-36 overflow-auto">

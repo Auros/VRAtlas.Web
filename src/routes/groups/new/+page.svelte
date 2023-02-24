@@ -19,7 +19,7 @@
 
 <Container>
     <div class="card p-4" class:cursor-progress={uploading}>
-        <h2>Create New Group</h2>
+        <div class="text-3xl">Create New Group</div>
         <hr class="!border-t-2 my-4" />
         <form method="POST" use:enhance={upload}>
             <div class="space-y-2">

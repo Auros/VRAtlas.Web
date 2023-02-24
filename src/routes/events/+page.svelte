@@ -45,7 +45,7 @@
     <div class="card p-4">
         <div class="flex flex-row gap-4">
             <div class="flex-grow">
-                <h2>{getTitle()}</h2>
+                <div class="text-3xl">{getTitle()}</div>
             </div>
         </div>
     </div>

@@ -19,7 +19,7 @@
         </a>
     </header>
     <div class="p-4">
-        <h4><b>{event.name}</b></h4>
+        <div class="text-xl"><b>{event.name}</b></div>
         <hr class="!border-t-2 my-4" />
         {#if event.startTime}
             <div class="text-center flex flex-col">

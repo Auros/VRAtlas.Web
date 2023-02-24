@@ -73,9 +73,9 @@
             <svelte:fragment slot="lead">
                 <div class="flex flex-row md:gap-6 gap-3 items-center">
                     <a href="/">
-                        <h3 class="select-none">
+                        <div class="text-2xl select-none">
                             <b>VR Atlas</b>
-                        </h3>
+                        </div>
                     </a>
                     <span class="divider-vertical h-10" />
                     <a href="/" class="hidden md:flex">

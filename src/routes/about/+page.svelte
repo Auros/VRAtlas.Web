@@ -10,7 +10,7 @@
     <div class="card p-4">
         <div class="flex flex-row gap-4">
             <div class="flex-grow">
-                <h2>About</h2>
+                <div class="text-3xl">About</div>
             </div>
         </div>
         <hr class="!border-t-2 my-4" />

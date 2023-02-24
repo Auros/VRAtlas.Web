@@ -40,7 +40,7 @@
 
 <Container>
     <div class="card p-4">
-        <h2>Edit Event <span class="text-primary-400">{event.name}</span></h2>
+        <div class="text-3xl">Edit Event <span class="text-primary-400">{event.name}</span></div>
         <hr class="!border-t-2 my-4" />
         <form method="POST" use:enhance={upload}>
             <div class="space-y-4">
@@ -103,7 +103,7 @@
                 <!-- Event Stars -->
 
                 <div class="flex flex-row gap-2">
-                    <h3>Stars</h3>
+                    <div class="text-2xl">Stars</div>
                     {#if stars.length <= 25}
                         <UserSelector
                             text="Add Star"
@@ -124,7 +124,7 @@
                                 <a href={`/users/${user.id}`}>
                                     <Avatar src={picture(user.picture)} width="lg:w-32 md:w-16 w-32" />
                                 </a>
-                                <h3>{user.username}</h3>
+                                <div class="text-2xl">{user.username}</div>
                                 <label class="label" for="star-title">
                                     <input
                                         id="star-title"
@@ -151,7 +151,7 @@
 
                 <!-- Time -->
 
-                <h3>Time</h3>
+                <div class="text-2xl">Time</div>
 
                 <!-- svelte-ignore a11y-label-has-associated-control -->
                 <label class="label">
