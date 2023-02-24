@@ -52,7 +52,7 @@
                                 The visual associated with the event.
                                 <div class="arrow variant-filled-primary" />
                             </div>
-                            <span class="text-warning-500">*Recommended Aspect Ratio - 3:4</span>
+                            <span class="text-warning-500 text-sm">Recommended Aspect Ratio - 3:4, Maximum 5 MB</span>
                             <input class="input" type="file" name="poster" required disabled={uploading} />
                         </label>
                         <hr class="!border-t-2 my-4" />

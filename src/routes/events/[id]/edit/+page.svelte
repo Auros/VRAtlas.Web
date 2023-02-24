@@ -80,7 +80,7 @@
                         The visual associated with the event.
                         <div class="arrow variant-filled-primary" />
                     </div>
-                    <span class="text-warning-500 text-sm">Recommended Aspect Ratio - 3:4</span>
+                    <span class="text-warning-500 text-sm">Recommended Aspect Ratio - 3:4, Maximum 5 MB</span>
                     <input class="input" type="file" name="poster" disabled={uploading} />
                 </label>
 
