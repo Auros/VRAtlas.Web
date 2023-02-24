@@ -6,12 +6,19 @@
     export let description: string | undefined = undefined;
     export let url: string | undefined = undefined;
     export let image: string | undefined = undefined;
+    export let twitter = false;
 </script>
 
 <MetaTags
     {title}
     titleTemplate="%s • VR Atlas"
     {description}
+    twitter={twitter && image ? {
+        cardType: 'summary_large_image',
+        description,
+        title,
+        image
+    } : undefined}
     openGraph={{
         type: 'website',
         title,
