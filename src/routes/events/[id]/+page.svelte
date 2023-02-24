@@ -67,7 +67,7 @@
     };
 </script>
 
-<AtlasMetaTags title={event.name} description={`An event hosted by ${group.name}`} />
+<AtlasMetaTags title={event.name} description={`An event hosted by ${group.name}`} twitter={true} />
 
 <Container>
     <div class="flex md:flex-row flex-col gap-4">
