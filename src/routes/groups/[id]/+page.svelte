@@ -144,7 +144,7 @@
                 <div class="flex flex-row gap-4">
                     <FollowButton id={group.id} type={2} />
                     {#if canEdit}
-                        <a href={`/groups/${group.id}/edit`} class="btn variant-ghost-primary w-20"> Edit </a>
+                        <a href={`/groups/${group.id}/edit`} class="btn variant-ghost-primary w-20 sm:order-none order-last"> Edit </a>
                         <a href={`/groups/${group.id}/event`} class="btn variant-ghost-primary w-40"> New Event </a>
                     {/if}
                 </div>
