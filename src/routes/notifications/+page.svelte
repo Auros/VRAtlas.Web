@@ -63,7 +63,7 @@
     <div class="card p-4">
         <div class="flex flex-row gap-4">
             <div class="flex-grow">
-                <h2>Your Notifications</h2>
+                <div class="text-3xl">Your Notifications</div>
             </div>
         </div>
     </div>
@@ -77,7 +77,7 @@
                 class:variant-soft-surface={notif.read}
                 href={`/${getEntityName(notif.entityType)}/${notif.entityId}${notif.key === 'EVENT_STAR_INVITED' ? '/invite' : ''}`}
             >
-                <h4>{notif.title}</h4>
+                <div class="text-xl">{notif.title}</div>
                 <hr class="!border-t-2 my-2" />
                 <p class="dark:text-surface-300 text-surface-600">
                     {notif.description}<b>{notif.key === 'EVENT_STAR_INVITED' ? ' Click to accept/deny.' : ''}</b>

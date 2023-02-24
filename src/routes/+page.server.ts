@@ -6,11 +6,8 @@ const getEvents = (status: EventStatus, fetcher: typeof fetch) => {
     return api.get<{ events: AtlasEvent[] }>(`/events?${new URLSearchParams({ size: '6', status: `${status}` })}`, fetcher);
 };
 
-export const load = (async ({ fetch, setHeaders }) => {
+export const load = (async ({ fetch }) => {
     try {
-        setHeaders({
-            'cache-control': 'max-age=60'
-        });
         return {
             live: getEvents(EventStatus.Started, fetch),
             upcoming: getEvents(EventStatus.Announced, fetch),

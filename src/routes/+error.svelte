@@ -7,7 +7,7 @@
 
 <Container>
     <div class="space-y-4">
-        <h2>Error! ({$page.status})</h2>
+        <div class="text-3xl">Error! ({$page.status})</div>
         {#if $page.error?.message}
             <p>{$page.error?.message}</p>
         {/if}

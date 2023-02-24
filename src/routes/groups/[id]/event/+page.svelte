@@ -24,7 +24,7 @@
     <div class="flex md:flex-row flex-col gap-4">
         <div class="basis-1/3 flex flex-col gap-4">
             <div class="card p-4 basis-1/2">
-                <h2>Create Event</h2>
+                <div class="text-3xl">Create Event</div>
                 <hr class="!border-t-2 my-4" />
                 <p>
                     Events are the core of the VR Atlas. Create one to publicize your event! You can customize the description, times, and more once you create
@@ -52,7 +52,7 @@
                                 The visual associated with the event.
                                 <div class="arrow variant-filled-primary" />
                             </div>
-                            <span class="text-warning-500">*Recommended Aspect Ratio - 3:4</span>
+                            <span class="text-warning-500 text-sm">Recommended Aspect Ratio - 3:4, Maximum 5 MB</span>
                             <input class="input" type="file" name="poster" required disabled={uploading} />
                         </label>
                         <hr class="!border-t-2 my-4" />

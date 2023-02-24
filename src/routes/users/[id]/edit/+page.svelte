@@ -47,7 +47,7 @@
 <Container>
     <div class="card p-4" class:cursor-progress={uploading}>
         <header>
-            <h2>Editing <span class="text-primary-600 dark:text-primary-300">{user.username}</span></h2>
+            <div class="text-3xl">Editing <span class="text-primary-600 dark:text-primary-300">{user.username}</span></div>
         </header>
         <hr class="!border-t-2 my-4" />
         <form method="POST" use:enhance={upload}>

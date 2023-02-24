@@ -41,7 +41,7 @@
 <Container>
     <div class="w-full h-full grid place-items-center space-y-4">
         <div class="text-center">
-            <h3>You have been invited</h3>
+            <div class="text-2xl">You have been invited</div>
             <p>...to star at <span class="dark:text-primary-400 text-primary-600">{data.event.name}</span></p>
         </div>
         <form method="POST" use:enhance={upload}>

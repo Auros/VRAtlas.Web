@@ -144,7 +144,7 @@
                 <div class="flex flex-row gap-4">
                     <FollowButton id={group.id} type={2} />
                     {#if canEdit}
-                        <a href={`/groups/${group.id}/edit`} class="btn variant-ghost-primary w-20"> Edit </a>
+                        <a href={`/groups/${group.id}/edit`} class="btn variant-ghost-primary w-20 sm:order-none order-last"> Edit </a>
                         <a href={`/groups/${group.id}/event`} class="btn variant-ghost-primary w-40"> New Event </a>
                     {/if}
                 </div>
@@ -161,7 +161,7 @@
         <header>
             <div class="flex flex-row gap-4">
                 <div class="flex-grow">
-                    <h2>Members</h2>
+                    <div class="text-3xl">Members</div>
                 </div>
                 {#if canEdit}
                     <div>
@@ -201,7 +201,7 @@
                         <a href={`/users/${member.user.id}`}>
                             <Avatar src={picture(member.user.picture)} width="lg:w-32 md:w-16 w-32" />
                         </a>
-                        <h3>{member.user.username}</h3>
+                        <div class="text-2xl">{member.user.username}</div>
                         {#if isOwner && member.user.id !== data.localUser?.id}
                             <select
                                 class="select"
@@ -219,7 +219,7 @@
                                 on:click={() => removeMember(member.user.id)}>X</button
                             >
                         {:else}
-                            <h6>{nameForRole(member.role)}</h6>
+                            <div class="text-lg">{nameForRole(member.role)}</div>
                         {/if}
                     </div>
                 </div>
@@ -231,7 +231,7 @@
             <header>
                 <div class="flex flex-row gap-4">
                     <div class="flex-grow">
-                        <h2>Ongoing Events</h2>
+                        <div class="text-3xl">Ongoing Events</div>
                     </div>
                 </div>
             </header>
@@ -248,7 +248,7 @@
             <header>
                 <div class="flex flex-row gap-4">
                     <div class="flex-grow">
-                        <h2>Upcoming Events</h2>
+                        <div class="text-3xl">Upcoming Events</div>
                     </div>
                 </div>
             </header>
@@ -265,7 +265,7 @@
             <header>
                 <div class="flex flex-row gap-4">
                     <div class="flex-grow">
-                        <h2>Unlisted Events</h2>
+                        <div class="text-3xl">Unlisted Events</div>
                     </div>
                 </div>
             </header>
@@ -282,7 +282,7 @@
             <header>
                 <div class="flex flex-row gap-4">
                     <div class="flex-grow">
-                        <h2>Past Events</h2>
+                        <div class="text-3xl">Past Events</div>
                     </div>
                 </div>
             </header>

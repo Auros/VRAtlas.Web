@@ -11,7 +11,7 @@
     <header>
         <div class="flex flex-row gap-4">
             <div class="flex-grow">
-                <h2>{type} Events</h2>
+                <div class="text-3xl">{type} Events</div>
             </div>
             {#if more}
                 <a href={`/events?status=${more}`} type="button" class="btn variant-ghost-primary">View More</a>
