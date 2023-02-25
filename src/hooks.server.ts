@@ -8,14 +8,14 @@ type Tokens = {
 };
 
 export const handle = (async ({ event, resolve }) => {
-    const { url, locals, cookies } = event;
+    const { url } = event;
     // If we're in the auth flow, validate the user here.
     if (url.pathname.endsWith('login/callback')) {
         await loginUser(event);
     }
 
     // Supply the local user's token into the event locals.
-    locals.token = cookies.get('token');
+    event.locals.token = event.cookies.get('token');
 
     // Handle the request.
     return await resolve(event);
@@ -23,9 +23,8 @@ export const handle = (async ({ event, resolve }) => {
 }) satisfies Handle;
 
 const loginUser = async (event: RequestEvent) => {
-    const { url, locals, cookies } = event;
-    const code = url.searchParams.get('code');
-    const challenge = cookies.get('challenge');
+    const code = event.url.searchParams.get('code');
+    const challenge = event.cookies.get('challenge');
     const authUrl = new URL(PUBLIC_OAUTH_URL);
 
     if (!(code && challenge)) {
@@ -34,7 +33,7 @@ const loginUser = async (event: RequestEvent) => {
 
     // If the provided challenge state does not equal the one we generated, throw.
     // (Preventing CSRF Attacks)
-    const state = url.searchParams.get('state');
+    const state = event.url.searchParams.get('state');
     if (state !== challenge) {
         console.log('Non-matching OAuth challenge detected.');
         throw error(401, 'Non-matching OAuth challenge. Cannot verify authorization state.');
@@ -42,7 +41,7 @@ const loginUser = async (event: RequestEvent) => {
 
     console.log('Deleting challenge cookie')
     // Delete the challenge cookie as it's no longer necessary
-    cookies.delete('challenge', { path: '/' });
+    event.cookies.delete('challenge', { path: '/' });
 
     // Setup the url for getting our tokens
     const params = new URLSearchParams();
@@ -55,8 +54,8 @@ const loginUser = async (event: RequestEvent) => {
 
     console.log('Setting token cookie');
     // Set the token in the cookies and locals
-    locals.token = tokens.accessToken;
-    cookies.set('token', tokens.accessToken, {
+    event.locals.token = tokens.accessToken;
+    event.cookies.set('token', tokens.accessToken, {
         maxAge: tokens.expires_in,
         path: '/'
     });
