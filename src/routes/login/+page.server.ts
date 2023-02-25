@@ -15,6 +15,7 @@ export const load = (async ({ cookies, url, fetch, locals }) => {
     const authUrl = new URL(PUBLIC_OAUTH_URL);
 
     // If there's no challenge or there's no code, it means we need to log in the user.
+    console.log(challenge);
     if (!challenge || !code) {
         console.log('Challenging user login request.');
 
