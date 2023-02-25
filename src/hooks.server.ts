@@ -10,7 +10,7 @@ type Tokens = {
 export const handle = (async ({ event, resolve }) => {
     const { url } = event;
     // If we're in the auth flow, validate the user here.
-    if (url.pathname.endsWith('login/callback')) {
+    if (url.pathname.includes('login/callback')) {
         await loginUser(event);
     }
 
@@ -27,7 +27,7 @@ const loginUser = async (event: RequestEvent) => {
     const challenge = event.cookies.get('challenge');
     const authUrl = new URL(PUBLIC_OAUTH_URL);
 
-    if (!(code && challenge)) {
+    if (!(code && challenge && challenge !== '')) {
         throw error(401, 'Authentication failed, missing parameters');
     }
 
@@ -38,10 +38,6 @@ const loginUser = async (event: RequestEvent) => {
         console.log('Non-matching OAuth challenge detected.');
         throw error(401, 'Non-matching OAuth challenge. Cannot verify authorization state.');
     }
-
-    console.log('Deleting challenge cookie')
-    // Delete the challenge cookie as it's no longer necessary
-    event.cookies.delete('challenge', { path: '/' });
 
     // Setup the url for getting our tokens
     const params = new URLSearchParams();
