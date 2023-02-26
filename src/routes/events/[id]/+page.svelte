@@ -18,8 +18,16 @@
 
     // If the current local user can modify this group. Used to show the Edit button.
     $: canEdit = isOwner || isManager;
-    $: isOwner = data.localUser && group.members.some((m) => m.user.id === data.localUser?.id && m.role === GroupMemberRole.Owner);
-    $: isManager = data.localUser && group.members.some((m) => m.user.id === data.localUser?.id && m.role === GroupMemberRole.Manager);
+    $: isOwner = localUserHasRole(GroupMemberRole.Owner);
+    $: isManager = localUserHasRole(GroupMemberRole.Manager);
+
+    const localUserHasRole = (role: GroupMemberRole) => {
+        if (!data.localUser) {
+            return false;
+        }
+
+        return group.members.some((m) => m.user.id === data.localUser?.id && m.role === role);
+    }
 
     const confirm = (action: string, body: string, endpoint: string, message: string) => {
         const announcement: ModalSettings = {
