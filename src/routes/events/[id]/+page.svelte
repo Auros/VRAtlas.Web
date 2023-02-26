@@ -18,8 +18,8 @@
 
     // If the current local user can modify this group. Used to show the Edit button.
     $: canEdit = isOwner || isManager;
-    $: isOwner = localUserHasRole(GroupMemberRole.Owner);
-    $: isManager = localUserHasRole(GroupMemberRole.Manager);
+    $: isOwner = group && localUserHasRole(GroupMemberRole.Owner);
+    $: isManager = group && localUserHasRole(GroupMemberRole.Manager);
 
     const localUserHasRole = (role: GroupMemberRole) => {
         if (!data.localUser) {
