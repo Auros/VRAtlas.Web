@@ -123,9 +123,11 @@
                 {#if event.startTime || event.tags.length}
                     <div class="flex flex-col gap-2">
                         {#if event.startTime}
-                            <div>
+                            {#if event.status === EventStatus.Concluded}
+                                <div class="text-lg">Ended ({new Date(event.startTime).toLocaleString()}, {dayjs(event.startTime).fromNow()})</div>
+                            {:else}
                                 <div class="text-lg">STARTS <b>@</b> {new Date(event.startTime).toLocaleString()} ({dayjs(event.startTime).fromNow()})</div>
-                            </div>
+                            {/if}
                         {/if}
                         <div class="flex flex-row gap-2">
                             {#each event.tags as tag}
