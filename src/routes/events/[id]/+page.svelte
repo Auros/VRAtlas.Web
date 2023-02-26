@@ -18,8 +18,16 @@
 
     // If the current local user can modify this group. Used to show the Edit button.
     $: canEdit = isOwner || isManager;
-    $: isOwner = data.localUser && group.members.some((m) => m.user.id === data.localUser?.id && m.role === GroupMemberRole.Owner);
-    $: isManager = data.localUser && group.members.some((m) => m.user.id === data.localUser?.id && m.role === GroupMemberRole.Manager);
+    $: isOwner = group && localUserHasRole(GroupMemberRole.Owner);
+    $: isManager = group && localUserHasRole(GroupMemberRole.Manager);
+
+    const localUserHasRole = (role: GroupMemberRole) => {
+        if (!data.localUser) {
+            return false;
+        }
+
+        return group.members.some((m) => m.user.id === data.localUser?.id && m.role === role);
+    }
 
     const confirm = (action: string, body: string, endpoint: string, message: string) => {
         const announcement: ModalSettings = {
@@ -123,9 +131,11 @@
                 {#if event.startTime || event.tags.length}
                     <div class="flex flex-col gap-2">
                         {#if event.startTime}
-                            <div>
+                            {#if event.status === EventStatus.Concluded}
+                                <div class="text-lg">Ended ({new Date(event.startTime).toLocaleString()}, {dayjs(event.startTime).fromNow()})</div>
+                            {:else}
                                 <div class="text-lg">STARTS <b>@</b> {new Date(event.startTime).toLocaleString()} ({dayjs(event.startTime).fromNow()})</div>
-                            </div>
+                            {/if}
                         {/if}
                         <div class="flex flex-row gap-2">
                             {#each event.tags as tag}
