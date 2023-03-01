@@ -17,12 +17,14 @@ You can visit the website at [vratlas.io](https://vratlas.io)
 
 **Environment:**
 
+This assumes you've followed the VRAtlas.API setup guide.
+
 Create a `.env` at the project root with the following keys:
 ```env
-PUBLIC_OAUTH_URL=<insert auth0 url>
-PUBLIC_API_URL=<insert dev API>
-PUBLIC_CDN_URL=<insert image cdn API URL>
-PUBLIC_SERVING_URL=<insert public serving url> # used for generating embed links
+PUBLIC_OAUTH_URL=<insert auth0 url> # You can find this in the API setup guide.
+PUBLIC_API_URL=https://vratlas.localhost/api
+PUBLIC_CDN_URL=https://imagedelivery.com/<CLOUDFLARE IMAGES ACCOUNT HASH>
+PUBLIC_SERVING_URL=<insert website public serving url> # used for generating embed links
 NODE_TLS_REJECT_UNAUTHORIZED=0 # use if running the backend OR frontend under http
 MODE=dev
 ```
