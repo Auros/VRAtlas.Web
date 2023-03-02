@@ -109,7 +109,7 @@
                         <span class="relative">
                             <button use:popup={{ event: 'click', target: 'local-user-context-menu' }} type="button">
                                 <Avatar
-                                    src={picture(data.localUser.picture)}
+                                    src={picture(data.localUser.picture, 'small')}
                                     alt={`${data.localUser.username}'s Avatar`}
                                     title={data.localUser.username}
                                     class="select-none"
