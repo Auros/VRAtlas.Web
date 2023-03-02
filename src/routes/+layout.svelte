@@ -14,6 +14,7 @@
     import { navigating, page } from '$app/stores';
     import type { Notification } from '$lib/types';
     import { notificationStore } from '$lib/stores';
+    import banner from '$lib/images/banner-border.webp';
     import { PUBLIC_API_URL } from '$env/static/public';
     import { HubConnectionBuilder } from '@microsoft/signalr';
     import { computePosition, autoUpdate, flip, shift, offset, arrow } from '@floating-ui/dom';
@@ -73,9 +74,7 @@
             <svelte:fragment slot="lead">
                 <div class="flex flex-row md:gap-6 gap-3 items-center">
                     <a href="/">
-                        <div class="text-2xl select-none">
-                            <b>VR Atlas</b>
-                        </div>
+                        <img src={banner} class="h-8" alt="Banner">
                     </a>
                     <span class="divider-vertical h-10" />
                     <a href="/" class="hidden md:flex">
@@ -109,7 +108,7 @@
                         <span class="relative">
                             <button use:popup={{ event: 'click', target: 'local-user-context-menu' }} type="button">
                                 <Avatar
-                                    src={picture(data.localUser.picture)}
+                                    src={picture(data.localUser.picture, 'small')}
                                     alt={`${data.localUser.username}'s Avatar`}
                                     title={data.localUser.username}
                                     class="select-none"
