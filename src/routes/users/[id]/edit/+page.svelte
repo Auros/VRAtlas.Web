@@ -4,6 +4,7 @@
     import { AtlasMetaTags, Container } from '$lib/components';
     import { ProgressRadial, toastStore } from '@skeletonlabs/skeleton';
     import { applyAction, enhance, type SubmitFunction } from '$app/forms';
+    import { goto } from '$app/navigation';
 
     export let data: PageData;
     export let form: ActionData;
@@ -38,6 +39,7 @@
                 background: 'success',
                 timeout: 5000
             });
+            await goto(`/users/${user.id}`);
         };
     }) satisfies SubmitFunction;
 </script>

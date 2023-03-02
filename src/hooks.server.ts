@@ -4,7 +4,7 @@ import { error, type Handle, type RequestEvent } from '@sveltejs/kit';
 
 type Tokens = {
     accessToken: string;
-    expires_in: number;
+    expiresIn: number;
 };
 
 export const handle = (async ({ event, resolve }) => {
@@ -52,7 +52,7 @@ const loginUser = async (event: RequestEvent) => {
     // Set the token in the cookies and locals
     event.locals.token = tokens.accessToken;
     event.cookies.set('token', tokens.accessToken, {
-        maxAge: tokens.expires_in,
+        maxAge: tokens.expiresIn,
         path: '/'
     });
 }
