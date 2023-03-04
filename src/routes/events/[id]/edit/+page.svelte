@@ -79,7 +79,7 @@
                 
                 <!-- svelte-ignore a11y-label-has-associated-control -->
                 <label class="label">
-                    <span>Tags</span>
+                    <span>Tags (Temporarily Disabled)</span>
                     <InputChip
                         disabled
                         name="tags"
