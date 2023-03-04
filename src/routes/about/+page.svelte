@@ -26,6 +26,9 @@
                 This idea and concept was built with finding events in <a href="https://vrchat.com" target="_blank" rel="noreferrer">VRChat</a>
                 in mind, but it can be used for <b>any kind of event</b> related to <b>VR</b>.
             </AboutQuery>
+            <AboutQuery title="Where can I learn about updates to the platform?">
+                Follow us on <a href="https://twitter.com/thevratlas" target="_blank" rel="noreferrer">Twitter</a>!
+            </AboutQuery>
             <AboutQuery src={CodeBracket} title="Where can I view the source code?">
                 The project is split up on GitHub between the
                 <a href="https://github.com/Auros/VRAtlas.API" target="_blank" rel="noreferrer">back end</a>

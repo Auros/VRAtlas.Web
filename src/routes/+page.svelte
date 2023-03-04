@@ -21,8 +21,8 @@
 
 <Container>
     <div class="mr-2">
-        <EventCollection type="Live" events={data.live?.events} more={'started'} />
-        <EventCollection type="Upcoming" events={data.upcoming?.events} more={'announced'} />
-        <EventCollection type="Past" events={data.concluded?.events} more={'concluded'} />
+        <EventCollection type="Live" events={data.live} more={'started'} />
+        <EventCollection type="Upcoming" events={data.upcoming} more={'announced'} />
+        <EventCollection type="Past" events={data.past} more={'concluded'} />
     </div>
 </Container>

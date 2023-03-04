@@ -1,17 +1,14 @@
-import type { PageServerLoad } from './$types';
-import { type AtlasEvent, EventStatus } from '$lib/types';
 import { api } from '$lib';
-
-const getEvents = (status: EventStatus, fetcher: typeof fetch) => {
-    return api.get<{ events: AtlasEvent[] }>(`/events?${new URLSearchParams({ size: '6', status: `${status}` })}`, fetcher);
-};
+import type { AtlasEvent } from '$lib/types';
+import type { PageServerLoad } from './$types';
 
 export const load = (async ({ fetch }) => {
     try {
+        const { live, upcoming, past } = await api.get<{ live: AtlasEvent[], upcoming: AtlasEvent[], past: AtlasEvent[] }>('/events/summaries', fetch);
         return {
-            live: getEvents(EventStatus.Started, fetch),
-            upcoming: getEvents(EventStatus.Announced, fetch),
-            concluded: getEvents(EventStatus.Concluded, fetch)
+            live,
+            upcoming,
+            past
         };
     } catch {
         // We don't want the main page to fallback to the error page, so we do nothing here.
