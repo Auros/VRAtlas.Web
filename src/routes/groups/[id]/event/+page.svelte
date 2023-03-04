@@ -1,7 +1,7 @@
 <script lang="ts">
     import type { PageServerData } from './$types';
-    import { ProgressRadial, popup } from '@skeletonlabs/skeleton';
-    import { AtlasMetaTags, Container, GroupCard } from '$lib/components';
+    import { ProgressRadial } from '@skeletonlabs/skeleton';
+    import { AtlasMetaTags, Container, GroupCard, ImageInput } from '$lib/components';
     import { applyAction, enhance, type SubmitFunction } from '$app/forms';
 
     export let data: PageServerData;
@@ -46,15 +46,7 @@
                             <span>Name</span>
                             <input class="input" type="text" name="name" placeholder="Event Name" required disabled={uploading} />
                         </label>
-                        <label class="label">
-                            <span use:popup={{ event: 'hover', target: 'visualTooltip' }}>Poster</span>
-                            <div class="text-xs text-center card variant-filled-primary p-2 whitespace-nowrap shadow-xl" data-popup="visualTooltip">
-                                The visual associated with the event.
-                                <div class="arrow variant-filled-primary" />
-                            </div>
-                            <span class="text-warning-500 text-sm">Recommended Aspect Ratio - 3:4, Maximum 5 MB</span>
-                            <input class="input" type="file" name="poster" required disabled={uploading} />
-                        </label>
+                        <ImageInput label="Poster" name="poster" aspectRatio="3:4" required={true} hoverText="The visual associated with the event." bind:disabled={uploading} />
                         <hr class="!border-t-2 my-4" />
                         <div class="flex flex-row gap-2">
                             <button type="submit" class="btn variant-filled-primary w-32" disabled={uploading}> Create </button>
