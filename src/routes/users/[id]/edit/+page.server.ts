@@ -1,7 +1,7 @@
 import { api } from '$lib';
 import { error } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
-import type { NotificationSettings, User } from '$lib/types';
+import type { NotificationSettings, ProfileStatus, User } from '$lib/types';
 
 export const load = (async ({ parent, params: { id }, fetch }) => {
     const { token, localUser } = await parent();
@@ -28,6 +28,8 @@ export const actions = {
         const atOneHour = data.get('at-one-hour') === 'on';
         const atOneDay = data.get('at-one-day') === 'on';
 
+        const profileStatus = Number(data.get('profile-status')) as ProfileStatus;
+
         await api.put(
             '/users/@me',
             fetch,
@@ -39,7 +41,8 @@ export const actions = {
                     atThirtyMinutes,
                     atOneHour,
                     atOneDay
-                }
+                },
+                profileStatus
             },
             token
         );

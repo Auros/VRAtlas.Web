@@ -1,14 +1,38 @@
 <script lang="ts">
-    import { picture } from '$lib';
+    import { api, picture } from '$lib';
+    import type { Group } from '$lib/types';
     import type { PageData } from './$types';
     import { Link } from '@steeze-ui/heroicons';
     import { Icon } from '@steeze-ui/svelte-icon';
-    import { AtlasMetaTags, Container, FollowButton } from '$lib/components';
+    import InfiniteLoading, { type InfiniteEvent } from 'svelte-infinite-loading';
+    import { AtlasMetaTags, Container, FollowButton, GroupCard } from '$lib/components';
     import { Github, Soundcloud, Bandcamp, Twitter, Spotify, Youtube, Twitch } from '@steeze-ui/simple-icons';
 
     export let data: PageData;
 
+    let groups: Group[] = data.followed?.groups ?? [];
+    let cursor: string | undefined = data.followed?.next;
+    
     $: user = data.user;
+    $: metadata = data.metadata;
+    
+    const infiniteHandler = async ({ detail: { loaded, complete } }: InfiniteEvent) => {
+        const token = data.token;
+        if (!token || !cursor) {
+            complete();
+            return;
+        }
+
+        const url = `/users/${data.user.id}/profile/groups?cursor=${cursor}`;
+        const query = await api.get<{ groups: Group[], next: string }>(url, fetch, token);
+        groups = [...groups, ...query.groups];
+        cursor = query.next;
+        loaded();
+        if (!query.next) {
+            complete();
+            cursor = undefined;
+        }
+    };
 </script>
 
 <AtlasMetaTags title={user.username} description={user.biography ?? `View ${user.username}'s profile.`} image={picture(user.picture, 'medium')} />
@@ -29,6 +53,12 @@
                             <FollowButton id={user.id} type={1} />
                         {/if}
                     </div>
+                    {#if metadata}
+                        <div class="text-sm flex flex-row gap-4">
+                            <a href={`/users/${user.id}/following`}><b>{metadata.following}</b> Following</a>
+                            <a href={`/users/${user.id}/followers`}><b>{metadata.followers}</b> Followers</a>
+                        </div>
+                    {/if}
                     {#if user.biography}
                         <p>{user.biography}</p>
                     {:else}
@@ -61,4 +91,24 @@
             </div>
         </div>
     </div>
+    <br />
+    {#if groups.length}
+        <div class="card p-4">
+            <div class="flex flex-row gap-4">
+                <div class="flex-grow">
+                    <div class="text-3xl">Followed Groups</div>
+                </div>
+            </div>
+            <hr class="!border-t-2 my-4" />
+            <div class="grid xl:grid-cols-3 lg:grid-cols-2 gap-4">
+                {#each groups as group}
+                    <GroupCard {group} />
+                {/each}
+            </div>
+        </div>
+        {#if cursor}
+            <br />
+            <InfiniteLoading on:infinite={infiniteHandler} />
+        {/if}
+    {/if}
 </Container>

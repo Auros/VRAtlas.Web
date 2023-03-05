@@ -5,7 +5,7 @@
     import { en } from 'svelty-picker/i18n';
     import type { PageServerData } from './$types';
     import SveltyPicker, { formatDate } from 'svelty-picker';
-    import { Container, UserSelector } from '$lib/components';
+    import { Container, ImageInput, UserSelector } from '$lib/components';
     import { applyAction, enhance, type SubmitFunction } from '$app/forms';
     import { Avatar, InputChip, ProgressRadial, popup } from '@skeletonlabs/skeleton';
 
@@ -73,20 +73,13 @@
                         disabled={uploading}
                     />
                 </label>
+                
                 <input type="hidden" name="previousposter" value={event.media} />
-                <label class="label">
-                    <span use:popup={{ event: 'hover', target: 'visualTooltip' }}>Poster</span>
-                    <div class="text-xs text-center card variant-filled-primary p-2 whitespace-nowrap shadow-xl" data-popup="visualTooltip">
-                        The visual associated with the event.
-                        <div class="arrow variant-filled-primary" />
-                    </div>
-                    <span class="text-warning-500 text-sm">Recommended Aspect Ratio - 3:4, Maximum 5 MB</span>
-                    <input class="input" type="file" name="poster" disabled={uploading} />
-                </label>
-
+                <ImageInput label="Poster" name="poster" aspectRatio="3:4" hoverText="The visual associated with the event." bind:disabled={uploading} />
+                
                 <!-- svelte-ignore a11y-label-has-associated-control -->
                 <label class="label">
-                    <span>Tags</span>
+                    <span>Tags (Temporarily Disabled)</span>
                     <InputChip
                         disabled
                         name="tags"
