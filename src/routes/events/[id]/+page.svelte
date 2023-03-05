@@ -155,9 +155,9 @@
                 </div>
             </div>
             <!-- Event Stars -->
-            <div class="grid lg:grid-cols-4 grid-cols-2 gap-4 md:order-last order-first">
+            <div class="grid lg:grid-cols-4 grid-cols-2 gap-4 md:order-last order-first flex-shrink">
                 {#each event.stars.filter((s) => s.status === 1) as star}
-                    <a href={`/users/${star.user.id}`} class="card card-hover p-2 flex flex-row">
+                    <a href={`/users/${star.user.id}`} class="card card-hover p-2 flex flex-row flex-shrink">
                         <div class="flex-shrink">
                             <Avatar src={picture(star.user.picture)} width="w-14" />
                         </div>

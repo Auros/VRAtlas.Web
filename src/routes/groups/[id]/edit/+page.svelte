@@ -1,6 +1,6 @@
 <script lang="ts">
     import type { PageServerData, ActionData } from './$types';
-    import { AtlasMetaTags, Container } from '$lib/components';
+    import { AtlasMetaTags, Container, ImageInput } from '$lib/components';
     import { applyAction, enhance, type SubmitFunction } from '$app/forms';
     import { ProgressRadial, toastStore } from '@skeletonlabs/skeleton';
 
@@ -55,16 +55,8 @@
                 </label>
                 <hr class="!border-t-2 my-4" />
                 <div class="text-2xl">Display</div>
-                <label class="label">
-                    <span>Icon</span>
-                    <span class="text-warning-500 text-sm">Recommended Aspect Ratio - 1:1, Maximum 5 MB</span>
-                    <input class="input" type="file" name="icon" disabled={uploading} />
-                </label>
-                <label class="label">
-                    <span>Banner</span>
-                    <span class="text-warning-500 text-sm">Recommended Aspect Ratio - 6:1, Maximum 5 MB</span>
-                    <input class="input" type="file" name="banner" disabled={uploading} />
-                </label>
+                <ImageInput label="Icon" name="icon" aspectRatio="1:1" bind:disabled={uploading} />
+                <ImageInput label="Banner" name="banner" aspectRatio="6:1" bind:disabled={uploading} />
                 <hr class="!border-t-2 my-4" />
                 <div class="flex flex-row gap-2">
                     <button type="submit" class="btn variant-filled-primary w-32" disabled={uploading}> Save </button>

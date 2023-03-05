@@ -5,6 +5,7 @@
     import { ProgressRadial, toastStore } from '@skeletonlabs/skeleton';
     import { applyAction, enhance, type SubmitFunction } from '$app/forms';
     import { goto } from '$app/navigation';
+    import { ProfileStatus } from '$lib/types';
 
     export let data: PageData;
     export let form: ActionData;
@@ -81,27 +82,44 @@
                         </button>
                     </div>
                 {/each}
-                <div class="label">
-                    <strong>Default Event Notification Settings</strong>
-                    <div class="space-y-2">
-                        <label class="flex items-center space-x-2">
-                            <input class="checkbox" type="checkbox" name="at-start" checked={data.defaultNotificationSettings.atStart} />
-                            <p>On Event Start</p>
-                        </label>
-                        <label class="flex items-center space-x-2">
-                            <input class="checkbox" type="checkbox" name="at-thirty-minutes" checked={data.defaultNotificationSettings.atThirtyMinutes} />
-                            <p>30 Minutes Before</p>
-                        </label>
-                        <label class="flex items-center space-x-2">
-                            <input class="checkbox" type="checkbox" name="at-one-hour" checked={data.defaultNotificationSettings.atOneHour} />
-                            <p>1 Hour Before</p>
-                        </label>
-                        <label class="flex items-center space-x-2">
-                            <input class="checkbox" type="checkbox" name="at-one-day" checked={data.defaultNotificationSettings.atOneDay} />
-                            <p>1 Day Before</p>
-                        </label>
+                <fieldset>
+                    <div class="label">
+                        <strong>Default Event Notification Settings</strong>
+                        <div class="space-y-2">
+                            <label class="flex items-center space-x-2">
+                                <input class="checkbox" type="checkbox" name="at-start" checked={data.defaultNotificationSettings.atStart} />
+                                <p>On Event Start</p>
+                            </label>
+                            <label class="flex items-center space-x-2">
+                                <input class="checkbox" type="checkbox" name="at-thirty-minutes" checked={data.defaultNotificationSettings.atThirtyMinutes} />
+                                <p>30 Minutes Before</p>
+                            </label>
+                            <label class="flex items-center space-x-2">
+                                <input class="checkbox" type="checkbox" name="at-one-hour" checked={data.defaultNotificationSettings.atOneHour} />
+                                <p>1 Hour Before</p>
+                            </label>
+                            <label class="flex items-center space-x-2">
+                                <input class="checkbox" type="checkbox" name="at-one-day" checked={data.defaultNotificationSettings.atOneDay} />
+                                <p>1 Day Before</p>
+                            </label>
+                        </div>
                     </div>
-                </div>
+                </fieldset>
+                <fieldset>
+                    <div class="label">
+                        <strong>Profile Status</strong>
+                        <div class="space-y-2">
+                            <label class="flex items-center space-x-2">
+                                <input class="radio" type="radio" name="profile-status" value={ProfileStatus.Public} bind:group={user.profileStatus} />
+                                <p>Public</p>
+                            </label>
+                            <label class="flex items-center space-x-2">
+                                <input class="radio" type="radio" name="profile-status" value={ProfileStatus.Private} bind:group={user.profileStatus} />
+                                <p>Private</p>
+                            </label>
+                        </div>
+                    </div>
+                </fieldset>
                 <hr class="!border-t-2 my-4" />
                 <div class="flex flex-row gap-2">
                     <button type="submit" class="btn variant-filled-primary w-32" disabled={uploading}> Save </button>
