@@ -3,8 +3,7 @@
 /// <reference lib="esnext" />
 /// <reference lib="webworker" />
 import { build, files, version } from '$service-worker';
-import { type AtlasEvent, EntityType, type Group, type Notification as Notif, type User } from './lib/types';
-import { api, picture } from './lib';
+import { EntityType, type Notification as Notif } from './lib/types';
 
 const sw = self as unknown as ServiceWorkerGlobalScope;
 const CACHE = `cache-${version}`;
@@ -77,24 +76,9 @@ sw.addEventListener('push', async (event) => {
 
     const notif = JSON.parse(dataString) as unknown as Notif;
 
-    let mediaId: string | undefined;
-    if (notif.entityType && notif.entityId) {
-        if (notif.entityType === EntityType.Event) {
-            const atlasEvent = await api.get<AtlasEvent>(`/events/${notif.entityId}`, fetch);
-            mediaId = atlasEvent.media;
-        } else if (notif.entityType === EntityType.Group) {
-            const atlasEvent = await api.get<Group>(`/events/${notif.entityId}`, fetch);
-            mediaId = atlasEvent.banner;
-        } else if (notif.entityType === EntityType.User) {
-            const atlasEvent = await api.get<User>(`/events/${notif.entityId}`, fetch);
-            mediaId = atlasEvent.picture;
-        }
-    }
-
-    const show = sw.registration.showNotification(`VR Atlas | ${notif.title}`, {
+    sw.registration.showNotification(`VR Atlas | ${notif.title}`, {
         data: notif,
         body: notif.description,
-        image: mediaId ? picture(mediaId, 'large') : undefined,
         lang: 'en-US'
     });
 })
