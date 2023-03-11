@@ -12,10 +12,11 @@
 
     $: user = data.user;
     let uploading = false;
-    let links: { id: number; value: string }[] = [];
     let linkIdIncrementer = 0;
+    let canSubscribeToNotifications = false;
+    let links: { id: number; value: string }[] = [];
 
-    onMount(() => {
+    onMount(async () => {
         user.links.forEach((l) => {
             links.push({
                 id: linkIdIncrementer++,
@@ -23,6 +24,17 @@
             });
         });
         links = links;
+
+        const query = await navigator.permissions.query({ name: 'notifications' });
+        if (query.state !== 'granted') {
+            canSubscribeToNotifications = true;
+            return;
+        }
+
+        const registration = await navigator.serviceWorker.ready;
+        const subscription = await registration.pushManager.getSubscription();
+        console.log(`[VR Atlas - Website] Web Push Notification Subscription: ${subscription ? 'Active' : 'Inactive'}`)
+        canSubscribeToNotifications = !subscription;
     });
 
     const upload = (() => {
@@ -43,6 +55,27 @@
             await goto(`/users/${user.id}`);
         };
     }) satisfies SubmitFunction;
+
+
+    const setupSubscription = (async () => {
+        const prompt = await Notification.requestPermission();
+        if (prompt !== 'granted') {
+            return;
+        }
+        const registration = await navigator.serviceWorker.ready;
+        let subscription = await registration.pushManager.getSubscription();
+        if (subscription) {
+            await subscription.unsubscribe();
+        }
+        subscription = await registration.pushManager.subscribe({
+            applicationServerKey: 'BNTUwcDah02ydWOrM-WID2vFJBMCRFZK4B1qs3nXvQGuPn1MRChPa7U1OM-KdkoSOeVSLUDvDL8ywvFh0q1KWSk',
+            userVisibleOnly: true
+        });
+        console.log(subscription);
+        const notification = new Notification('VR Atlas', {
+            body: 'Web push notifications are now enabled!'
+        });
+    });
 </script>
 
 <AtlasMetaTags title="Edit Profile" description={`Edit your profile.`} />
@@ -86,6 +119,9 @@
                     <div class="label">
                         <strong>Default Event Notification Settings</strong>
                         <div class="space-y-2">
+                            {#if canSubscribeToNotifications}
+                                <button on:click={setupSubscription} type="button" class="btn variant-ghost-primary">Enable Web Push Notifications</button>
+                            {/if}
                             <label class="flex items-center space-x-2">
                                 <input class="checkbox" type="checkbox" name="at-start" checked={data.defaultNotificationSettings.atStart} />
                                 <p>On Event Start</p>
