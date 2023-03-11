@@ -79,9 +79,8 @@
                 
                 <!-- svelte-ignore a11y-label-has-associated-control -->
                 <label class="label">
-                    <span>Tags (Temporarily Disabled)</span>
+                    <span>Tags</span>
                     <InputChip
-                        disabled
                         name="tags"
                         bind:value={tags}
                         allowUpperCase

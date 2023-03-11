@@ -1,11 +1,13 @@
 <script lang="ts">
+    import { api } from '$lib';
     import { onMount } from 'svelte';
+    import { goto } from '$app/navigation';
+    import { ProfileStatus } from '$lib/types';
     import type { ActionData, PageData } from './$types';
+    import { PUBLIC_VAPID_KEY } from '$env/static/public';
     import { AtlasMetaTags, Container } from '$lib/components';
     import { ProgressRadial, toastStore } from '@skeletonlabs/skeleton';
     import { applyAction, enhance, type SubmitFunction } from '$app/forms';
-    import { goto } from '$app/navigation';
-    import { ProfileStatus } from '$lib/types';
 
     export let data: PageData;
     export let form: ActionData;
@@ -68,11 +70,11 @@
             await subscription.unsubscribe();
         }
         subscription = await registration.pushManager.subscribe({
-            applicationServerKey: 'BNTUwcDah02ydWOrM-WID2vFJBMCRFZK4B1qs3nXvQGuPn1MRChPa7U1OM-KdkoSOeVSLUDvDL8ywvFh0q1KWSk',
+            applicationServerKey: PUBLIC_VAPID_KEY,
             userVisibleOnly: true
         });
-        console.log(subscription);
-        const notification = new Notification('VR Atlas', {
+        await api.post<unknown>(`/notifications/web`, fetch, subscription, data.token ?? '');
+        new Notification('VR Atlas', {
             body: 'Web push notifications are now enabled!'
         });
     });

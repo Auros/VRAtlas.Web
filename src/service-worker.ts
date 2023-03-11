@@ -3,6 +3,8 @@
 /// <reference lib="esnext" />
 /// <reference lib="webworker" />
 import { build, files, version } from '$service-worker';
+import { type AtlasEvent, EntityType, type Group, type Notification as Notif, type User } from './lib/types';
+import { api, picture } from './lib';
 
 const sw = self as unknown as ServiceWorkerGlobalScope;
 const CACHE = `cache-${version}`;
@@ -66,6 +68,57 @@ sw.addEventListener('fetch', async (event) => {
     event.respondWith(respond() as unknown as Promise<Response>);
 })
 
-sw.addEventListener('push', (event) => {
-    console.log('pushed');
+sw.addEventListener('push', async (event) => {
+    const dataString = event.data?.text();
+    if (!dataString || !dataString.startsWith('{')) {
+        console.log(`[VR Atlas - Service Worker] Unknown Push Event: ${dataString}`);
+        return;
+    }
+
+    const notif = JSON.parse(dataString) as unknown as Notif;
+
+    let mediaId: string | undefined;
+    if (notif.entityType && notif.entityId) {
+        if (notif.entityType === EntityType.Event) {
+            const atlasEvent = await api.get<AtlasEvent>(`/events/${notif.entityId}`, fetch);
+            mediaId = atlasEvent.media;
+        } else if (notif.entityType === EntityType.Group) {
+            const atlasEvent = await api.get<Group>(`/events/${notif.entityId}`, fetch);
+            mediaId = atlasEvent.banner;
+        } else if (notif.entityType === EntityType.User) {
+            const atlasEvent = await api.get<User>(`/events/${notif.entityId}`, fetch);
+            mediaId = atlasEvent.picture;
+        }
+    }
+
+    const show = sw.registration.showNotification(`VR Atlas | ${notif.title}`, {
+        data: notif,
+        body: notif.description,
+        image: mediaId ? picture(mediaId, 'large') : undefined,
+        lang: 'en-US'
+    });
+})
+
+sw.addEventListener('notificationclick', async (event) => {
+    console.log('[VR Atlas - Service Worker] Notification Clicked');
+    event.notification.close();
+
+    const notif = event.notification.data as unknown as Notif;
+    if (!notif.entityId || !notif.entityType) {
+        return;
+    }
+
+    let url = '/';
+    if (notif.key === 'EVENT_STAR_INVITED') {
+        url = `/events/${notif.entityId}/invite`
+    } else if (notif.entityType === EntityType.Event) {
+        url = `/events/${notif.entityId}`;
+    } else if (notif.entityType === EntityType.Group) {
+        url = `/groups/${notif.entityId}`;
+    } else if (notif.entityType === EntityType.User) {
+        url = `/users/${notif.entityId}`;
+    }
+
+    const open = sw.clients.openWindow(url);
+    event.waitUntil(open);
 })
