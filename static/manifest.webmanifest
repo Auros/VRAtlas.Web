@@ -1,0 +1,33 @@
+{
+    "theme_color": "#9013fe",
+    "background_color": "#272727",
+    "display": "standalone",
+    "scope": "/",
+    "start_url": "/",
+    "name": "VR Atlas",
+    "description": "The open source hub to find new events in virtual reality.",
+    "short_name": "VR Atlas",
+    "orientation": "landscape",
+    "icons": [
+        {
+            "src": "/icon-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/icon-256x256.png",
+            "sizes": "256x256",
+            "type": "image/png"
+        },
+        {
+            "src": "/icon-384x384.png",
+            "sizes": "384x384",
+            "type": "image/png"
+        },
+        {
+            "src": "/icon-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}
