@@ -26,6 +26,10 @@
 
     // If the user's browser requests reduced motion, disable the page transition animation.
     onMount(async () => {
+        if (!browser) {
+            return;
+        }
+
         const match = window.matchMedia(`(prefers-reduced-motion: reduce)`);
         let doTransitions = match === undefined;
         if (!doTransitions) {
@@ -33,8 +37,8 @@
         }
         animatedPageTransitions = doTransitions;
 
-        // Don't connect to the notification hub unless we're logged in and are in the browser
-        if (!browser || !data.token) {
+        // Don't connect to the notification hub unless we're logged in
+        if (!data.token) {
             return;
         }
 
