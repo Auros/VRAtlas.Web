@@ -36,6 +36,18 @@ const uploadImage = async (blob: FormDataEntryValue, token: string) => {
     return id;
 };
 
+const uploadVideo = async (blob: FormDataEntryValue, token: string) => {
+    const form = new FormData();
+    form.append('file', blob);
+
+    const { id } = await api.request<{ id: string }>(fetch, '/upload/video', {
+        body: form,
+        method: 'POST'
+    }, token, true);
+
+    return id;
+}
+
 const nameForRole = (role: GroupMemberRole) => {
     switch (role) {
         case GroupMemberRole.Manager:
@@ -58,4 +70,4 @@ const roleForName = (role: string) => {
     }
 };
 
-export { picture, getUserById, uploadImage, nameForRole, roleForName };
+export { picture, getUserById, uploadImage, uploadVideo, nameForRole, roleForName };

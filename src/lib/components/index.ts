@@ -3,6 +3,7 @@ export { default as EventCard } from './EventCard.svelte';
 export { default as GroupCard } from './GroupCard.svelte';
 export { default as AboutQuery } from './AboutQuery.svelte';
 export { default as ImageInput } from './ImageInput.svelte';
+export { default as EventPoster } from './EventPoster.svelte';
 export { default as FollowButton } from './FollowButton.svelte';
 export { default as UserSelector } from './UserSelector.svelte';
 export { default as AtlasMarkdown } from './AtlasMarkdown.svelte';
