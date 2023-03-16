@@ -21,10 +21,8 @@
         </p>
         <hr class="!border-t-2 my-4" />
         <Accordion duration={200}>
-            <AboutQuery src={Calendar} title="How can I create an event?">
-                Use the <code>Log In</code> button, create a <code>New Group</code> or be invited to a Group, and press the <code>New Event</code> button on the Group Page.
-                This idea and concept was built with finding events in <a href="https://vrchat.com" target="_blank" rel="noreferrer">VRChat</a>
-                in mind, but it can be used for <b>any kind of event</b> related to <b>VR</b>.
+            <AboutQuery src={Calendar} title="How do I use the website?">
+                Check out our <a href="https://wiki.vratlas.io">wiki</a> page for guides on learning about and creating groups and events.
             </AboutQuery>
             <AboutQuery title="Where can I learn about updates to the platform?">
                 Follow us on <a href="https://twitter.com/thevratlas" target="_blank" rel="noreferrer">Twitter</a>!
