@@ -163,7 +163,7 @@
                     <button type="submit" class="btn variant-filled-primary w-32" disabled={uploading}> Save </button>
                     {#if uploading}
                         <div class="w-10 h-10">
-                            <ProgressRadial stroke={80} meter="stroke-primary-500 dark:stroke-surface-5" />
+                            <ProgressRadial width="5" stroke={80} meter="stroke-primary-500 dark:stroke-surface-5" />
                         </div>
                     {/if}
                 </div>

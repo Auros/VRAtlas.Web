@@ -6,8 +6,8 @@
     import { modalStore } from '@skeletonlabs/skeleton';
     import RelativeTime from 'dayjs/plugin/relativeTime';
     import { EventStatus, GroupMemberRole } from '$lib/types';
-    import { AtlasMarkdown, AtlasMetaTags, Container, EventPoster, FollowButton, GroupCard } from '$lib/components';
     import { Avatar, ProgressRadial, toastStore, type ModalSettings } from '@skeletonlabs/skeleton';
+    import { AtlasMarkdown, AtlasMetaTags, Container, EventPoster, FollowButton, GroupCard } from '$lib/components';
 
     dayjs.extend(RelativeTime);
     export let data: PageData;
@@ -102,20 +102,20 @@
                         {#if event.startTime}
                             <!-- Event start time is required for these actions -->
                             {#if performingAction}
-                                <ProgressRadial stroke={80} meter="stroke-primary-500 dark:stroke-surface-5" />
+                                <ProgressRadial width="5" stroke={80} meter="stroke-primary-500 dark:stroke-surface-5" />
                             {:else}
                                 {#if event.status === EventStatus.Unlisted}
-                                    <button on:click={confirmAnnouncement} class="btn variant-ghost-warning">Announce</button>
+                                    <button on:click={confirmAnnouncement} class="btn variant-ghost-warning h-12">Announce</button>
                                 {/if}
                                 {#if event.status === EventStatus.Announced}
-                                    <button on:click={confirmStart} class="btn variant-ghost-warning">Start</button>
+                                    <button on:click={confirmStart} class="btn variant-ghost-warning h-12">Start</button>
                                 {/if}
                                 {#if event.status === EventStatus.Started}
-                                    <button on:click={confirmConclude} class="btn variant-ghost-warning">Conclude</button>
+                                    <button on:click={confirmConclude} class="btn variant-ghost-warning h-12">Conclude</button>
                                 {/if}
                             {/if}
                         {/if}
-                        <a href={`/events/${event.id}/edit`} class="btn variant-ghost-primary">Edit</a>
+                        <a href={`/events/${event.id}/edit`} class="btn variant-ghost-primary h-12">Edit</a>
                     {/if}
                 </div>
                 <hr class="!border-t-2 my-4" />

@@ -78,7 +78,7 @@
 
 <button
     type="button"
-    class="btn"
+    class="btn h-12"
     class:variant-ghost-primary={!isFollowing}
     class:variant-ghost-error={isFollowing === true}
     disabled={isFollowing === null || processing}

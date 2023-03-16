@@ -153,7 +153,7 @@
                             {#if $navigating}
                                 <div class="container mx-auto flex justify-center items-center my-24">
                                     <div class="w-40 h-40">
-                                        <ProgressRadial stroke={60} meter="stroke-primary-500" />
+                                        <ProgressRadial width="5" stroke={60} meter="stroke-primary-500" />
                                     </div>
                                 </div>
                             {:else}
