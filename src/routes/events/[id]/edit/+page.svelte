@@ -47,7 +47,6 @@
             }
 
             if (poster && (poster as Blob).size !== 0) {
-                console.log('poster good');
                 const id = await uploadImage(poster, token ?? '');
                 data.set('poster', id);
             } else {
@@ -56,7 +55,7 @@
         } catch (e) {
             uploading = false;
             toastStore.trigger({
-                message: 'Failed to upload resource. Did you go over the file limit?'
+                message: 'Failed to upload resource. Did you go over the file size limit?'
             })
             cancel();
         }
