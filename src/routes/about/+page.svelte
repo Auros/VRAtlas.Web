@@ -22,7 +22,7 @@
         <hr class="!border-t-2 my-4" />
         <Accordion duration={200}>
             <AboutQuery src={Calendar} title="How do I use the website?">
-                Check out our <a href="https://wiki.vratlas.io">wiki</a> page for guides on learning about and creating groups and events.
+                Check out our <a href="https://wiki.vratlas.io" target="_blank" rel="noreferrer">wiki</a> page for guides on learning about and creating groups and events.
             </AboutQuery>
             <AboutQuery title="Where can I learn about updates to the platform?">
                 Follow us on <a href="https://twitter.com/thevratlas" target="_blank" rel="noreferrer">Twitter</a>!
