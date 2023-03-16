@@ -91,32 +91,34 @@
         </div>
         <div class="basis-3/4 md:order-last order-first flex flex-col gap-4">
             <div class="card p-4">
-                <div class="flex flex-row gap-4">
+                <div class="flex md:flex-row flex-col gap-4">
                     <!-- Event Title -->
-                    <div class="flex-grow">
-                        <h1>{event.name}</h1>
+                    <div class="flex-grow md:text-left text-center">
+                        <div class="md:text-4xl text-5xl">{event.name}</div>
                     </div>
-                    <FollowButton id={event.id} type={3} />
-                    <!-- Editor Button -->
-                    {#if canEdit}
-                        {#if event.startTime}
-                            <!-- Event start time is required for these actions -->
-                            {#if performingAction}
-                                <ProgressRadial width="5" stroke={80} meter="stroke-primary-500 dark:stroke-surface-5" />
-                            {:else}
-                                {#if event.status === EventStatus.Unlisted}
-                                    <button on:click={confirmAnnouncement} class="btn variant-ghost-warning h-12">Announce</button>
-                                {/if}
-                                {#if event.status === EventStatus.Announced}
-                                    <button on:click={confirmStart} class="btn variant-ghost-warning h-12">Start</button>
-                                {/if}
-                                {#if event.status === EventStatus.Started}
-                                    <button on:click={confirmConclude} class="btn variant-ghost-warning h-12">Conclude</button>
+                    <div class="flex flex-row gap-4 flex-grow md:justify-end justify-center">
+                        <FollowButton id={event.id} type={3} />
+                        <!-- Editor Button -->
+                        {#if canEdit}
+                            {#if event.startTime}
+                                <!-- Event start time is required for these actions -->
+                                {#if performingAction}
+                                    <ProgressRadial width="5" stroke={80} meter="stroke-primary-500 dark:stroke-surface-5" />
+                                {:else}
+                                    {#if event.status === EventStatus.Unlisted}
+                                        <button on:click={confirmAnnouncement} class="btn variant-ghost-warning h-12">Announce</button>
+                                    {/if}
+                                    {#if event.status === EventStatus.Announced}
+                                        <button on:click={confirmStart} class="btn variant-ghost-warning h-12">Start</button>
+                                    {/if}
+                                    {#if event.status === EventStatus.Started}
+                                        <button on:click={confirmConclude} class="btn variant-ghost-warning h-12">Conclude</button>
+                                    {/if}
                                 {/if}
                             {/if}
+                            <a href={`/events/${event.id}/edit`} class="btn variant-ghost-primary h-12">Edit</a>
                         {/if}
-                        <a href={`/events/${event.id}/edit`} class="btn variant-ghost-primary h-12">Edit</a>
-                    {/if}
+                    </div>
                 </div>
                 <hr class="!border-t-2 my-4" />
                 <!-- Time and Tags -->
