@@ -23,13 +23,14 @@ const api = {
             },
             token
         ),
-    delete: <T>(url: string, fetcher: typeof fetch, token: string) => request<T>(fetcher, url, { method: 'DELETE' }, token)
+    delete: <T>(url: string, fetcher: typeof fetch, token: string) => request<T>(fetcher, url, { method: 'DELETE' }, token),
+    request
 };
 
-async function request<T>(fetcher: typeof fetch, url: string, init?: RequestInit, token?: string) {
+async function request<T>(fetcher: typeof fetch, url: string, init?: RequestInit, token?: string, isFile = false) {
     init ??= {};
     const headers: [string, string][] = [];
-    if (init.body) {
+    if (init.body && !isFile) {
         headers.push(['Content-Type', 'application/json']);
     }
     if (token) {

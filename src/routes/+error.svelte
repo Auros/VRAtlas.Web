@@ -5,6 +5,10 @@
     $: errors = $page.error?.errors;
 </script>
 
+<svelte:head>
+    <title>Error • VR Atlas</title>
+</svelte:head>
+
 <Container>
     <div class="space-y-4">
         <div class="text-3xl">Error! ({$page.status})</div>

@@ -1,13 +1,14 @@
 <script lang="ts">
-    import { picture } from '$lib';
     import { onMount } from 'svelte';
+    import { page } from '$app/stores';
     import type { User } from '$lib/types';
     import { en } from 'svelty-picker/i18n';
     import type { PageServerData } from './$types';
+    import { picture, uploadImage, uploadVideo } from '$lib';
     import SveltyPicker, { formatDate } from 'svelty-picker';
-    import { Container, ImageInput, UserSelector } from '$lib/components';
     import { applyAction, enhance, type SubmitFunction } from '$app/forms';
-    import { Avatar, InputChip, ProgressRadial, popup } from '@skeletonlabs/skeleton';
+    import { AtlasMetaTags, Container, ImageInput, UserSelector } from '$lib/components';
+    import { Avatar, InputChip, ProgressRadial, popup, toastStore } from '@skeletonlabs/skeleton';
 
     export let data: PageServerData;
 
@@ -18,6 +19,7 @@
     let now = new Date();
     let uploading = false;
     let tags: string[] = [];
+    let videoChecked = false;
     let stars: { user: User; title: string }[] = event?.stars ?? [];
     let maximumDate = new Date(now.getTime() + 1000 * 60 * 60 * 24 * 90); // 90 days
 
@@ -26,10 +28,39 @@
         tags = event.tags;
         startTime = event.startTime ?? '';
         endTime = event.endTime ?? '';
+        videoChecked = !!event.video;
     });
 
-    const upload: SubmitFunction = () => {
+    const upload: SubmitFunction = async ({ data, cancel }) => {
         uploading = true;
+        const token = $page.data.token;
+
+        try {
+            const video = data.get('video');
+            const poster = data.get('poster');
+
+            if (video && (video as Blob).size !== 0) {
+                const id = await uploadVideo(video, token ?? '');
+                data.set('video', id);
+            } else {
+                data.delete('video');
+            }
+
+            if (poster && (poster as Blob).size !== 0) {
+                console.log('poster good');
+                const id = await uploadImage(poster, token ?? '');
+                data.set('poster', id);
+            } else {
+                data.delete('poster');
+            }
+        } catch (e) {
+            uploading = false;
+            toastStore.trigger({
+                message: 'Failed to upload resource. Did you go over the file limit?'
+            })
+            cancel();
+        }
+
         return async ({ result, update }) => {
             await applyAction(result);
             uploading = false;
@@ -37,6 +68,8 @@
         };
     };
 </script>
+
+<AtlasMetaTags title="Edit Event" description="Edit an event." />
 
 <Container>
     <div class="card p-4">
@@ -77,6 +110,27 @@
                 <input type="hidden" name="previousposter" value={event.media} />
                 <ImageInput label="Poster" name="poster" aspectRatio="3:4" hoverText="The visual associated with the event." bind:disabled={uploading} />
                 
+                <label class="flex items-center space-x-2">
+                    <input class="checkbox" type="checkbox" name="has-video" bind:checked={videoChecked} />
+                    <p use:popup={{ event: 'hover', target: 'hasVideoTooltip' }}>
+                        Use Video 
+                    </p>
+                    <div class="text-xs text-center card variant-filled-primary p-2 whitespace-nowrap shadow-xl" data-popup="hasVideoTooltip">
+                        You can upload a video file as an alternate poster display. It will be shown on most browsers.
+                        <div class="arrow variant-filled-primary" />
+                    </div>
+                </label>
+
+                {#if videoChecked}
+                    <ImageInput
+                        label="Video"
+                        name="video"
+                        aspectRatio="3:4"
+                        maxFileSize="10 MB"
+                        accept=".mp4,.webm"
+                        hoverText="The video visual element associated with the event. If if it cannot be displayed in certain environments, it will fall back to the image poster." />
+                {/if}
+
                 <!-- svelte-ignore a11y-label-has-associated-control -->
                 <label class="label">
                     <span>Tags</span>

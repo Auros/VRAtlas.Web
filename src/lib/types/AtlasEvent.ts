@@ -18,6 +18,7 @@ type AtlasEvent = {
         title: string;
     }[];
     autoStart: boolean;
+    video?: string;
 };
 
 export default AtlasEvent;

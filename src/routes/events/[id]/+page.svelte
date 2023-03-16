@@ -6,7 +6,7 @@
     import { modalStore } from '@skeletonlabs/skeleton';
     import RelativeTime from 'dayjs/plugin/relativeTime';
     import { EventStatus, GroupMemberRole } from '$lib/types';
-    import { AtlasMarkdown, AtlasMetaTags, Container, FollowButton, GroupCard } from '$lib/components';
+    import { AtlasMarkdown, AtlasMetaTags, Container, EventPoster, FollowButton, GroupCard } from '$lib/components';
     import { Avatar, ProgressRadial, toastStore, type ModalSettings } from '@skeletonlabs/skeleton';
 
     dayjs.extend(RelativeTime);
@@ -82,15 +82,7 @@
         <div class="basis-1/4 flex flex-col gap-4">
             <!-- Event Poster -->
             <div class="card overflow-hidden">
-                <header style={`background-image: url(${picture(event.media, 'large')})`}>
-                    <div class="backdrop-blur-lg">
-                        <img
-                            src={picture(event.media, 'large')}
-                            alt={`${event.name}'s Poster`}
-                            class="select-none object-contain bg-black/50 w-full aspect-[3/4]"
-                        />
-                    </div>
-                </header>
+                <EventPoster event={event} posterSize={'large'} clickable={false} />
             </div>
             <!-- Group Card -->
             <div class="card overflow-hidden">

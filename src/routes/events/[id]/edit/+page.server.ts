@@ -54,14 +54,11 @@ export const actions = {
         const starsTitles = form.getAll('star-title');
 
         const name = form.get('name');
+        const video = form.get('video');
         const poster = form.get('poster');
+        const hasVideo = form.get('has-video');
         const autoStart = form.get('auto-start');
         const description = form.get('description');
-
-        let media: string | null = null;
-        if (poster && (poster as Blob).size !== 0) {
-            media = await uploadImage(poster, token ?? '');
-        }
 
         await api.put(
             '/events',
@@ -70,7 +67,8 @@ export const actions = {
                 id,
                 name,
                 description,
-                media,
+                media: poster,
+                video,
                 tags,
                 stars: starsIds.map((id, index) => {
                     return {
@@ -78,7 +76,8 @@ export const actions = {
                         title: starsTitles[index]
                     };
                 }),
-                autoStart: autoStart === 'on'
+                autoStart: autoStart === 'on',
+                hasVideo: hasVideo === 'on'
             },
             token ?? ''
         );
