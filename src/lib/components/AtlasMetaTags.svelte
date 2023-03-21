@@ -9,12 +9,15 @@
     export let image: string | undefined = undefined;
     export let twitter = false;
     export let large = true;
+
+    // Replace double lines with single lines to make formatted text descriptions smaller.
+    $: cleanedDescription = description ? markdownToTxt(description.replace('\r\n\r\n', '\r\n')) : undefined;
 </script>
 
 <MetaTags
     {title}
     titleTemplate="%s • VR Atlas"
-    description={description ? markdownToTxt(description) : undefined}
+    description={cleanedDescription}
     twitter={twitter && image ? {
         cardType: large ? 'summary_large_image' : 'summary'
     } : undefined}
@@ -23,6 +26,6 @@
         title,
         url: url ? `${PUBLIC_SERVING_URL}${url}` : undefined,
         images: [{ url: image ?? `${PUBLIC_SERVING_URL}/icon.png` }],
-        description: description ? markdownToTxt(description) : undefined,
+        description: cleanedDescription,
     }}
 />
