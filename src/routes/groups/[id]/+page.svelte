@@ -130,7 +130,7 @@
     };
 </script>
 
-<AtlasMetaTags title={group.name} description={group.description} url={`/groups/${group.id}`} large={true} image={picture(group.banner, 'large')} />
+<AtlasMetaTags title={group.name} description={group.description} url={`/groups/${group.id}`} large={true} image={picture(group.banner, 'large')} twitter={true} />
 
 <Container>
     <div class="card overflow-hidden">
