@@ -22,7 +22,7 @@
             }
             toastStore.trigger({
                 message: 'Successfully updated group.',
-                background: 'success',
+                background: 'variant-filled-success',
                 timeout: 5000
             });
         };

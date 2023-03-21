@@ -51,7 +51,7 @@
             }
             toastStore.trigger({
                 message: 'Successfully updated profile.',
-                background: 'success',
+                background: 'variant-filled-success',
                 timeout: 5000
             });
             await goto(`/users/${user.id}`);

@@ -45,7 +45,7 @@
                 performingAction = false;
                 toastStore.trigger({
                     message,
-                    background: 'success'
+                    background: 'variant-filled-success'
                 });
             }
         };
