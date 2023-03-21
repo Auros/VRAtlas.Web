@@ -10,8 +10,8 @@
     export let twitter = false;
     export let large = true;
 
-    // Replace double lines with single lines to make formatted text descriptions smaller.
-    $: cleanedDescription = description ? markdownToTxt(description.replace('\r\n\r\n', '\r\n')) : undefined;
+    // Replace double line breaks with single line breaks to make formatted text descriptions smaller.
+    $: cleanedDescription = description ? markdownToTxt(description.replace(/[\r\n]+/gm, "\r\n")) : undefined;
 </script>
 
 <MetaTags
