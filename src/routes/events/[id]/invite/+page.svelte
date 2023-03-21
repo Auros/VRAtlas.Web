@@ -28,7 +28,7 @@
             }
             toastStore.trigger({
                 message: `Successfully ${accepted ? 'accepted' : 'rejected'} event invite`,
-                background: accepted ? 'success' : 'error',
+                background: accepted ? 'variant-filled-success' : 'variant-filled-error',
                 timeout: 5000
             });
             await goto(`/events/${data.event.id}`);

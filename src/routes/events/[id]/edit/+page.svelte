@@ -55,7 +55,8 @@
         } catch (e) {
             uploading = false;
             toastStore.trigger({
-                message: 'Failed to upload resource. Did you go over the file size limit?'
+                message: 'Failed to upload resource. Did you go over the file size limit?',
+                background: 'variant-filled-error'
             })
             cancel();
         }

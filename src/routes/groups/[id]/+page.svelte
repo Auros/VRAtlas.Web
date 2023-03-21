@@ -45,7 +45,7 @@
         if (result.type === 'success') {
             toastStore.trigger({
                 message: `Changed user's role to ${nameForRole(role)}`,
-                background: 'success',
+                background: 'variant-filled-success',
                 timeout: 2000
             });
         }
@@ -92,8 +92,8 @@
 
             // Show a toast the user.
             toastStore.trigger({
-                message: `Added user to group.`,
-                background: 'success',
+                message: `Invited user to group.`,
+                background: 'variant-filled-success',
                 timeout: 2000
             });
         } catch {
@@ -121,7 +121,7 @@
             // Show a toast the user.
             toastStore.trigger({
                 message: `Removed user from group.`,
-                background: 'warning',
+                background: 'variant-filled-warning',
                 timeout: 2000
             });
         } catch (e) {
@@ -130,7 +130,7 @@
     };
 </script>
 
-<AtlasMetaTags title={group.name} description={group.description} url={`/groups/${group.id}`} />
+<AtlasMetaTags title={group.name} description={group.description} url={`/groups/${group.id}`} large={true} image={picture(group.banner, 'large')} twitter={true} />
 
 <Container>
     <div class="card overflow-hidden">

@@ -88,6 +88,9 @@
                     <a href="/about">
                         <div class="text-lg select-none">About</div>
                     </a>
+                    <a href="https://wiki.vratlas.io" target="_blank" rel="noreferrer">
+                        <div class="text-lg select-none">Wiki</div>
+                    </a>
                 </div>
             </svelte:fragment>
             <svelte:fragment slot="trail">
