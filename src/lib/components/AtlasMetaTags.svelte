@@ -1,6 +1,6 @@
 <script lang="ts">
     import { MetaTags } from 'svelte-meta-tags';
-    import markdownToTxt from 'markdown-to-txt';
+    import { markdownToTxt } from 'markdown-to-txt';
     import { PUBLIC_SERVING_URL } from '$env/static/public';
 
     export let title: string;
