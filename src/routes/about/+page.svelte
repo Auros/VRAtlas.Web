@@ -27,6 +27,11 @@
             <AboutQuery title="Where can I learn about updates to the platform?">
                 Follow us on <a href="https://twitter.com/thevratlas" target="_blank" rel="noreferrer">Twitter</a>!
             </AboutQuery>
+            <AboutQuery src={EnvelopeOpen} title="Why are there Follow buttons?">
+                VR Atlas has a notification system built into the API which allows users to receive updates from certain topics. You can only receive real-time updates
+                while on the main website and through <a href="https://wiki.vratlas.io/notifications" target="_blank" rel="noreferrer">web push notifications</a>
+                (receive notifications through your browser even when not on the website). Discord DM and Email reminders are planned for the future.
+            </AboutQuery>
             <AboutQuery src={CodeBracket} title="Where can I view the source code?">
                 The project is split up on GitHub between the
                 <a href="https://github.com/Auros/VRAtlas.API" target="_blank" rel="noreferrer">back end</a>
@@ -51,10 +56,6 @@
             <AboutQuery src={Eye} title="Will there ever be ads on this website?">
                 <b>NO</b>. There will NEVER be ads associated with this project as long as it's being run by me (Auros). I have pledged to never include
                 ads or absolute paywalls in anything I (Auros) create that is free and open-source.
-            </AboutQuery>
-            <AboutQuery src={EnvelopeOpen} title="Why are there Follow buttons?">
-                VR Atlas has a notification system built into the API which allows users to receive updates from certain topics. Right now, you can only receive real-time updates
-                while on the main website, however the system is very extensible. Discord DM and Email reminders are planned for the future.
             </AboutQuery>
         </Accordion>
     </div>
