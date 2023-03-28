@@ -22,12 +22,15 @@
                 <span class="text-xl">{dayjs(event.startTime).format('ddd, MMM D').toUpperCase()}</span>
                 <span class="text-xl">{dayjs(event.startTime).format('h:mm A')}</span>
             </div>
-            <hr class="!border-t-2 my-4" />
         {/if}
         {#if event.description !== ''}
-            <p class="max-h-64 overflow-auto">
-                <AtlasMarkdown text={event.description} />
-            </p>
+            <div class="hidden md:block">
+                <hr class="!border-t-2 my-4" />
+                <p class="max-h-64 overflow-auto">
+                    <AtlasMarkdown text={event.description} />
+                </p>
+            </div>
+            
         {:else}
             <p><i>No information provided.</i></p>
         {/if}
