@@ -8,6 +8,7 @@ type Group = {
     icon: string;
     banner: string;
     createdAt: string;
+    identity?: string;
 };
 
 export default Group;

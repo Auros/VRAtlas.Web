@@ -8,7 +8,7 @@
     export let clickable = true;
 </script>
 
-<a href={clickable ? `/groups/${group.id}` : undefined} class="card card-hover variant-glass-surface overflow-hidden">
+<a href={clickable ? (group.identity ?? `/groups/${group.id}`) : undefined} target={group.identity ? '_blank' : undefined} rel={group.identity ? 'noreferrer' : undefined} class="card card-hover variant-glass-surface overflow-hidden">
     <header class="relative">
         <Avatar src={picture(group.icon)} width="2xl:w-16 xl:w-14 lg:w-16 md:w-24 w-16" class="absolute top-2 left-2 hidden xl:flex" />
         <img src={picture(group.banner)} alt={`${group.name}'s Banner'`} class="select-none object-cover bg-black/50 w-full aspect-[24/4]" />
