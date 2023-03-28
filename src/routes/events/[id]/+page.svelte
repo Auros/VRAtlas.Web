@@ -122,7 +122,7 @@
                 </div>
                 <hr class="!border-t-2 my-4" />
                 <!-- Time and Tags -->
-                {#if event.startTime || event.tags.length}
+                {#if event.startTime || (event.tags.length || event.crosspost)}
                     <div class="flex flex-col gap-2">
                         {#if event.startTime}
                             {#if event.status === EventStatus.Concluded}
@@ -132,6 +132,11 @@
                             {/if}
                         {/if}
                         <div class="flex flex-row gap-2">
+                            {#if event.crosspost}
+                                <a href={event.crosspost} target="_blank" rel="noreferrer" style="text-decoration: none;">
+                                    <span class="chip variant-ghost-secondary text-secondary-500">CROSSPOST</span>
+                                </a>
+                            {/if}
                             {#each event.tags as tag}
                                 <span class="chip variant-filled-surface">{tag}</span>
                             {/each}

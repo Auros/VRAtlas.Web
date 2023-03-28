@@ -19,6 +19,7 @@ type AtlasEvent = {
     }[];
     autoStart: boolean;
     video?: string;
+    crosspost?: string;
 };
 
 export default AtlasEvent;
