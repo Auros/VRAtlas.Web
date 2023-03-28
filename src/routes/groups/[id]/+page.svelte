@@ -157,75 +157,77 @@
             {/if}
         </div>
     </div>
-    <div class="card p-4 mt-8">
-        <header>
-            <div class="flex flex-row gap-4">
-                <div class="flex-grow">
-                    <div class="text-3xl">Members</div>
-                </div>
-                {#if canEdit}
-                    <div>
-                        <span class="relative">
-                            <button type="button" class="btn variant-ghost-primary" use:popup={{ event: 'click', target: 'add-member' }}>Add Member</button>
-                            <div class="card p-4 w-96 h-64 space-y-4 z-10" data-popup="add-member">
-                                <input bind:value={userSearchQuery} class="input" type="text" placeholder="Search for users..." on:input={() => userSearch()} />
-                                <div class="h-28 overflow-auto">
-                                    <ListBox>
-                                        {#each usersInSearch as user}
-                                            <ListBoxItem bind:group={selectedUser} name={user.id} value={user.id} on:click={() => (selectedUser = user.id)}>
-                                                <svelte:fragment slot="lead">
-                                                    <Avatar src={picture(user.picture, 'small')} width="w-10" />
-                                                </svelte:fragment>
-                                                {user.username}
-                                            </ListBoxItem>
-                                        {/each}
-                                    </ListBox>
+    {#if group.members.length}
+        <div class="card p-4 mt-8">
+            <header>
+                <div class="flex flex-row gap-4">
+                    <div class="flex-grow">
+                        <div class="text-3xl">Members</div>
+                    </div>
+                    {#if canEdit}
+                        <div>
+                            <span class="relative">
+                                <button type="button" class="btn variant-ghost-primary" use:popup={{ event: 'click', target: 'add-member' }}>Add Member</button>
+                                <div class="card p-4 w-96 h-64 space-y-4 z-10" data-popup="add-member">
+                                    <input bind:value={userSearchQuery} class="input" type="text" placeholder="Search for users..." on:input={() => userSearch()} />
+                                    <div class="h-28 overflow-auto">
+                                        <ListBox>
+                                            {#each usersInSearch as user}
+                                                <ListBoxItem bind:group={selectedUser} name={user.id} value={user.id} on:click={() => (selectedUser = user.id)}>
+                                                    <svelte:fragment slot="lead">
+                                                        <Avatar src={picture(user.picture, 'small')} width="w-10" />
+                                                    </svelte:fragment>
+                                                    {user.username}
+                                                </ListBoxItem>
+                                            {/each}
+                                        </ListBox>
+                                    </div>
+                                    <button
+                                        type="button"
+                                        class="btn variant-ghost-primary absolute right-4"
+                                        disabled={selectedUser === ''}
+                                        on:click={addSelectedUser}>Add</button
+                                    >
                                 </div>
+                            </span>
+                        </div>
+                    {/if}
+                </div>
+            </header>
+            <hr class="!border-t-2 my-4" />
+            <div class="grid md:grid-cols-6 gap-4">
+                {#each group.members as member}
+                    <div class="card variant-glass-surface p-4">
+                        <div class="flex flex-col items-center gap-2">
+                            <a href={`/users/${member.user.id}`}>
+                                <Avatar src={picture(member.user.picture)} width="lg:w-32 md:w-16 w-32" />
+                            </a>
+                            <div class="text-2xl">{member.user.username}</div>
+                            {#if isOwner && member.user.id !== data.localUser?.id}
+                                <select
+                                    class="select"
+                                    disabled={modifyingMember}
+                                    class:cursor-progress={modifyingMember}
+                                    bind:value={member.role}
+                                    on:change={() => memberRoleChanged(member.user.id, member.role)}
+                                >
+                                    <option value={GroupMemberRole.Standard}>Standard</option>
+                                    <option value={GroupMemberRole.Manager}>Manager</option>
+                                </select>
                                 <button
                                     type="button"
-                                    class="btn variant-ghost-primary absolute right-4"
-                                    disabled={selectedUser === ''}
-                                    on:click={addSelectedUser}>Add</button
+                                    class="btn-icon variant-filled-error scale-50 absolute right-0 top-0"
+                                    on:click={() => removeMember(member.user.id)}>X</button
                                 >
-                            </div>
-                        </span>
+                            {:else}
+                                <div class="text-lg">{nameForRole(member.role)}</div>
+                            {/if}
+                        </div>
                     </div>
-                {/if}
+                {/each}
             </div>
-        </header>
-        <hr class="!border-t-2 my-4" />
-        <div class="grid md:grid-cols-6 gap-4">
-            {#each group.members as member}
-                <div class="card variant-glass-surface p-4">
-                    <div class="flex flex-col items-center gap-2">
-                        <a href={`/users/${member.user.id}`}>
-                            <Avatar src={picture(member.user.picture)} width="lg:w-32 md:w-16 w-32" />
-                        </a>
-                        <div class="text-2xl">{member.user.username}</div>
-                        {#if isOwner && member.user.id !== data.localUser?.id}
-                            <select
-                                class="select"
-                                disabled={modifyingMember}
-                                class:cursor-progress={modifyingMember}
-                                bind:value={member.role}
-                                on:change={() => memberRoleChanged(member.user.id, member.role)}
-                            >
-                                <option value={GroupMemberRole.Standard}>Standard</option>
-                                <option value={GroupMemberRole.Manager}>Manager</option>
-                            </select>
-                            <button
-                                type="button"
-                                class="btn-icon variant-filled-error scale-50 absolute right-0 top-0"
-                                on:click={() => removeMember(member.user.id)}>X</button
-                            >
-                        {:else}
-                            <div class="text-lg">{nameForRole(member.role)}</div>
-                        {/if}
-                    </div>
-                </div>
-            {/each}
         </div>
-    </div>
+    {/if}
     {#if data.live.events.length}
         <div class="card p-4 mt-8">
             <header>
