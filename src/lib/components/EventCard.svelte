@@ -15,7 +15,7 @@
 <div class="card card-hover variant-glass-surface hover:overflow-visible overflow-hidden">
     <EventPoster event={event} posterSize={posterSize} />
     <div class="p-4">
-        <div class="text-xl"><b>{event.name}</b></div>
+        <div class="text-xl text-center"><b>{event.name}</b></div>
         <hr class="!border-t-2 my-4" />
         {#if event.startTime}
             <div class="text-center flex flex-col">
